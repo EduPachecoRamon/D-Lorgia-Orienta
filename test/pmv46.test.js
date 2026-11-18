@@ -42,7 +42,7 @@ test('galería oficial, sedes y catálogo con imágenes de respaldo',()=>{
   assert.match(site,/Huancayo/);
   assert.match(site,/Piura/);
   assert.match(site,/Pucallpa/);
-  assert.match(fallback,/dlorgia-atmosphere\.webp/);
+  assert.match(fallback,/official-image-unavailable/);
   assert.match(imagery,/officialTreatmentImage/);
   assert.match(html,/dlorgia-imagery46\.css/);
   for(const name of ['experiencias.html','sedes.html','dlorgia-gallery46.css','dlorgia-gallery46.js'])assert.ok(existsSync(path.join(root,'public',name.includes('.')&&name.endsWith('.html')?'': 'assets',name)));
@@ -50,7 +50,7 @@ test('galería oficial, sedes y catálogo con imágenes de respaldo',()=>{
 
 test('PWA incluye las pantallas sin agregar un servicio de pago',()=>{
   const sw=read('public/service-worker.js');
-  assert.match(sw,/dlorgia-orienta-v480-primera-experiencia/);
+  assert.match(sw,/dlorgia-orienta-v490-institucional/);
   assert.match(sw,/'\/experiencias'/);
   assert.match(sw,/'\/sedes'/);
   assert.match(sw,/dlorgia-admin-pmv46\.css/);

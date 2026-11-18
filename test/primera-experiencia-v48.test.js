@@ -34,16 +34,15 @@ test('flujo entre login y registro conserva correo sin crear cuentas por error',
  assert.match(j,/data\.needsEmailConfirmation/);
  assert.match(j,/\/api\/auth\/google\/start/);
 });
-test('cubo accesible por teclado, hover, clic y táctil; imágenes propias',()=>{
- const j=read('public/assets/portada-v48.js');
+test('cubo accesible por teclado, hover, clic y táctil, sin ilustraciones artificiales',()=>{
+ const j=read('public/assets/portada-v49.js');
  const h=read('public/portada.html');
  assert.match(j,/addEventListener\('click'/);
  assert.match(j,/addEventListener\('mouseenter'/);
  assert.match(j,/addEventListener\('focus'/);
  assert.match(h,/aria-live="polite"/);
- for(const f of ['piel-editorial','cuidado-editorial','orientacion','consulta','evaluacion','empresa-editorial']){
-   assert.ok(fs.existsSync(path.join(root,'public/assets/media',f+'.svg')),f);
- }
+ assert.doesNotMatch(h,/assets\/media\//);
+ assert.ok((h.match(/www\.dlorgia\.com\//g)||[]).length>=6);
 });
 test('rutas públicas y acceso sirven documentos distintos', {timeout:13000}, async()=>{
  const s=http.createServer();await new Promise(res=>s.listen(0,'127.0.0.1',res));const port=s.address().port;await new Promise(res=>s.close(res));

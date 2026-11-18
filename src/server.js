@@ -104,7 +104,7 @@ const mime = {
 };
 
 async function serveStatic(res, pathname) {
-  const requested = pathname === '/' ? '/portada.html' : pathname === '/app' ? '/index.html' : pathname === '/admin' ? '/admin.html' : pathname === '/conoce' ? '/conoce.html' : pathname === '/ayuda' ? '/ayuda.html' : pathname === '/experiencias' ? '/experiencias.html' : pathname === '/sedes' ? '/sedes.html' : pathname === '/admin/ayuda' ? '/admin-ayuda.html' : pathname;
+  const requested = pathname === '/' ? '/portada.html' : pathname === '/app' ? '/index.html' : pathname === '/admin' ? '/admin.html' : pathname === '/conoce' ? '/conoce.html' : pathname === '/ayuda' ? '/ayuda.html' : pathname === '/guia' ? '/guia.html' : pathname === '/experiencias' ? '/experiencias.html' : pathname === '/sedes' ? '/sedes.html' : pathname === '/admin/ayuda' ? '/admin-ayuda.html' : pathname;
   const safePath = path.normalize(requested).replace(/^(\.\.[/\\])+/, '');
   const filePath = path.resolve(publicDir, `.${safePath}`);
   if (!filePath.startsWith(publicDir)) return false;
@@ -358,7 +358,7 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'GET' && url.pathname === '/api/status') {
     return json(res, 200, {
       service: "D'Lorgia Orienta",
-      version: '4.7.1',
+      version: '4.9.0',
       status: 'ok',
       whatsappConfigured: Boolean(config.accessToken && config.phoneNumberId),
       aiConfigured: getAIState().configured,

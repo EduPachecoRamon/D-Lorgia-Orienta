@@ -2,7 +2,7 @@
  * Importa fotografías suministradas y autorizadas por D’Lorgia, SIN descargarlas de terceros.
  * Uso: node scripts/instalar-fotos-autorizadas.mjs /ruta/a/carpeta-fotos
  * Nombres aceptados: acne, laser, face, pigment, botox, hair, tattoo, body, rosacea
- * + otros nombres usados en la galería: colormax-acne, colormax-manchas, ...
+ * + para la portada: foto-colormax-manchas, alta-frecuencia-facial-2, colormax-acne, foto-depilacion-laser-piernas, prp, botox
  * Solo JPEG, PNG y WebP; recomienda optimización previa (<500 KB por foto).
  */
 import fs from 'node:fs/promises';
@@ -57,7 +57,7 @@ for(const dirent of files){
  done++;
 }
 if(done){
- for(const rel of ['public/portada.html','public/conoce.html','public/experiencias.html','public/sedes.html','public/assets/dlorgia-imagery46.js']){
+ for(const rel of ['public/portada.html','public/conoce.html','public/experiencias.html','public/sedes.html','public/assets/dlorgia-imagery46.js','public/assets/institucional-v49.css']){
    const target=path.join(root,rel);
    let html=await fs.readFile(target,'utf8');
    for(const [oldUrl,newUrl] of replacements)html=html.replaceAll(oldUrl,newUrl);
