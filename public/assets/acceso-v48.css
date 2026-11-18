@@ -1,0 +1,34 @@
+/* v4.8: el acceso es una vista autónoma y nunca una portada con pantallas debajo. */
+.app-shell main>.screen:not(.active){display:none!important;visibility:hidden!important;pointer-events:none!important}
+.app-shell.entry-mode main>.screen:not(#login){display:none!important}
+.app-shell.entry-mode #experience-status{display:none!important}
+.app-shell.entry-mode .topbar,.app-shell.entry-mode .bottom-nav,.app-shell.entry-mode .ambient-layer{display:none!important}
+.app-shell.entry-mode{background:linear-gradient(146deg,#eaf0e9 0%,#f7f4ed 56%,#eaf2ec 100%)!important}
+.app-shell.entry-mode main{overflow-y:auto!important;overscroll-behavior:contain;min-height:0;display:block!important}
+.app-shell.entry-mode #login{display:block!important;min-height:100%!important;padding:28px 18px 52px!important;background:transparent!important;overflow:visible!important}
+.app-shell.entry-mode #login .login-wrap{display:grid!important;grid-template-columns:minmax(0,1fr)!important;min-height:0!important;max-width:490px!important;gap:0!important;place-items:center!important;padding:0!important;margin:0 auto!important}
+.app-shell.entry-mode #login .login-brand,.app-shell.entry-mode #login .login-trust{display:none!important}
+.app-shell.entry-mode #login .auth-card{margin:0!important;display:block;width:100%!important;max-width:490px!important;padding:clamp(20px,4vw,36px)!important;border-radius:30px!important;background:#fffdfa!important;border:1px solid #d9e4d9!important;box-shadow:0 24px 75px #23463815!important;overflow:hidden!important}
+.auth-brand-v48{text-align:center;display:flex;flex-direction:column;align-items:center;gap:7px;margin-bottom:24px!important}
+.auth-back-v48{align-self:flex-start;color:#476b58;text-decoration:none;font-size:12px;font-weight:750;margin-bottom:8px;padding:6px 2px}.auth-back-v48:hover{text-decoration:underline}
+.auth-brand-v48-mark{width:62px;height:62px;border-radius:19px;display:grid;place-items:center;background:#183e35;color:#dfc087;font:600 28px Fraunces,Georgia,serif;border:1px solid #c4a66c;box-shadow:0 10px 26px rgba(32,77,58,.14)}
+.auth-brand-v48 .eyebrow{margin:8px 0 0;font-size:10px!important;color:#967647!important;letter-spacing:.15em}
+.auth-brand-v48 h1{margin:0!important;font:600 clamp(30px,5vw,42px)/1.08 Fraunces,Georgia,serif!important;color:#183e35!important;letter-spacing:-.035em}
+.auth-brand-v48>p:last-child{font-size:14px;color:#577366;line-height:1.65;max-width:38ch;margin:4px 0 0}
+.app-shell.entry-mode .auth-mode-switch button{font-size:14px!important;min-height:44px}
+.app-shell.entry-mode .auth-card input{font-size:16px!important;min-height:44px}
+.app-shell.entry-mode .auth-card .login-card-head b{font-size:20px!important}
+.app-shell.entry-mode .auth-card .auth-submit{min-height:52px;font-size:14px!important}
+.app-shell.entry-mode .auth-card .auth-row,.app-shell.entry-mode .auth-card .auth-link{font-size:12px!important}
+.auth-choice-v48{text-align:center;padding:15px 0 4px;font-weight:700;color:#60746a;font-size:13px}
+.auth-switch-text-v48{color:#1e5b46;border:0;background:none;cursor:pointer;text-decoration:underline;text-underline-offset:4px;font-weight:850;font-size:13px;padding:8px}
+.google-auth-explain-v48{font-size:11px!important;text-align:center!important;line-height:1.55;color:#64786a;margin:7px 0 10px!important}
+.app-shell.entry-mode .login-note{font-size:12px!important}.app-shell.entry-mode .auth-feedback.show{max-height:180px;font-size:13px}
+.app-shell.entry-mode .guest-entry{font-size:13px;min-height:45px}
+.app-shell.entry-mode .auth-card .field-with-icon{min-height:50px!important}
+@media(min-width:720px){body{padding:0!important}.app-shell{width:100%!important;max-width:none!important;min-height:100dvh!important;height:100dvh!important;max-height:none!important;margin:0!important;border:0!important;border-radius:0!important}.app-shell>.ambient-layer{width:100%!important;max-width:none!important;top:0!important;height:100%!important;border-radius:0!important}.app-shell main>.screen:not(#login){max-width:1400px!important;margin-inline:auto!important}.app-shell.entry-mode #login{padding:50px 24px!important}.app-shell.entry-mode #login .login-wrap{max-width:480px!important}.app-shell .bottom-nav{width:100%!important;bottom:auto!important;border-radius:0!important}}
+@media(max-width:719px){.app-shell.entry-mode #login{padding:17px 13px 32px!important}.app-shell.entry-mode #login .auth-card{padding:21px 16px!important;border-radius:25px!important}.auth-brand-v48{margin-bottom:15px!important}.auth-brand-v48-mark{width:53px;height:53px}.auth-brand-v48 h1{font-size:30px!important}.app-shell.entry-mode .auth-mode-switch button{min-height:41px}}
+@media(prefers-reduced-motion:reduce){.app-shell.entry-mode #login *, .app-shell.entry-mode #login *::before,.app-shell.entry-mode #login *::after{animation:none!important;transition:none!important}}
+
+/* Sin notificaciones antiguas cubriendo el formulario de acceso. */
+body.auth-only-v48 #app-toast,body.auth-only-v48 #network-banner{display:none!important}

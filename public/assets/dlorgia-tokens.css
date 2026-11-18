@@ -1,0 +1,19 @@
+/* D’LORGIA / 4.3 · Tokens compartidos · Fuente: dlorgia.tokens.json */
+:root{
+  --dl-forest:#183E35;--dl-forest-hover:#245A4C;--dl-cream:#F6F2E9;--dl-paper:#FFFDFA;
+  --dl-ink:#1A3029;--dl-muted:#52665B;--dl-sage:#DAE6DB;--dl-gold:#B88B50;
+  --dl-gold-ink:#755324;--dl-border:#D6E1D7;--dl-error:#873F35;--dl-error-surface:#FCF2EC;
+  --dl-success-surface:#E7F3EB;--dl-display:'Fraunces',Georgia,serif;
+  --dl-body:'Manrope',Inter,system-ui,-apple-system,sans-serif;
+  --dl-radius-sm:12px;--dl-radius-md:18px;--dl-radius-lg:28px;
+  --dl-shadow:0 18px 50px rgba(26,48,41,.075);--dl-focus:0 0 0 3px rgba(36,90,76,.19);
+  --cream:var(--dl-cream);--paper:var(--dl-paper);--surface:var(--dl-paper);
+  --green:var(--dl-forest);--green2:var(--dl-forest-hover);--green-2:var(--dl-forest-hover);
+  --green3:#12382F;--green-3:var(--dl-sage);--ink:var(--dl-ink);
+  --muted:var(--dl-muted);--gold:var(--dl-gold);--line:var(--dl-border);
+  font-family:var(--dl-body);
+}
+html{font-family:var(--dl-body);text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body,button,input,select,textarea{font-family:var(--dl-body)}
+:where(button,a,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #3D886D;outline-offset:3px}
+::selection{background:#DCEBDD;color:var(--dl-forest)}

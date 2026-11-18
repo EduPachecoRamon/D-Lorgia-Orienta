@@ -1,0 +1,226 @@
+/* D’Lorgia Atelier v4.4 — command center redesign, human-readable at every breakpoint. */
+:root{--dl-gold-deep:#86612e;--dl-forest-deep:#153c30}
+html{background:#f3f6f1}
+body{background:#f3f6f1!important}
+/* A v4.2 selector accidentally made the intro curtain relative, leaving a full blank viewport above Admin. */
+.intro-curtain{position:fixed!important;inset:0;z-index:999!important}
+.intro-curtain.done{display:none!important}
+.ambient-admin-layer{position:fixed!important;inset:0!important;z-index:0;pointer-events:none;opacity:1!important;mask-image:none!important;-webkit-mask-image:none!important}
+.ambient-admin-layer::after{background:transparent!important}
+.ambient-admin-layer .ambient-motif.motif-main{opacity:.028!important;color:#2a7055}
+.ambient-admin-layer .ambient-motif.motif-secondary{opacity:.022!important;color:#b3965b}
+.ambient-admin-layer .ambient-icon{opacity:.038!important}
+.ambient-admin-layer .ambient-icon.ambient-gold{opacity:.028!important}
+.ambient-admin-layer[data-scene]{filter:none!important}
+.login-stage{position:relative!important;z-index:1;background:linear-gradient(110deg,#f5f7f0,#f2eee4);min-height:100dvh}
+.login-art{background:linear-gradient(135deg,rgba(13,46,37,.72),rgba(29,77,60,.24)),url('/assets/dlorgia-atmosphere.webp') center/cover!important}
+.login-emblem{box-shadow:0 24px 80px rgba(9,36,28,.35),0 0 0 30px rgba(255,255,255,.09)!important;background:rgba(21,68,52,.28);backdrop-filter:blur(14px);border-color:rgba(253,233,178,.83)}
+.login-copy{position:relative}
+.login-copy .eyebrow{color:#8e6633}
+.login-copy h1{font:500 clamp(43px,5vw,71px)/1.04 var(--dl-display),Georgia,serif;letter-spacing:-.045em;max-width:12ch;color:#153c30}
+.login-copy>p{font-size:16px;max-width:40ch;line-height:1.7}
+.login-card{padding:28px;border-radius:27px;border-color:#d5e2d6;box-shadow:0 25px 70px rgba(27,64,52,.075)}
+.login-card label{font-size:14px}
+.login-card input{font-size:15px;min-height:48px}
+.admin-login-a11y{position:absolute;right:22px;top:22px;border:1px solid #d4e1d4;background:#fffdf8;border-radius:100px;padding:9px 15px;color:#1c4d3e;font-weight:800;font-size:12px;cursor:pointer}
+.admin-app{position:relative;z-index:1;min-height:100dvh;background:transparent!important;--sidebar:252px;grid-template-columns:252px minmax(0,1fr)}
+.admin-app .sidebar{width:252px;background:linear-gradient(175deg,#143c30 0%,#205644 54%,#102f27 100%)!important;border:0;border-right:1px solid rgba(228,214,181,.2);box-shadow:12px 0 38px rgba(18,49,37,.07);padding:24px 16px}
+.admin-app .brand-lockup{padding-bottom:26px;border-bottom:1px solid rgba(244,242,225,.14);margin-bottom:20px}
+.admin-app .brand-mark{background:#254d40;color:#f2daaa!important;border:1px solid rgba(235,205,151,.6)!important;box-shadow:0 0 0 5px rgba(255,255,255,.025)}
+.admin-app .brand-copy strong{color:#fffaf0;font:500 30px var(--dl-display),Georgia,serif}
+.admin-app .brand-copy small{color:#e3c994}
+.admin-app .nav-item{color:#d4e2d7;font-size:13px;min-height:51px;border:1px solid transparent;margin:1px 0}
+.admin-app .nav-item .nav-icon{color:#aac6b2}
+.admin-app .nav-item:hover{background:rgba(237,247,232,.10);border-color:rgba(245,246,236,.1);color:#fff}
+.admin-app .nav-item.active{background:rgba(242,231,199,.15);border-color:rgba(242,220,164,.25);color:#fffdf3;box-shadow:inset 0 0 0 1px rgba(239,222,181,.025)}
+.admin-app .nav-item.active:before{left:-16px;background:#ebc993;width:4px}
+.admin-app .nav-item.active .nav-icon{color:#f1d3a0}
+.admin-app .nav-item kbd{color:rgba(223,234,220,.5)}
+.admin-app .command-hint{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:#f1f8ee;min-height:45px}
+.admin-app .command-hint kbd{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.15);color:#dce6db}
+.admin-app .connection-card{background:rgba(235,245,232,.10);border-color:rgba(255,255,255,.15);color:#fff}
+.admin-app .connection-card b{color:#f3f9f1}
+.admin-app .connection-card small{color:#c4d8c9}
+.admin-app .back-app{color:#f0d8a9;font-size:12px}
+.admin-app .workspace{grid-column:2;position:relative;background:linear-gradient(160deg,rgba(249,250,245,.83),rgba(242,247,240,.84));min-width:0;min-height:100dvh}
+.admin-app .topbar{height:73px;position:sticky;top:0;z-index:39;background:rgba(255,254,250,.95);border-bottom:1px solid #e1e8df;backdrop-filter:blur(16px);box-shadow:0 5px 24px rgba(30,70,52,.04)}
+.admin-app .breadcrumbs{font-size:13px;color:#708478}
+.admin-app .breadcrumbs b{color:#1e483a}
+.admin-app .top-actions{gap:8px}
+.admin-app .top-actions .icon-button,.admin-app .top-actions .ghost-button{min-width:42px;min-height:42px;border-radius:13px}
+.admin-app .admin-session .avatar{background:#173e32;color:#f3e0ae}
+.admin-app .admin-session b{font-size:12px}
+.admin-app .main-content{padding:clamp(19px,2.5vw,36px)!important;max-width:1560px;margin:0 auto}
+.admin-app .view{animation:atelierAdminEnter .24s ease both}
+@keyframes atelierAdminEnter{from{opacity:.7;transform:translate3d(0,8px,0)}to{opacity:1;transform:none}}
+.admin-app .atelier-hero{position:relative;min-height:269px;max-height:none;overflow:hidden;border-radius:28px;border:1px solid rgba(255,255,255,.63);box-shadow:0 25px 60px rgba(43,90,73,.15);padding:clamp(26px,3.4vw,46px);margin:0 0 23px;display:flex;align-items:center;gap:22px;background:linear-gradient(90deg,rgba(13,50,39,.91) 0%,rgba(21,69,49,.78) 37%,rgba(34,93,75,.20) 75%),url('/assets/dlorgia-atmosphere.webp') center/cover!important}
+.admin-app .atelier-hero:before{content:"";position:absolute;inset:12px;border:1px solid rgba(255,245,220,.25);border-radius:21px;pointer-events:none}
+.admin-app .atelier-hero:after{content:"";position:absolute;right:-85px;bottom:-100px;width:350px;height:350px;border:1px solid rgba(255,253,244,.3);border-radius:50%;box-shadow:0 0 0 32px rgba(255,255,255,.023),0 0 0 63px rgba(255,255,255,.02);pointer-events:none}
+.admin-app .atelier-hero-copy{max-width:640px;min-width:0;position:relative;z-index:2;padding-right:10px}
+.admin-app .atelier-hero-eyebrow{display:inline-block;color:#efd5a1;font-size:11px;font-weight:900;letter-spacing:.19em}
+.admin-app .atelier-hero-dot{margin:0 8px;font-size:12px}
+.admin-app .atelier-hero h1{color:#fffdf7;font:500 clamp(38px,4vw,55px)/1.04 var(--dl-display),Georgia,serif;letter-spacing:-.046em;margin:12px 0 13px;max-width:13ch}
+.admin-app .atelier-hero-copy>p{color:rgba(255,253,245,.89);font-size:16px;line-height:1.55;max-width:41ch;margin:0}
+.admin-app .atelier-hero-meta{display:flex;align-items:center;gap:12px;color:#f2d8ad;font-size:11px;letter-spacing:.025em;margin-top:19px}
+.admin-app .hero-meta-separator{width:4px;height:4px;border-radius:50%;background:#f4dbac}
+.admin-app .atelier-hero-right{margin-left:auto;align-self:center;position:relative;z-index:1;opacity:.9}
+.admin-app .atelier-hero-seal{display:grid;place-content:center;text-align:center;width:120px;height:120px;border:1px solid rgba(255,255,255,.6);border-radius:50%;color:#fff4d6;font:500 48px/1 var(--dl-display),Georgia,serif;background:rgba(16,65,46,.16);box-shadow:0 0 0 15px rgba(255,255,255,.045),0 0 0 30px rgba(255,255,255,.022);backdrop-filter:blur(5px)}
+.admin-app .atelier-hero-seal small{display:block;font:800 9px var(--dl-body),sans-serif;letter-spacing:.22em;margin-top:4px}
+.admin-app .atelier-hero .system-pill{position:absolute;right:22px;bottom:18px;z-index:4;background:rgba(13,49,38,.70);border:1px solid rgba(243,248,236,.25);backdrop-filter:blur(10px);color:#f3f8f2;font-size:11px;max-width:50%;white-space:normal}
+.admin-app .kpi-grid{margin:0 0 18px;gap:14px}
+.admin-app .kpi-card{background:rgba(255,253,249,.95);border:1px solid #dfebe0;border-radius:22px;min-height:151px;padding:19px 20px;box-shadow:0 13px 36px rgba(23,69,49,.04)}
+.admin-app .kpi-card:nth-child(2){background:linear-gradient(145deg,#fffefa,#f5f8f1)}
+.admin-app .kpi-card:nth-child(4){background:linear-gradient(135deg,#fdfaf1,#fffefb)}
+.admin-app .kpi-card small{font-size:11px;letter-spacing:.12em;color:#637968}
+.admin-app .kpi-card strong{font:500 clamp(35px,3vw,45px) var(--dl-display),Georgia,serif;color:#1b4a3a}
+.admin-app .kpi-card em{font-size:12px;color:#748579}
+.admin-app .kpi-icon{color:#315e4b;background:#e9f1e9;border-radius:12px}
+.admin-app .dashboard-grid{gap:17px}
+.admin-app .panel-card{background:rgba(255,254,250,.95);border:1px solid #dde7dd;border-radius:23px;box-shadow:0 16px 45px rgba(27,70,52,.04)}
+.admin-app .panel-head{gap:12px;align-items:flex-start}
+.admin-app .panel-head h2{font:500 clamp(23px,2.2vw,31px)/1.16 var(--dl-display),Georgia,serif;color:#1c4336}
+.admin-app .panel-head .eyebrow{color:#8f6730}
+.admin-app .pulse-card{background:linear-gradient(151deg,#123e32,#27644c)!important;border:1px solid rgba(242,222,176,.13);box-shadow:0 26px 56px rgba(18,64,43,.14)}
+.admin-app .pulse-card .panel-head h2,.admin-app .pulse-card .panel-head .eyebrow{color:#fff4dd}
+.admin-app .pulse-line{padding:11px 0}
+.admin-app .pulse-line strong{font:500 22px var(--dl-display),Georgia,serif;color:#f6d7a4}
+.admin-app .funnel{display:flex;align-items:stretch;gap:9px;overflow-x:auto;scrollbar-width:thin;padding-bottom:5px}
+.admin-app .funnel-step{flex:1 0 125px;min-width:125px;border-radius:16px;padding:15px 12px;background:#f8faf5;border:1px solid #e0e9de}
+.admin-app .funnel-step small{font-size:11px!important;white-space:normal;overflow:visible;text-overflow:clip;line-height:1.35;min-height:28px;color:#906e3a}
+.admin-app .funnel-step strong{font:500 34px var(--dl-display),Georgia,serif;margin-top:7px;color:#173f32}
+.admin-app .funnel-step span{font-size:10px!important}
+.admin-app .journey-map{overflow-x:auto;min-height:168px}
+.admin-app .journey-node b{font-size:11px!important}
+.admin-app .calendar-grid{gap:6px}
+.admin-app .calendar-day{min-height:62px;min-width:0}
+.admin-app .calendar-nav b{min-width:122px;text-transform:capitalize;font-size:12px}
+.admin-app .activity-item,.admin-app .audit-item{min-height:56px}
+.admin-app .quick-grid button{border-color:#dde8dc;border-radius:15px;background:#f9faf6}
+.admin-app .page-head{padding:6px 0 17px}
+.admin-app .page-head h1{font-size:clamp(39px,4.6vw,57px)}
+.admin-app .page-head p{font-size:15px;max-width:60ch}
+.admin-app .toolbar{padding:15px 0;gap:12px}
+.admin-app .search-box input{font-size:14px!important}
+.admin-app .data-surface{border:1px solid #dae6dd;border-radius:20px;background:#fffdfa}
+.admin-app :where(.data-surface table,.panel-card table) th{font-size:11px}
+.admin-app :where(.data-surface table,.panel-card table) td{font-size:13px}
+.admin-app .treatment-card p{font-size:13px!important;color:#667b6e}
+.admin-app .treatment-card h3{font-size:24px}
+.admin-app :where(.primary,.ghost-button,.mini-button){min-height:40px}
+.admin-app .settings-grid .panel-card{min-height:230px}
+/* Accessibility — available to both administrators and sign-in screen. */
+.admin-a11y-panel{position:fixed;right:24px;top:85px;z-index:160;width:min(calc(100vw - 32px),385px);max-height:calc(100dvh - 115px);overflow:auto;background:#fffdfa;border:1px solid #cfded2;border-radius:23px;padding:20px;box-shadow:0 35px 110px rgba(18,54,43,.26)}
+.admin-a11y-panel.hidden{display:none!important}
+.admin-a11y-head{display:flex;gap:12px;justify-content:space-between;align-items:flex-start;margin-bottom:17px}
+.admin-a11y-head h2{font:500 27px var(--dl-display),Georgia,serif;color:#153d30;margin:4px 0 0}
+.admin-a11y-panel label{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;padding:15px 12px;border-radius:14px;border:1px solid #dfe8dd;margin-bottom:10px;background:#f8faf6;cursor:pointer}
+.admin-a11y-panel label b{font-size:14px;display:block}
+.admin-a11y-panel label small{font-size:12px;display:block;color:#5e7567;line-height:1.45;margin-top:4px}
+.admin-a11y-panel input{width:22px;height:22px;accent-color:#1c583f}
+.a11y-large-text .admin-app :where(.panel-card p,.kpi-card em,.activity-item small,.audit-item small,.funnel-step span,.system-check span,.treatment-card p,.meta-chip){font-size:14px!important}
+.a11y-large-text .admin-app :where(.nav-item,.toolbar input,table td,table th){font-size:15px!important}
+.a11y-large-text .admin-app .panel-head h2{font-size:32px!important}
+.a11y-high-contrast .admin-app :where(.panel-card,.kpi-card,.data-surface,.treatment-card){border-color:#688a71!important}
+.a11y-high-contrast .admin-app :where(.muted,.kpi-card em,.panel-card p){color:#3d5a4a!important}
+.a11y-high-contrast .ambient-admin-layer .ambient-motif{opacity:.01!important}
+.dlorgia-motion-paused .ambient-admin-layer :where(.ambient-motif,.ambient-icon){display:none!important;animation:none!important}
+.dlorgia-motion-paused .admin-app .view{animation:none!important}
+:where(.admin-app,.login-stage) :where(button,input,select,textarea,a):focus-visible{outline:3px solid #56a783;outline-offset:3px}
+@media(max-width:1100px){
+ .admin-app{--sidebar:238px;grid-template-columns:238px minmax(0,1fr)}
+ .admin-app .sidebar{width:238px}
+ .admin-app .atelier-hero-seal{width:96px;height:96px;font-size:40px}
+ .admin-app .kpi-grid{gap:9px}
+ .admin-app .kpi-card{padding:15px}
+}
+@media(max-width:760px){
+ .admin-app{grid-template-columns:minmax(0,1fr)!important}
+ .admin-app .sidebar{width:270px;z-index:60}
+ .admin-app .workspace{grid-column:1;min-width:0}
+ .admin-app .topbar{height:68px}
+ .admin-app .top-actions{gap:4px}
+ .admin-app .top-actions .ghost-button{display:none}
+ .admin-app .admin-session div:not(.avatar){display:none}
+ .admin-app .main-content{padding:14px!important}
+ .admin-app .atelier-hero{min-height:260px;border-radius:23px;padding:28px 21px;margin-bottom:16px;align-items:flex-start}
+ .admin-app .atelier-hero h1{font-size:39px;max-width:12ch}
+ .admin-app .atelier-hero-copy>p{font-size:14px}
+ .admin-app .atelier-hero-right{display:none}
+ .admin-app .atelier-hero .system-pill{bottom:13px;right:15px;max-width:85%;font-size:10px}
+ .admin-app .atelier-hero-meta{margin-top:14px}
+ .admin-app .kpi-grid{grid-template-columns:1fr 1fr;gap:9px}
+ .admin-app .kpi-card{min-height:135px}
+ .admin-app .panel-card{padding:17px}
+ .admin-app .funnel-step{min-width:119px;flex-basis:119px}
+ .admin-app .dashboard-grid{gap:13px}
+ .admin-a11y-panel{right:12px;top:74px}
+}
+@media(max-width:420px){
+ .admin-app .atelier-hero h1{font-size:34px}
+ .admin-app .atelier-hero-copy>p{font-size:13px}
+ .admin-app .kpi-card strong{font-size:31px}
+ .admin-app .panel-head h2{font-size:24px}
+ .admin-app .kpi-card small{font-size:9px}
+ .admin-app .calendar-grid{gap:3px}
+ .admin-app .calendar-day{min-height:48px;padding:5px}
+ .admin-app .top-actions .icon-button{width:35px;min-width:35px;height:35px;min-height:35px}
+}
+@media(prefers-reduced-motion:reduce){.admin-app .view{animation:none!important}.ambient-admin-layer :where(.ambient-motif,.ambient-icon){display:none!important}}
+
+/* Admin KPI cards must stay visible when the data-flash effect temporarily replaces
+   the generic .reveal animation. This resolves the empty white KPI row. */
+.admin-app .kpi-card.reveal{opacity:1!important;transform:none!important}
+/* Show every conversion stage without clipped labels or hidden columns. */
+.admin-app .funnel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;overflow:visible;padding:0}
+.admin-app .funnel-step{min-width:0;min-height:112px;flex:auto}
+.admin-app .funnel-step small{min-height:0;display:block;font-size:11px!important;line-height:1.35;overflow-wrap:anywhere}
+@media(max-width:760px){.admin-app .funnel{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-app .funnel-step{min-height:103px}}
+
+
+/* v4.4.1 — Admin topbar redesign */
+.admin-app .topbar{height:auto;min-height:90px;top:12px;margin:14px 18px 0;padding:14px 18px 14px 20px;border-radius:24px;background:linear-gradient(135deg,rgba(255,253,248,.97),rgba(248,251,247,.94));border:1px solid rgba(209,221,212,.95);box-shadow:0 18px 45px rgba(27,70,52,.08),0 6px 14px rgba(27,70,52,.04)}
+.admin-app .main-content{padding-top:26px!important}
+.admin-app .topbar-left{display:flex;align-items:center;gap:14px;min-width:0;flex:1 1 auto}
+.admin-app .crumb-stack{display:grid;gap:4px;min-width:0}
+.admin-app .topbar-kicker{font-size:11px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:#8f6830}
+.admin-app .breadcrumbs{gap:10px;font-size:14px;flex-wrap:wrap}.admin-app .breadcrumbs span{color:#6d8276}.admin-app .breadcrumbs span:after{color:#b2bcb7}.admin-app .breadcrumbs b{font:500 clamp(25px,2.5vw,32px)/1.05 var(--dl-display),Georgia,serif;color:#173f33;letter-spacing:-.03em}
+.admin-app .topbar-context{display:flex;align-items:center;gap:9px;min-width:0}.admin-app .context-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(180deg,#4eab80,#2f6f57);box-shadow:0 0 0 5px rgba(88,166,129,.12)}.admin-app .topbar-context small{font-size:12px;line-height:1.45;color:#5f776a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:min(54vw,560px)}
+.admin-app .top-actions{display:flex;align-items:center;gap:12px;flex:0 0 auto;margin-left:18px}.admin-app .top-action-group{display:flex;align-items:center;gap:8px;padding:7px;border-radius:18px;background:rgba(242,247,241,.82);border:1px solid rgba(216,226,217,.96);box-shadow:inset 0 1px 0 rgba(255,255,255,.65)}
+.admin-app .top-action-group .ghost-button{min-height:46px;padding-inline:18px;border-radius:14px;background:#fffdf8;border-color:#d8e4d8;font-weight:800;color:#184236;box-shadow:0 8px 20px rgba(29,71,54,.05)}
+.admin-app .top-action-group .icon-button,.admin-app .top-action-group .ghost-button,.admin-app .top-action-group .notification-button{min-width:46px;min-height:46px;border-radius:14px}.admin-app .top-action-group .icon-button,.admin-app .top-action-group .notification-button{background:rgba(255,253,249,.92);border-color:#dce6dd;color:#174335;box-shadow:0 8px 20px rgba(29,71,54,.04)}
+.admin-app .notification-wrap{position:relative}.admin-app .notification-button{position:relative}.admin-app .notification-panel{right:0;top:calc(100% + 12px)}
+.admin-app .admin-session-card{display:flex;align-items:center;gap:12px;padding:9px 10px 9px 9px;border-radius:20px;background:linear-gradient(140deg,#173d32,#1d5542);border:1px solid rgba(242,221,179,.26);box-shadow:0 16px 32px rgba(17,54,42,.16)}
+.admin-app .admin-session{gap:12px;margin-left:0}.admin-app .admin-session .avatar{width:42px;height:42px;font:600 18px var(--dl-display),Georgia,serif;background:linear-gradient(180deg,#f0d7a5,#deb773);color:#173f33;box-shadow:0 8px 18px rgba(7,31,23,.18)}
+.admin-app .session-copy{display:grid;gap:2px;min-width:0}.admin-app .session-role-pill{display:inline-flex;align-items:center;justify-content:center;width:max-content;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.16);font-size:9px;letter-spacing:.13em;text-transform:uppercase;font-weight:900;color:#f2d9ab}.admin-app .admin-session b{font-size:14px;max-width:180px;color:#fffdf7}.admin-app .admin-session small{font-size:11px;color:rgba(242,248,244,.72)}
+.admin-app .session-menu{min-height:42px;padding:0 16px;border-radius:14px;border:1px solid rgba(240,220,177,.26);background:rgba(255,255,255,.09);color:#fffdf8;font-weight:800}.admin-app .session-menu:hover{background:rgba(255,255,255,.15)}
+.admin-app .notification-count{top:3px;right:3px;background:#a24d3d;color:#fff;border:2px solid #fffdfa;border-radius:999px;min-width:18px;height:18px;padding:0 4px;display:grid;place-items:center;font-size:10px;font-weight:900}
+@media(max-width:1180px){.admin-app .topbar{margin:12px 14px 0;padding:13px 14px}.admin-app .top-actions{gap:10px}.admin-app .topbar-context small{max-width:34vw}.admin-app .admin-session b{max-width:120px}}
+@media(max-width:900px){.admin-app .topbar{display:grid;grid-template-columns:1fr;gap:12px}.admin-app .top-actions{margin-left:0;justify-content:space-between}.admin-app .topbar-context small{max-width:none}.admin-app .admin-session-card{margin-left:auto}}
+@media(max-width:760px){.admin-app .topbar{top:0;margin:0;border-radius:0;padding:10px 14px 12px;border-left:0;border-right:0;border-top:0;min-height:68px;box-shadow:0 8px 22px rgba(27,70,52,.06)}.admin-app .main-content{padding-top:14px!important}.admin-app .topbar-left{gap:10px}.admin-app .crumb-stack{gap:2px}.admin-app .topbar-kicker,.admin-app .topbar-context{display:none}.admin-app .breadcrumbs{font-size:13px}.admin-app .breadcrumbs b{font-size:24px}.admin-app .top-actions{gap:8px;justify-content:flex-end}.admin-app .top-action-group{padding:4px;gap:4px;border-radius:15px}.admin-app .top-action-group .ghost-button{display:none}.admin-app .top-action-group .icon-button,.admin-app .top-action-group .notification-button{width:38px;min-width:38px;height:38px;min-height:38px}.admin-app .admin-session-card{padding:6px 7px;border-radius:16px}.admin-app .admin-session .avatar{width:36px;height:36px;font-size:16px}.admin-app .session-copy{display:none}.admin-app .session-menu{padding:0 12px;min-height:36px}.admin-app .notification-panel{right:-8px}}
+
+/* v4.5 — admin workspace refinement */
+.admin-app .workspace{background:radial-gradient(circle at 88% 10%,rgba(214,228,218,.34),transparent 24%),radial-gradient(circle at 8% 92%,rgba(236,223,194,.28),transparent 30%),linear-gradient(160deg,rgba(250,251,246,.9),rgba(242,247,240,.9));}
+.admin-app .content{max-width:1560px;margin:0 auto;padding-inline:20px}
+.admin-app .page-head{padding:24px 26px;border-radius:28px;background:linear-gradient(135deg,rgba(255,253,249,.96),rgba(245,249,243,.94));border:1px solid rgba(216,228,219,.92);box-shadow:0 16px 40px rgba(19,58,43,.05);margin-bottom:18px}
+.admin-app .page-head h1{font:600 clamp(34px,3vw,50px)/1.02 var(--dl-display),Georgia,serif;letter-spacing:-.03em;color:#173f33}
+.admin-app .page-head p{max-width:72ch;color:#61796c}
+.admin-app .kpi-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.admin-app .kpi-card{position:relative;overflow:hidden}
+.admin-app .kpi-card::after{content:'';position:absolute;inset:auto -32px -46px auto;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(38,94,71,.10),transparent 66%)}
+.admin-app .dashboard-grid{gap:18px}.admin-app .panel-card{border-radius:24px;box-shadow:0 14px 34px rgba(19,58,43,.05)}
+.admin-app .panel-card .panel-head{margin-bottom:14px}.admin-app .panel-card h2{font-size:26px;letter-spacing:-.02em}
+@media(max-width:1180px){.admin-app .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-app .content{padding-inline:16px}}
+@media(max-width:760px){.admin-app .page-head{padding:18px 18px 20px;border-radius:22px}.admin-app .content{padding-inline:12px}}
+
+/* v4.4.2 — richer admin overview hero and calmer dashboard rhythm */
+.admin-app .atelier-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:26px;min-height:300px}
+.admin-app .atelier-hero-copy h1{max-width:11ch}.admin-app .atelier-hero-copy>p{max-width:46ch}
+.admin-app .atelier-hero-art{position:relative;display:grid;place-items:center;min-width:320px;min-height:220px;padding:12px 10px 24px}
+.admin-app .atelier-hero-art::before{content:'';position:absolute;inset:10px 22px 22px;border-radius:32px;background:radial-gradient(circle at 30% 30%,rgba(255,247,226,.16),transparent 36%),linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(8px)}
+.admin-app .hero-float-card{position:absolute;display:grid;gap:4px;padding:14px 16px;border-radius:18px;background:rgba(255,253,247,.93);border:1px solid rgba(235,222,192,.84);box-shadow:0 16px 34px rgba(14,43,35,.16);max-width:180px;color:#183f34}
+.admin-app .hero-float-card small{font-size:10px;letter-spacing:.18em;font-weight:900;color:#916c36}.admin-app .hero-float-card b{font-size:16px;line-height:1.16}.admin-app .hero-float-card span{font-size:12px;line-height:1.5;color:#5a7065}.admin-app .hero-float-card--one{left:0;bottom:8px}.admin-app .hero-float-card--two{right:0;top:8px}
+.admin-app .atelier-hero-seal{position:relative;z-index:2;width:132px;height:132px}
+.admin-app .kpi-card,.admin-app .panel-card{backdrop-filter:blur(7px)}
+.admin-app .top-grid .panel-card,.admin-app .middle-grid .panel-card,.admin-app .lower-grid .panel-card{min-height:100%}
+@media(max-width:1180px){.admin-app .atelier-hero{grid-template-columns:1fr}.admin-app .atelier-hero-art{min-width:0;justify-self:start;width:min(100%,380px)}.admin-app .hero-float-card--two{right:12px}}
+@media(max-width:760px){.admin-app .atelier-hero{min-height:0}.admin-app .atelier-hero-art{display:none}}

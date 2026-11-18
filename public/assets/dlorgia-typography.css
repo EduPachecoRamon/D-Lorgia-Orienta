@@ -1,0 +1,9 @@
+/* Tipografía editorial, escala legible y jerarquías compartidas */
+body{font-family:var(--dl-body)!important;color:var(--dl-ink)}
+:where(.hero h1,.hero-copy h1,.login-brand h1,.login-copy h1,.page-head h1,.hero-row h1,.section-heading h2,.section-minihead h2,.panel-head h2,.settings-grid h2,.modal-head h2,.drawer-head h2,.login-card-head b,.brand-copy strong,.topbar strong,.brand-mark,.brand-lockup .brand-mark,.login-emblem,.intro-mark span,.onboarding-wrap h1,.guide-result-hero h3,.guide-persona b,.guide-choice b,.treatment-card h3,.panel h2,.panel h3,.kpi-card strong,.pulse-line strong,.journey-node strong,.funnel-step strong){font-family:var(--dl-display)!important;font-optical-sizing:auto}
+:where(p,li,label,button,input,select,textarea){line-height:1.55}
+:where(.eyebrow){letter-spacing:.115em;font-weight:800}
+:where(.muted){color:var(--dl-muted)}
+:where(.hero h1,.login-brand h1,.login-copy h1,.page-head h1){letter-spacing:-.035em;font-weight:520;line-height:1.07}
+:where(.panel-head h2,.section-heading h2,.section-minihead h2){letter-spacing:-.024em;line-height:1.15}
+@media(max-width:380px){:where(.hero h1,.login-brand h1,.section-heading h2){overflow-wrap:break-word}}

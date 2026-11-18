@@ -1,0 +1,16 @@
+D’LORGIA · CARPETA DE FOTOGRAFÍAS AUTORIZADAS
+
+Esta versión no descarga, copia ni redistribuye automáticamente fotos del sitio de D’Lorgia.
+Las imágenes oficiales actuales se enlazan al sitio, con un recurso visual local si fallan.
+
+Si el equipo de D’Lorgia autoriza y entrega archivos:
+1. Guardarlos en una carpeta separada con nombres como colormax-acne.webp,
+   botox.webp, alta-frecuencia-facial-2.jpg, prp.webp, etc.
+2. Ejecutar: node scripts/instalar-fotos-autorizadas.mjs /ruta/carpeta
+3. Hacer commit de los archivos locales, comprobar licencias y consentimiento
+   para las fotos que puedan mostrar personas.
+4. Optimizar los archivos (idealmente menos de 500 KB), con tamaños adecuados
+   para no consumir demasiado ancho de banda.
+
+Sin servicio de imágenes de pago. No guardar imágenes sensibles de pacientes
+sin consentimiento y revisión de privacidad.

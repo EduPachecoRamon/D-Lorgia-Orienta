@@ -1,0 +1,52 @@
+/* D’LORGIA 4.3 — Editorial Wellness · Centro de operaciones */
+body{background:var(--dl-cream)}
+.admin-app{background:radial-gradient(circle at 84% 12%,rgba(218,230,219,.38),transparent 31%),#F7F8F4}
+.sidebar{background:linear-gradient(180deg,#FFFDFA 0%,#F5F4EC 100%);border-color:var(--dl-border);width:258px;--sidebar:258px;padding:30px 18px}
+.admin-app{--sidebar:258px;grid-template-columns:258px minmax(0,1fr)}
+.brand-lockup{padding-bottom:32px;gap:13px}.brand-mark{width:48px;height:48px;border-radius:16px!important;background:var(--dl-forest);color:#EACB90!important;font-size:18px}
+.brand-copy strong{font-size:28px;font-weight:500;line-height:1.05}.brand-copy small{font-size:10px;color:var(--dl-gold-ink)}
+.nav-item{min-height:47px;font-size:13px;letter-spacing:-.005em;border-radius:13px;padding:11px 12px}
+.nav-item.active{background:#E7F0E9;color:var(--dl-forest);box-shadow:inset 0 0 0 1px rgba(24,62,53,.05)}
+.nav-icon{width:21px;height:21px;display:grid;place-items:center;color:#647D71}.nav-item.active .nav-icon{color:var(--dl-forest)}
+.connection-card{background:#EEF3EE;border-color:var(--dl-border)}.connection-card small{font-size:11px}.connection-card b{font-size:13px}
+.sidebar-foot .back-app{font-size:12px}
+.topbar{background:rgba(255,253,250,.88);height:75px;border-color:var(--dl-border);box-shadow:0 3px 20px rgba(24,62,53,.035)}
+.breadcrumbs{font-size:13px}.breadcrumbs b{font-weight:800}
+.main-content{padding:clamp(22px,3.3vw,46px)!important;max-width:1580px;margin-inline:auto;width:100%}
+.hero-row{padding:5px 0 23px;gap:28px}.hero-row h1{font-size:clamp(37px,4.2vw,60px);letter-spacing:-.035em}
+.hero-row p,.page-head p{font-size:14px;color:var(--dl-muted)}
+.page-head h1{font-size:clamp(39px,5vw,61px);line-height:1.05;margin:12px 0}
+.panel-card{border-radius:23px!important;padding:clamp(18px,2vw,26px);background:#FFFDFA}
+.panel-head h2{font-size:clamp(23px,2vw,29px);line-height:1.2}
+.kpi-card{border-radius:20px!important;background:#FFFDFA;padding:20px;min-height:160px}.kpi-card strong{font-size:clamp(30px,3vw,44px)}.kpi-card small{font-size:11px;color:var(--dl-muted);letter-spacing:.08em}.kpi-card em{font-size:12px}
+.pulse-card{background:linear-gradient(145deg,#173F35,#285F4D)!important;box-shadow:0 22px 48px rgba(24,62,53,.16)}
+.pulse-card .panel-head h2,.pulse-card b{color:#fff}
+:where(.pulse-line small,.pulse-line b,.insight-line p,.insight-line b,.audit-item b,.audit-item small,.activity-item b,.activity-item small,.notification-item b,.notification-item small,.calendar-detail-item b,.calendar-detail-item small,.funnel-step small,.funnel-step span,.journey-node b,.journey-node small,.treatment-card p,.treatment-card small,.calendar-weekday,.quick-grid small,.quick-grid b,.system-check span,.system-check b){font-size:12px!important;line-height:1.48}
+.pulse-line b{font-size:13px!important}.pulse-line strong{font-size:21px}
+.funnel-step{padding:14px 10px;border-radius:14px}.funnel-step strong{font-size:29px}.funnel-step span{font-size:11px!important}
+.journey-node .node-circle{width:70px;height:70px}.journey-node strong{font-size:23px}.journey-node b{font-size:12px!important}
+.calendar-weekday{font-weight:900;color:var(--dl-gold-ink)}.calendar-day{min-height:68px;background:#FFFEFB;border-radius:12px;border-color:#E0E7DD}.calendar-day b{font-size:12px}.calendar-dot{width:7px;height:7px}
+.insight-line,.notification-item,.audit-item{border-color:#E2E8DE}.insight-line{padding:13px}
+.data-surface{border-radius:19px;overflow-x:auto}.data-surface table,.panel-card table{min-width:660px}
+table :where(th,td){font-size:12px;line-height:1.45}table th{letter-spacing:.05em;font-size:11px;color:var(--dl-muted)}
+:where(.toolbar input,.search-box input,.login-card input,.treatment-form input,.treatment-form select,.command-input){font-size:13px!important}
+:where(.status,.soft-badge,.meta-chip){font-size:11px!important;line-height:1.3}
+.login-stage{background:#F7F2E9}.login-art{background:radial-gradient(circle at 25% 15%,rgba(218,195,147,.2),transparent 36%),linear-gradient(150deg,#14382F,#285B4C)}
+.login-emblem{font-family:var(--dl-display);border-radius:34px;box-shadow:0 0 0 19px rgba(255,255,255,.035)}
+.login-copy h1{letter-spacing:-.05em;line-height:1.05}.login-copy>p{font-size:15px;line-height:1.7}
+.login-card{border-radius:23px;padding:26px;max-width:490px}.login-card label{font-size:13px}
+.admin-toast{font-size:13px!important;min-height:50px}
+.feedback{min-height:0}.feedback:empty{display:none}.feedback:not(:empty){display:block;background:var(--dl-error-surface);border:1px solid #E9CFC6;color:var(--dl-error)}
+.notification-panel{border-radius:20px;padding:18px;z-index:100;max-height:min(76vh,700px);overflow-y:auto}
+.notification-head h3{font-size:23px}
+.treatment-card{border-radius:20px;padding:19px}.treatment-card h3{font-size:23px}
+.detail-drawer,.modal,.command-palette{background:#FFFDFA}
+:where(.calendar-day,.nav-item,.treatment-card,.quick-grid button):focus-visible{box-shadow:var(--dl-focus)}
+/* El diagnóstico técnico solo vive en Configuración, nunca en avisos de operación */
+@media(max-width:1100px){.main-content{padding:22px!important}.top-grid,.middle-grid,.lower-grid{gap:13px}}
+@media(max-width:950px){.sidebar{width:240px}.admin-app{--sidebar:240px;grid-template-columns:240px minmax(0,1fr)}.kpi-card{padding:14px}}
+@media(max-width:760px){.sidebar{width:260px}.admin-app{grid-template-columns:minmax(0,1fr)}.main-content{padding:18px!important}.hero-row h1{font-size:40px}.panel-card{padding:18px}.calendar-day{min-height:56px;padding:6px}.calendar-day b{font-size:11px}}
+
+.login-art .login-emblem{position:relative}.login-art .dl-signature{position:absolute;inset:12px;width:calc(100% - 24px);height:calc(100% - 24px);opacity:.26;pointer-events:none}
+
+.nav-svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}.nav-item:focus-visible{outline-offset:-1px}.nav-item.active .nav-svg{stroke-width:1.9}

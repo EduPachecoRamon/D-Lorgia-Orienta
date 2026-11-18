@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1f5548" />
+  <meta name="description" content="D’Lorgia Orienta: explora tratamientos, encuentra orientación personalizada y organiza tu bienestar." />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/assets/icons/icon-192.png" />
+  <title>D’Lorgia Orienta</title>
+  <style id="critical-v400">
+    /* Critical guard: evita mezclar HTML nuevo con estilos viejos durante una actualización. */
+    .auth-form{display:none}
+    .auth-form.active{display:block}
+    .auth-success-layer{display:none}
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/styles-v400.css" />
+  <link rel="stylesheet" href="/assets/dlorgia-tokens.css" />
+  <link rel="stylesheet" href="/assets/dlorgia-typography.css" />
+  <link rel="stylesheet" href="/assets/dlorgia-components.css" />
+  <link rel="stylesheet" href="/assets/dlorgia-motion.css" />
+  <link rel="stylesheet" href="/assets/dlorgia-patient.css" />
+  <link rel="stylesheet" href="/assets/dlorgia-ateliers-v44.css" />
+  <link rel="stylesheet" href="/assets/dlorgia-pmv45.css" />
+  <link rel="stylesheet" href="/assets/dlorgia-imagery46.css" />
+  <link rel="stylesheet" href="/assets/dlorgia-connected47.css" />
+  <link rel="stylesheet" href="/assets/acceso-v48.css" />
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.8 12 3l9 7.8v9.1a1.1 1.1 0 0 1-1.1 1.1H15v-6H9v6H4.1A1.1 1.1 0 0 1 3 19.9Z"/></symbol>
+      <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3 1.35 3.65L17 8l-3.65 1.35L12 13l-1.35-3.65L7 8l3.65-1.35Z"/><path d="m18.5 13 .8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/><path d="m5.5 14 .7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7Z"/></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.9a5.6 5.6 0 0 0-7.9 0L12 5.8l-.9-.9a5.6 5.6 0 0 0-7.9 7.9L12 21l8.8-8.2a5.6 5.6 0 0 0 0-7.9Z"/></symbol>
+      <symbol id="i-heart-pulse" viewBox="0 0 24 24"><path d="M19.5 5.2a5.1 5.1 0 0 0-7.2 0L12 5.5l-.3-.3a5.1 5.1 0 0 0-7.2 7.2L12 20l2.1-2.1"/><path d="M3.5 13h4l1.5-3 3 6 2-4 1.5 3h5"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.8 20a6.2 6.2 0 0 1 12.4 0"/><path d="M16 5.2a3.3 3.3 0 0 1 0 6.3M16.8 14.4a5.6 5.6 0 0 1 4.4 5.6"/></symbol>
+      <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><circle cx="12" cy="10" r="2.4"/><path d="M8.2 17a4.4 4.4 0 0 1 7.6 0"/></symbol>
+      <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+      <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.6 2.6L16.5 9"/></symbol>
+      <symbol id="i-message" viewBox="0 0 24 24"><path d="M5 18.5 3.8 21l3.7-1A9 9 0 1 0 3 12c0 2.5 1 4.8 2 6.5Z"/><path d="M8 9.5h8M8 13h5"/></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></symbol>
+      <symbol id="i-stethoscope" viewBox="0 0 24 24"><path d="M6 3v5a4 4 0 0 0 8 0V3M4 3h4M12 3h4"/><path d="M10 12v2a5 5 0 0 0 10 0v-1"/><circle cx="20" cy="10.5" r="1.5"/></symbol>
+      <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4Z"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></symbol>
+      <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+      <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+      <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+      <symbol id="i-accessibility" viewBox="0 0 24 24"><circle cx="12" cy="4" r="1.8"/><path d="M6 8h12"/><path d="M12 6v5"/><path d="m9.5 21 1.6-6.2M14.5 21 13 14.8"/><path d="M8.5 11.5 12 13l3.5-1.5"/></symbol>
+      <symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 5H5v14h5M13 8l4 4-4 4M17 12H9"/></symbol>
+      <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 4C12 4 6 8 6 14c0 3 2 5 5 5 6 0 9-7 9-15Z"/><path d="M4 21c2-5 6-8 12-11"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10v6M12 7h.01"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-user-plus" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2.5 21a6.5 6.5 0 0 1 13 0M18 8v6M15 11h6"/></symbol>
+      <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 8-8M15 8l2 2M17 6l2 2"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5.2-3.2 8.3-8 10-4.8-1.7-8-4.8-8-10V6Z"/><path d="m9 12 2 2 4-5"/></symbol>
+      <symbol id="i-at" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M16 12v1.5a2.5 2.5 0 0 1-5 0V12a2.5 2.5 0 0 1 5 0Zm0 0V8.5"/><path d="M16 15.5c1.5 0 3-1.2 3-3.5"/></symbol>
+      <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.8 8.2-2.1 5.5-5.5 2.1 2.1-5.5Z"/><circle cx="12" cy="12" r="1"/></symbol>
+
+      <symbol id="i-dermis" viewBox="0 0 24 24"><path d="M2 9c3-4 6-4 10-1s7 3 10-1M2 14c3-4 6-4 10-1s7 3 10-1M2 19c3-4 6-4 10-1s7 3 10-1"/><circle cx="6" cy="4.5" r="1"/><circle cx="17" cy="4" r="1"/></symbol>
+      <symbol id="i-hydrate" viewBox="0 0 24 24"><path d="M12 2c-3.2 5-7.5 9.2-7.5 13a7.5 7.5 0 0 0 15 0C19.5 11.2 15.2 7 12 2Z"/><path d="M8 15a4.2 4.2 0 0 0 4.2 4.2"/></symbol>
+      <symbol id="i-cell" viewBox="0 0 24 24"><path d="M6 3 2.5 9l2 7L11 21l7-2 3.5-7-3-6-6-3z"/><circle cx="12" cy="12" r="4"/><path d="M10 12h4M12 10v4"/></symbol>
+      <symbol id="i-flora" viewBox="0 0 24 24"><path d="M12 21v-11M12 15c-7 0-9-4-9-8 5-1 9 2 9 8ZM12 12c0-6 4-9 9-8 0 5-3 8-9 8Z"/></symbol>
+    </defs>
+  </svg>
+  <div id="network-banner" class="network-banner hidden">Sin conexión · tu perfil, historial y navegación local siguen disponibles</div>
+  <div id="app-toast" class="app-toast" role="status" aria-live="polite"></div>
+  <div class="app-shell entry-mode">
+  <div class="ambient-layer" id="ambient-layer" data-scene="login" aria-hidden="true">
+    <!-- Motivos grandes: el mismo icono de la sección cae en loop a distintas velocidades. -->
+    <span class="ambient-motif motif-main" style="--x:-8%;--duration:22s;--delay:-4s;--size:118px;--drift:26px;--rot:-12deg"><svg><use href="#i-sparkles"/></svg></span>
+    <span class="ambient-motif motif-main" style="--x:24%;--duration:28s;--delay:-19s;--size:84px;--drift:-18px;--rot:8deg"><svg><use href="#i-sparkles"/></svg></span>
+    <span class="ambient-motif motif-main" style="--x:57%;--duration:24s;--delay:-11s;--size:142px;--drift:20px;--rot:-5deg"><svg><use href="#i-sparkles"/></svg></span>
+    <span class="ambient-motif motif-main" style="--x:80%;--duration:31s;--delay:-25s;--size:102px;--drift:-24px;--rot:11deg"><svg><use href="#i-sparkles"/></svg></span>
+    <span class="ambient-motif motif-main" style="--x:8%;--duration:34s;--delay:-30s;--size:72px;--drift:14px;--rot:4deg"><svg><use href="#i-sparkles"/></svg></span>
+    <span class="ambient-motif motif-main" style="--x:67%;--duration:26s;--delay:-6s;--size:76px;--drift:13px;--rot:-8deg"><svg><use href="#i-sparkles"/></svg></span>
+    <!-- Motivo secundario: acompaña sin competir con el principal. -->
+    <span class="ambient-motif motif-secondary" style="--x:44%;--duration:36s;--delay:-15s;--size:64px;--drift:-11px;--rot:8deg"><svg><use href="#i-heart"/></svg></span>
+    <span class="ambient-motif motif-secondary" style="--x:88%;--duration:39s;--delay:-33s;--size:58px;--drift:15px;--rot:-6deg"><svg><use href="#i-hydrate"/></svg></span>
+    <!-- Micromotivos propios de cuidado de piel, hidratación y estructura dermis. -->
+    <span class="ambient-icon" style="--x:15%;--duration:17s;--delay:-12s;--size:19px;--drift:12px"><svg><use href="#i-sparkles"/></svg></span>
+    <span class="ambient-icon ambient-gold" style="--x:52%;--duration:21s;--delay:-7s;--size:16px;--drift:-9px"><svg><use href="#i-sparkles"/></svg></span>
+    <span class="ambient-icon" style="--x:75%;--duration:19s;--delay:-16s;--size:20px;--drift:10px"><svg><use href="#i-cell"/></svg></span>
+    <span class="ambient-icon" style="--x:91%;--duration:36s;--delay:-21s;--size:26px;--drift:12px"><svg><use href="#i-dermis"/></svg></span>
+  </div>
+    <header class="topbar">
+      <button class="icon-btn" data-nav="home" aria-label="Inicio"><svg class="ui-icon"><use href="#i-home"/></svg></button>
+      <div class="brand-lockup">
+        <div class="brand-mark">DL</div>
+        <div><p class="eyebrow">D’LORGIA</p><strong>Orienta</strong></div>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn a11y-trigger" id="a11y-trigger" type="button" aria-expanded="false" aria-controls="a11y-panel" aria-label="Opciones de accesibilidad"><svg class="ui-icon"><use href="#i-accessibility"/></svg></button>
+        <a class="ghost compact header-help" href="/ayuda" aria-label="Abrir centro de ayuda">Ayuda</a>
+        <button class="ghost compact" data-nav="portal">Mi espacio</button>
+      </div>
+    </header>
+
+    <div id="experience-status" class="experience-status hidden" aria-live="polite"></div>
+    <aside id="a11y-panel" class="a11y-panel hidden" aria-label="Accesibilidad">
+      <div class="a11y-panel-head">
+        <div><p class="eyebrow">ACCESIBILIDAD</p><h3>Ajusta tu lectura</h3></div>
+        <button id="a11y-close" class="icon-btn" type="button" aria-label="Cerrar accesibilidad">×</button>
+      </div>
+      <div class="a11y-options">
+        <label class="a11y-option"><span><b>Texto más grande</b><small>Mejora la lectura en toda la app.</small></span><input id="a11y-large-text" type="checkbox" /></label>
+        <label class="a11y-option"><span><b>Mayor contraste</b><small>Refuerza colores y bordes principales.</small></span><input id="a11y-high-contrast" type="checkbox" /></label>
+        <label class="a11y-option"><span><b>Menos movimiento</b><small>Reduce transiciones y pausa el fondo.</small></span><input id="a11y-reduce-motion" type="checkbox" /></label>
+      </div>
+    </aside>
+    <main>
+      <section class="screen active" id="login" data-icon="✦" data-icon2="◇">
+        <div class="login-wrap">
+          <div class="login-brand">
+            <div class="login-emblem"><img class="dl-signature" src="/assets/dlorgia-signature.svg" alt="" /><span>DL</span><small>ORIENTA</small></div>
+            <p class="eyebrow">D’LORGIA ORIENTA</p>
+            <h1>Cuidarte comienza<br><span>por conocerte.</span></h1>
+            <p class="muted">Ingresa para continuar tu orientación, seguimiento y próximos pasos.</p>
+          </div>
+
+          <div class="login-card auth-card" id="auth-card">
+            <div class="auth-brand-v48"><a href="/" class="auth-back-v48" aria-label="Volver a la portada">← Conoce D’Lorgia</a><div class="auth-brand-v48-mark" aria-hidden="true">DL</div><p class="eyebrow">D’LORGIA ORIENTA</p><h1>Tu espacio para cuidarte.</h1><p>Ingresa o crea tu cuenta para comenzar tu orientación.</p></div>
+            <div class="auth-mode-switch" role="tablist" aria-label="Acceso D’Lorgia">
+              <button class="active" type="button" data-auth-mode="login" role="tab" aria-selected="true">Ingresar</button>
+              <button type="button" data-auth-mode="register" role="tab" aria-selected="false">Crear cuenta</button>
+              <span class="auth-switch-glider" aria-hidden="true"></span>
+            </div>
+
+            <div class="google-auth-panel hidden" id="google-auth-panel" aria-live="polite">
+              <button class="google-auth-button" id="google-sign-in" type="button" aria-label="Continuar con Google">
+                <span class="google-g" aria-hidden="true">G</span><span>Continuar con Google</span><svg class="ui-icon"><use href="#i-arrow-right"/></svg>
+              </button>
+              <p class="google-auth-explain-v48">Si es tu primera vez, Google crea tu cuenta automáticamente.</p><div class="google-auth-separator"><span>o utiliza tu correo</span></div>
+            </div>
+
+            <form id="login-form" class="auth-form active" data-auth-panel="login">
+              <div class="login-card-head">
+                <span class="icon-tile"><svg class="ui-icon"><use href="#i-lock"/></svg></span>
+                <span><small>ACCESO</small><b>Bienvenido de nuevo</b></span>
+              </div>
+              <div id="login-feedback" class="auth-feedback" aria-live="polite"></div>
+              <label class="field-with-icon"><span><svg class="ui-icon"><use href="#i-mail"/></svg></span><input id="login-user" autocomplete="username" placeholder="Correo o usuario" required /></label>
+              <label class="field-with-icon"><span><svg class="ui-icon"><use href="#i-lock"/></svg></span><input id="login-password" type="password" autocomplete="current-password" placeholder="Clave de acceso" required /><button class="field-action" data-toggle-password="#login-password" type="button" aria-label="Mostrar u ocultar clave"><svg class="ui-icon"><use href="#i-eye"/></svg></button></label>
+              <div class="auth-row">
+                <label class="remember-row"><input id="login-remember" type="checkbox" /> <span>Recordarme</span></label>
+                <button class="auth-link" id="forgot-access" type="button">Olvidé mi clave</button>
+              </div>
+              <button class="primary full login-submit auth-submit" type="submit"><span>Ingresar a mi recorrido</span><svg class="ui-icon"><use href="#i-arrow-right"/></svg></button>
+              <div class="auth-choice-v48">¿Primera vez en D’Lorgia? <button type="button" data-auth-mode="register" class="auth-switch-text-v48">Crear cuenta</button></div><button class="ghost full guest-entry" id="guest-entry" type="button">Explorar como invitado</button>
+              <p class="login-note"><svg class="ui-icon"><use href="#i-shield"/></svg><span>Tu recorrido continúa aquí cuando regreses. Cuida tu contraseña y utiliza una cuenta personal.</span></p>
+            </form>
+
+            <form id="register-form" class="auth-form" data-auth-panel="register">
+              <div class="login-card-head">
+                <span class="icon-tile"><svg class="ui-icon"><use href="#i-user-plus"/></svg></span>
+                <span><small>NUEVA CUENTA</small><b>Crea tu espacio D’Lorgia</b></span>
+              </div>
+              <div id="register-feedback" class="auth-feedback" aria-live="polite"></div>
+              <label class="field-with-icon"><span><svg class="ui-icon"><use href="#i-user"/></svg></span><input id="register-name" autocomplete="name" placeholder="Nombre o alias" maxlength="60" required /></label>
+              <label class="field-with-icon"><span><svg class="ui-icon"><use href="#i-mail"/></svg></span><input id="register-email" type="email" autocomplete="email" placeholder="Correo" maxlength="120" required /></label>
+              <label class="field-with-icon"><span><svg class="ui-icon"><use href="#i-at"/></svg></span><input id="register-username" autocomplete="username" placeholder="Usuario (ej. cunta19)" maxlength="30" required /></label>
+              <label class="field-with-icon"><span><svg class="ui-icon"><use href="#i-key"/></svg></span><input id="register-password" type="password" autocomplete="new-password" placeholder="Crea una clave" minlength="8" required /><button class="field-action" data-toggle-password="#register-password" type="button" aria-label="Mostrar u ocultar clave"><svg class="ui-icon"><use href="#i-eye"/></svg></button></label>
+              <div class="password-meter" id="password-meter"><span></span><small>Usa 8+ caracteres y combina letras, números o símbolos.</small></div>
+              <label class="field-with-icon"><span><svg class="ui-icon"><use href="#i-circle-check"/></svg></span><input id="register-confirm" type="password" autocomplete="new-password" placeholder="Repite la clave" minlength="8" required /><button class="field-action" data-toggle-password="#register-confirm" type="button" aria-label="Mostrar u ocultar clave"><svg class="ui-icon"><use href="#i-eye"/></svg></button></label>
+              <button class="primary full login-submit auth-submit" type="submit"><span>Crear mi espacio</span><svg class="ui-icon"><use href="#i-arrow-right"/></svg></button>
+              <div class="auth-choice-v48">¿Ya tienes cuenta? <button type="button" data-auth-mode="login" class="auth-switch-text-v48">Ingresar</button></div><p class="login-note"><svg class="ui-icon"><use href="#i-info"/></svg><span>Crea tu espacio para organizar tus preferencias, orientaciones y próximos pasos.</span></p>
+            </form>
+
+            <div class="auth-form verify-panel" data-auth-panel="pending" id="verify-panel" aria-live="polite">
+              <div class="verify-symbol" aria-hidden="true">✉</div>
+              <p class="eyebrow">UN ÚLTIMO PASO</p>
+              <h2>Revisa tu correo.</h2>
+              <p>Enviamos un enlace de verificación a <strong id="verify-email">tu correo</strong>. Ábrelo para activar tu espacio.</p>
+              <ol><li>Busca el mensaje de D’Lorgia en tu bandeja o spam.</li><li>Confirma tu dirección desde el enlace.</li><li>Regresa para comenzar tu recorrido.</li></ol>
+              <button class="primary full" type="button" id="verify-go-login">Ya confirmé, iniciar sesión</button>
+              <a class="verify-help" href="/ayuda#cuenta">¿No recibiste el correo? Revisa la guía de acceso.</a>
+            </div>
+
+            <form id="reset-form" class="auth-form" data-auth-panel="reset">
+              <div class="login-card-head">
+                <span class="icon-tile"><svg class="ui-icon"><use href="#i-key"/></svg></span>
+                <span><small>RECUPERACIÓN DE ACCESO</small><b>Restablece tu acceso</b></span>
+              </div>
+              <div id="reset-feedback" class="auth-feedback" aria-live="polite"></div>
+              <p class="auth-help">Escribe tu correo para recuperar el acceso y sigue las indicaciones que aparecerán a continuación.</p>
+              <label class="field-with-icon"><span><svg class="ui-icon"><use href="#i-mail"/></svg></span><input id="reset-user" autocomplete="username" placeholder="Correo o usuario" required /></label>
+              <label class="field-with-icon" id="reset-password-field"><span><svg class="ui-icon"><use href="#i-key"/></svg></span><input id="reset-password" type="password" autocomplete="new-password" placeholder="Nueva clave" minlength="8" required /><button class="field-action" data-toggle-password="#reset-password" type="button" aria-label="Mostrar u ocultar clave"><svg class="ui-icon"><use href="#i-eye"/></svg></button></label>
+              <label class="field-with-icon" id="reset-confirm-field"><span><svg class="ui-icon"><use href="#i-circle-check"/></svg></span><input id="reset-confirm" type="password" autocomplete="new-password" placeholder="Repite la nueva clave" minlength="8" required /></label>
+              <button class="primary full auth-submit" type="submit"><span>Guardar nueva clave</span><svg class="ui-icon"><use href="#i-circle-check"/></svg></button>
+              <button class="ghost full auth-link-back" type="button" data-auth-mode="login">Volver al ingreso</button>
+            </form>
+
+            <div class="auth-success-layer" id="auth-success" aria-hidden="true">
+              <span class="auth-success-icon"><svg class="ui-icon"><use href="#i-circle-check"/></svg></span>
+              <b id="auth-success-title">Listo</b><small>Preparando tu recorrido…</small>
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+
+          
+        </div>
+      </section>
+
+      <section class="screen" id="welcome" data-icon="✦" data-icon2="◇">
+        <div class="welcome-hero">
+          <div class="welcome-copy">
+            <span class="eyebrow">BIENVENIDO A D’LORGIA</span>
+            <h1>Tu cuidado, <em>más claro</em> desde el comienzo.</h1>
+            <p>Te mostraremos cómo orientarte, explorar tratamientos y solicitar una evaluación cuando lo decidas.</p>
+          </div>
+          <div class="welcome-art" role="img" aria-label="Ilustración abstracta D’Lorgia en tonos verdes y dorados"></div>
+        </div>
+        <div class="welcome-steps" aria-label="Tu recorrido en tres pasos">
+          <article><span>01</span><h2>Cuéntanos lo que buscas</h2><p>Personaliza tu perfil sin necesidad de compartir datos médicos.</p></article>
+          <article><span>02</span><h2>Descubre tus opciones</h2><p>Usa el Orientador y el catálogo para comparar con calma.</p></article>
+          <article><span>03</span><h2>Decide tu siguiente paso</h2><p>Resuelve dudas y solicita una evaluación con el equipo.</p></article>
+        </div>
+        <div class="welcome-actions">
+          <button class="primary full" id="welcome-continue" type="button">Personalizar mi recorrido →</button>
+          <button class="secondary full" id="welcome-explore" type="button">Explorar primero</button>
+          <a href="/ayuda" class="help-inline">¿Necesitas ayuda para empezar?</a>
+        </div>
+      </section>
+
+      <section class="screen" id="onboarding" data-icon="✦" data-icon2="◇">
+        <div class="onboarding-wrap">
+          <div class="onboarding-orbit">
+            <span class="orb orb-1"><svg class="ui-icon"><use href="#i-sparkles"/></svg></span><span class="orb orb-2"><svg class="ui-icon"><use href="#i-heart"/></svg></span><span class="orb orb-3"><svg class="ui-icon"><use href="#i-clock"/></svg></span>
+            <div class="onboarding-core">DL</div>
+          </div>
+          <p class="eyebrow">PRIMERA VEZ</p>
+          <h1>Vamos a personalizar tu recorrido.</h1>
+          <p class="muted">Tu asesor usará estas preferencias para darte contexto útil sin diagnosticar ni reemplazar una evaluación profesional.</p>
+          <form id="onboarding-form" class="panel form-grid onboarding-form">
+            <label>¿Cómo quieres que te llamemos?<input id="onboard-name" maxlength="60" placeholder="Nombre o alias" /></label>
+            <label>Sede preferida<select id="onboard-branch"><option value="huancayo">Huancayo</option><option value="piura">Piura</option><option value="pucallpa">Pucallpa</option></select></label>
+            <label>¿Qué te interesa más?<select id="onboard-interest"><option value="piel">Piel</option><option value="corporal">Corporal</option><option value="capilar">Capilar</option><option value="depilacion">Depilación</option><option value="tatuajes">Tatuajes</option><option value="explorar">Quiero explorar</option></select></label>
+            <label>¿Qué valoras más?<select id="onboard-priority"><option value="resultados">Entender resultados</option><option value="recuperacion">Recuperación corta</option><option value="cuidados">Cuidados claros</option><option value="acompanamiento">Acompañamiento</option></select></label>
+            <button class="primary full" type="submit">Crear mi recorrido →</button>
+            <button class="ghost full" id="skip-onboarding" type="button">Continuar sin personalizar</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="screen" id="home" data-icon="✦" data-icon2="♡">
+        <div class="hero">
+          <div class="hero-copy">
+            <span class="status-pill" id="home-status-pill"><svg class="ui-icon"><use href="#i-sparkles"/></svg><span>Orientación + acompañamiento</span></span>
+            <p id="home-personal-greeting" class="personal-greeting hidden"></p>
+            <p class="eyebrow">BIENESTAR Y TRANSFORMACIÓN</p>
+            <h1>Entiende tu proceso.<br><span>Decide con calma.</span></h1>
+            <p>Reúne orientación, tratamientos, seguimiento y evaluación profesional en una experiencia clara, calmada y fácil de recorrer.</p>
+            <div class="hero-actions">
+              <button class="primary full" data-nav="guide"><svg class="ui-icon"><use href="#i-compass"/></svg> Crear mi ruta personal →</button>
+              <button class="secondary full" data-nav="catalog">Explorar tratamientos</button>
+              <button class="secondary full" data-nav="assistant">Hablar con mi asesor</button>
+            </div>
+          </div>
+          <div class="hero-visual visual-home">
+            <div class="visual-orbit orbit-a"><svg class="ui-icon"><use href="#i-sparkles"/></svg></div>
+            <div class="visual-orbit orbit-b"><svg class="ui-icon"><use href="#i-scan"/></svg></div>
+            <div class="visual-orbit orbit-c"><svg class="ui-icon"><use href="#i-heart"/></svg></div>
+            <div class="visual-center"><span>DL</span><small>ORIENTA</small></div>
+          </div>
+        </div>
+
+        <div id="home-continuity" class="continuity-card hidden"></div>
+        <div id="home-plan" class="plan-card hidden"></div>
+
+        <div class="section-minihead">
+          <div><p class="eyebrow">TU RECORRIDO</p><h2>Escoge tu siguiente movimiento</h2></div>
+        </div>
+        <button class="guide-entry-card" data-nav="guide">
+          <span class="guide-entry-icon"><svg class="ui-icon"><use href="#i-compass"/></svg></span>
+          <span><small>ORIENTADOR PERSONAL</small><b>Quiero una guía para decidir mejor</b><em>Define prioridades, recuperación y objetivos. El sistema organiza tus afinidades y te muestra el camino más coherente.</em></span>
+          <span class="guide-entry-arrow">→</span>
+        </button>
+        <div id="home-guide-resume" class="guide-resume hidden"></div>
+        <div class="quick-grid">
+          <button class="quick-card quick-advisor" data-nav="assistant">
+            <span class="quick-icon"><svg class="ui-icon"><use href="#i-sparkles"/></svg></span><b>Asesor personalizado</b><span>Respuestas claras según tu contexto y tu etapa.</span>
+          </button>
+          <button class="quick-card quick-calc" data-nav="calculator">
+            <span class="quick-icon"><svg class="ui-icon"><use href="#i-target"/></svg></span><b>Expectativas reales</b><span>Comprende recuperación, tiempos y cuidados de forma referencial.</span>
+          </button>
+          <button class="quick-card quick-follow" data-nav="followup">
+            <span class="quick-icon"><svg class="ui-icon"><use href="#i-bell"/></svg></span><b>Seguimiento</b><span>Organiza recordatorios y próximos pasos sin perder el hilo.</span>
+          </button>
+          <button class="quick-card quick-space" data-nav="portal">
+            <span class="quick-icon"><svg class="ui-icon"><use href="#i-user"/></svg></span><b>Mi espacio</b><span>Perfil, historial, guardados y documentos en un solo lugar.</span>
+          </button>
+        </div>
+
+        <div class="trust-strip">
+          <span>✓ Orientación clara</span><span>✓ Sin diagnósticos automáticos</span><span>✓ Derivación profesional</span>
+        </div>
+      </section>
+
+      <section class="screen" id="guide" data-icon="◇" data-icon2="✦">
+        <div class="section-heading">
+          <button class="back" data-back aria-label="Volver"><svg class="ui-icon"><use href="#i-chevron-left"/></svg></button>
+          <div><p class="eyebrow">ORIENTADOR PERSONAL</p><h2>Encuentra un camino para explorar</h2></div>
+          <span class="section-icon"><svg class="ui-icon"><use href="#i-compass"/></svg></span>
+        </div>
+        <div class="guide-safety-banner">
+          <span><svg class="ui-icon"><use href="#i-shield"/></svg></span>
+          <p><b>Orientación, no diagnóstico.</b> Este recorrido organiza tus preferencias y compara información general del catálogo. La decisión clínica siempre queda para la evaluación profesional.</p>
+        </div>
+        <div class="guide-progress" id="guide-progress" aria-label="Progreso del Orientador Personal"></div>
+        <div id="guide-content"></div>
+      </section>
+
+      <section class="screen" id="catalog" data-icon="◌" data-icon2="✧">
+        <div class="section-heading">
+          <button class="back" data-back aria-label="Volver"><svg class="ui-icon"><use href="#i-chevron-left"/></svg></button>
+          <div><p class="eyebrow">TRATAMIENTOS</p><h2>Explora tus opciones</h2></div>
+          <span class="section-icon"><svg class="ui-icon"><use href="#i-scan"/></svg></span>
+        </div>
+        <p class="muted">Explora por categoría y abre cada tratamiento con una ficha más clara antes de decidir tu siguiente paso.</p>
+        <a class="official-gallery-link" href="/experiencias" target="_blank" rel="noopener noreferrer">Ver galería de DLorgia ↗</a>
+        <label class="catalog-search-field" for="catalog-search"><svg class="ui-icon"><use href="#i-scan"/></svg><input type="search" id="catalog-search" autocomplete="off" placeholder="Buscar acné, manchas, láser…" aria-describedby="catalog-results-count" /><span class="catalog-search-shortcut">Buscar</span></label>
+        <p id="catalog-results-count" class="catalog-results-count" role="status" aria-live="polite">Explora el catálogo</p>
+        <div class="chips filter-chips" id="category-filters"></div>
+        <div id="catalog-list" class="catalog-list"></div>
+      </section>
+
+      <section class="screen" id="detail" data-icon="✧" data-icon2="◇">
+        <div class="section-heading">
+          <button class="back" data-back aria-label="Volver"><svg class="ui-icon"><use href="#i-chevron-left"/></svg></button>
+          <div><p class="eyebrow">DETALLE DEL TRATAMIENTO</p><h2 id="detail-name">Tratamiento</h2></div>
+          <span class="section-icon"><svg class="ui-icon"><use href="#i-sparkles"/></svg></span>
+        </div>
+        <div id="detail-content"></div>
+      </section>
+
+      <section class="screen" id="calculator" data-icon="◎" data-icon2="✦">
+        <div class="section-heading">
+          <button class="back" data-back aria-label="Volver"><svg class="ui-icon"><use href="#i-chevron-left"/></svg></button>
+          <div><p class="eyebrow">EXPECTATIVAS REALES</p><h2>Orientador de expectativas</h2></div>
+          <span class="section-icon"><svg class="ui-icon"><use href="#i-target"/></svg></span>
+        </div>
+        <div class="info-banner">
+          <span class="info-banner-icon"><svg class="ui-icon"><use href="#i-info"/></svg></span>
+          <p><b>Calculadora Digital de Expectativas Reales.</b> Organiza información referencial según tus selecciones. No predice resultados clínicos ni sustituye una evaluación profesional.</p>
+        </div>
+        <div class="stepper"><span class="active">1 Tratamiento</span><span>2 Objetivo</span><span>3 Orientación</span><span>4 Siguiente paso</span></div>
+        <form id="orientation-form" class="panel form-grid">
+          <label>Tratamiento<select id="treatment-select" required></select></label>
+          <label>¿Qué quieres comprender mejor?<select id="goal-select"></select></label>
+          <label>Sensibilidad / tolerancia<select id="sensitivity-select"><option value="no_indicado">No indicado</option><option value="normal">Sin sensibilidad especial conocida</option><option value="sensible">Piel o zona sensible</option></select></label>
+          <label>Preferencia de recuperación<select id="availability-select"><option value="flexible">Flexible</option><option value="rapida">Quiero conocer opciones compatibles con recuperación corta</option></select></label>
+          <button class="primary" type="submit">Generar mi orientación →</button>
+        </form>
+        <div id="orientation-result" class="hidden"></div>
+      </section>
+
+      <section class="screen" id="assistant" data-icon="✦" data-icon2="◌">
+        <div class="section-heading">
+          <button class="back" data-back aria-label="Volver"><svg class="ui-icon"><use href="#i-chevron-left"/></svg></button>
+          <div><p class="eyebrow">ASESOR PERSONALIZADO</p><h2>Habla con tu guía D’Lorgia</h2></div>
+          <span class="section-icon"><svg class="ui-icon"><use href="#i-sparkles"/></svg></span>
+        </div>
+
+        <div class="advisor-identity">
+          <div class="advisor-avatar"><span><svg class="ui-icon"><use href="#i-sparkles"/></svg></span></div>
+          <div><b>D’Lorgia Orienta</b><p id="advisor-greeting">Te ayudo a entender tu proceso, ordenar ideas y decidir el siguiente paso con calma.</p></div>
+        </div>
+
+        <div id="advisor-context" class="context-card"></div>
+
+        <div class="advisor-scope">
+          <span class="scope-good">Puedo: explicar, orientar, resumir y ayudarte a organizarte.</span>
+          <span class="scope-stop">No hago: diagnósticos, recetas ni promesas de resultados.</span>
+        </div>
+
+        <div class="chat-panel">
+          <div id="assistant-status" class="assistant-status">Comprobando asesor…</div>
+          <div class="bubble bot"><b>Asesor D’Lorgia</b><br>¿Qué necesitas entender hoy? Puedo usar el tratamiento que estás revisando como contexto.</div>
+          <div id="chat-log"></div>
+          <div class="advisor-topics" id="advisor-topics">
+            <button data-focus="expectativas" data-prompt="¿Qué puedo esperar de este tratamiento?"><svg class="ui-icon"><use href="#i-sparkles"/></svg> Qué esperar</button>
+            <button data-focus="recuperacion" data-prompt="¿Cómo suele ser la recuperación de este tratamiento?"><svg class="ui-icon"><use href="#i-clock"/></svg> Recuperación</button>
+            <button data-focus="cuidados" data-prompt="¿Qué cuidados generales debo conocer?"><svg class="ui-icon"><use href="#i-heart"/></svg> Cuidados</button>
+            <button data-focus="evaluacion" data-prompt="¿Qué debería preguntar en mi evaluación profesional?"><svg class="ui-icon"><use href="#i-stethoscope"/></svg> Preparar evaluación</button>
+          </div>
+          <form id="chat-form" class="chat-form">
+            <input id="chat-input" placeholder="Escribe tu duda…" autocomplete="off" maxlength="500" />
+            <button class="primary" type="submit"><span>Enviar</span><svg class="ui-icon"><use href="#i-sparkles"/></svg></button>
+          </form>
+          <div id="last-answer-meta" class="answer-meta hidden"></div>
+          <div class="action-row">
+            <button class="secondary" data-nav="evaluation">Solicitar evaluación</button>
+            <button class="secondary" data-nav="followup">Crear recordatorio</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="summary" data-icon="▤" data-icon2="✓">
+        <div class="section-heading">
+          <button class="back" data-back aria-label="Volver"><svg class="ui-icon"><use href="#i-chevron-left"/></svg></button>
+          <div><p class="eyebrow">TU ORIENTACIÓN</p><h2>Resumen personal</h2></div>
+          <span class="section-icon"><svg class="ui-icon"><use href="#i-file"/></svg></span>
+        </div>
+        <div id="summary-content" class="panel"></div>
+        <div class="action-stack">
+          <button class="primary" data-nav="assistant">Preguntar a mi asesor →</button>
+          <button class="secondary" data-nav="evaluation">Solicitar evaluación</button>
+          <button class="secondary" data-nav="followup">Crear recordatorio</button>
+          <button class="secondary" id="download-summary">Descargar resumen</button>
+        </div>
+      </section>
+
+      <section class="screen" id="evaluation" data-icon="◇" data-icon2="✓">
+        <div class="section-heading">
+          <button class="back" data-back aria-label="Volver"><svg class="ui-icon"><use href="#i-chevron-left"/></svg></button>
+          <div><p class="eyebrow">SIGUIENTE PASO</p><h2>Evaluación profesional</h2></div>
+          <span class="section-icon"><svg class="ui-icon"><use href="#i-stethoscope"/></svg></span>
+        </div>
+        <div class="info-banner professional"><span class="info-banner-icon"><svg class="ui-icon"><use href="#i-circle-check"/></svg></span><p>La orientación digital termina donde comienza la decisión profesional. El equipo confirma disponibilidad, procedimiento y recomendaciones individuales.</p></div>
+        <form id="evaluation-form" class="panel form-grid">
+          <label>Nombre<input id="eval-name" required placeholder="¿Cómo te llamas?" /></label>
+          <label>Correo o contacto<input id="eval-contact" required placeholder="Tu contacto" /></label>
+          <label>Sede<select id="eval-branch"><option value="huancayo">Huancayo</option><option value="piura">Piura</option><option value="pucallpa">Pucallpa</option></select></label>
+          <label>Interés<input id="eval-interest" placeholder="Ej. Limpieza facial" /></label>
+          <label>Fecha preferida<input id="eval-date" type="date" /></label>
+          <div class="schedule-box">
+            <div class="schedule-head"><span><small>Agenda de la sede</small><b id="schedule-title">Selecciona una fecha</b></span><span class="live-dot">●</span></div>
+            <div id="schedule-slots" class="schedule-slots"><p class="muted">Elige sede y fecha para consultar horarios disponibles.</p></div>
+            <input id="eval-time" type="hidden" />
+          </div>
+          <button class="primary" type="submit">Reservar horario y preparar solicitud</button>
+        </form>
+        <div id="evaluation-result" class="hidden"></div>
+      </section>
+
+      <section class="screen" id="followup" data-icon="◷" data-icon2="✓">
+        <div class="section-heading">
+          <button class="back" data-back aria-label="Volver"><svg class="ui-icon"><use href="#i-chevron-left"/></svg></button>
+          <div><p class="eyebrow">SEGUIMIENTO</p><h2>Tu proceso, paso a paso</h2></div>
+          <span class="section-icon"><svg class="ui-icon"><use href="#i-bell"/></svg></span>
+        </div>
+        <p class="muted">Convierte tu orientación en acciones concretas. Tus recordatorios se conservan en tu espacio personal.</p>
+        <div id="followup-content"></div>
+
+        <div class="panel reminder-builder">
+          <div class="panel-title"><span class="panel-icon"><svg class="ui-icon"><use href="#i-bell"/></svg></span><div><p class="eyebrow">NUEVA ALARMA</p><h3>Crear recordatorio</h3></div></div>
+          <div class="form-grid compact-grid">
+            <label>Tipo<select id="reminder-type"><option value="evaluacion">Evaluación</option><option value="cuidado">Revisar cuidados</option><option value="seguimiento">Seguimiento</option><option value="personalizado">Personalizado</option></select></label>
+            <label>Recordatorio<input id="reminder-title" placeholder="Ej. Revisar cuidados posteriores" maxlength="80" /></label>
+            <label>Fecha<input id="reminder-date" type="date" /></label>
+            <label>Hora<input id="reminder-time" type="time" /></label>
+            <button class="primary" id="add-reminder" type="button">Guardar alarma</button>
+          </div>
+          <p class="microcopy">Si autorizas notificaciones, la app puede avisarte mientras esté abierta. Para producción se usarían notificaciones push del sistema.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title"><span class="panel-icon"><svg class="ui-icon"><use href="#i-circle-check"/></svg></span><div><p class="eyebrow">MIS ALARMAS</p><h3>Recordatorios guardados</h3></div></div>
+          <div id="reminders-list" class="reminders-list"></div>
+          <button class="secondary full" id="enable-notifications" type="button">Activar notificaciones del navegador</button>
+        </div>
+      </section>
+
+      <section class="screen" id="portal" data-icon="✧" data-icon2="◇">
+        <div class="section-heading portal-heading">
+          <button class="back" data-back aria-label="Volver"><svg class="ui-icon"><use href="#i-chevron-left"/></svg></button>
+          <div><p class="eyebrow">MI ESPACIO</p><h2>Tu centro personal</h2></div>
+          <span class="section-icon"><svg class="ui-icon"><use href="#i-user"/></svg></span>
+        </div>
+        <div class="portal-cover portal-cover--atelier">
+          <div class="portal-cover-copy">
+            <p class="eyebrow">ORDEN + CALMA</p>
+            <h3>Todo tu recorrido, pero mejor organizado.</h3>
+            <p>Separa lo esencial en vistas claras: resumen, recorrido, seguimiento y preferencias. Menos ruido, más orden.</p>
+          </div>
+          <div class="portal-cover-seal" aria-hidden="true"><span>DL</span><small>ORIENTA</small></div>
+        </div>
+        <div class="portal-overview-grid">
+          <div class="panel portal-overview-panel">
+            <div class="portal-section-intro compact"><div><p class="eyebrow">DE UN VISTAZO</p><h3>Estado de tu espacio</h3></div><span class="portal-section-note">Resumen claro</span></div>
+            <div class="stats-grid" id="portal-stats"></div>
+            <div class="portal-actions-stack portal-shortcut-grid">
+              <button class="portal-jump-card" data-nav="journey-space"><span class="portal-shortcut-icon"><svg class="ui-icon"><use href="#i-compass"/></svg></span><span><b>Mi recorrido</b><small>Orientación, guardados, historial y continuidad.</small></span><span class="shortcut-arrow">↗</span></button>
+              <button class="portal-jump-card" data-nav="preferences-space"><span class="portal-shortcut-icon"><svg class="ui-icon"><use href="#i-user"/></svg></span><span><b>Preferencias</b><small>Alias, sede y cómo quieres que te acompañemos.</small></span><span class="shortcut-arrow">↗</span></button>
+              <button class="portal-jump-card" data-nav="followup"><span class="portal-shortcut-icon"><svg class="ui-icon"><use href="#i-calendar"/></svg></span><span><b>Seguimiento</b><small>Alarmas, próximos pasos y continuidad.</small></span><span class="shortcut-arrow">↗</span></button>
+              <a class="portal-jump-card help-portal-card" href="/ayuda"><span class="portal-shortcut-icon">?</span><span><b>Centro de ayuda</b><small>Guías de uso y respuestas para continuar.</small></span><span class="shortcut-arrow">↗</span></a>
+            </div>
+          </div>
+          <div class="panel portal-overview-panel spotlight-panel">
+            <div class="panel-title"><span class="panel-icon"><svg class="ui-icon"><use href="#i-sparkles"/></svg></span><div><p class="eyebrow">EN FOCO</p><h3>Lo más importante ahora</h3></div></div>
+            <div id="portal-guide-summary"></div>
+            <div class="portal-mini-actions">
+              <button class="secondary full" data-nav="guide">Ver mi orientación</button>
+              <button class="secondary full" data-nav="assistant">Hablar con mi asesor</button>
+            </div>
+          </div>
+        </div>
+        <div class="portal-section-intro"><div><p class="eyebrow">CONTINUIDAD</p><h3>Tu siguiente paso</h3></div><span class="portal-section-note">Sin perder el hilo</span></div>
+        <div class="panel portal-next-card"><div class="panel-title"><span class="panel-icon"><svg class="ui-icon"><use href="#i-clock"/></svg></span><div><p class="eyebrow">PRÓXIMOS PASOS</p><h3>Sigue tu proceso con claridad</h3></div></div><div id="portal-reminders"></div><div class="portal-mini-actions"><button class="secondary full" data-nav="followup">Gestionar recordatorios</button><button class="secondary full" data-nav="journey-space">Abrir mi recorrido</button></div></div>
+      </section>
+
+      <section class="screen" id="journey-space" data-icon="✧" data-icon2="◇">
+        <div class="section-heading portal-heading">
+          <button class="back" data-back aria-label="Volver"><svg class="ui-icon"><use href="#i-chevron-left"/></svg></button>
+          <div><p class="eyebrow">MI RECORRIDO</p><h2>Tu avance y tus referencias</h2></div>
+          <span class="section-icon"><svg class="ui-icon"><use href="#i-compass"/></svg></span>
+        </div>
+        <div class="journey-shell">
+          <div class="panel guide-portal-panel"><div class="panel-title"><span class="panel-icon"><svg class="ui-icon"><use href="#i-compass"/></svg></span><div><p class="eyebrow">ORIENTADOR PERSONAL</p><h3>Tu perfil de orientación</h3></div></div><div id="journey-guide-summary"></div><button class="secondary full" data-nav="guide">Ver mi orientación <span aria-hidden="true">→</span></button></div>
+          <div class="journey-grid">
+            <div class="panel"><div class="panel-title"><span class="panel-icon"><svg class="ui-icon"><use href="#i-bookmark"/></svg></span><div><p class="eyebrow">GUARDADOS</p><h3>Para revisar después</h3></div></div><div id="saved-list" class="saved-list"></div><button class="portal-inline-link" data-nav="catalog">Explorar tratamientos →</button></div>
+            <div class="panel"><div class="panel-title"><span class="panel-icon"><svg class="ui-icon"><use href="#i-file"/></svg></span><div><p class="eyebrow">HISTORIAL</p><h3>Orientaciones recientes</h3></div></div><div id="history-list" class="history-list"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="preferences-space" data-icon="✧" data-icon2="◇">
+        <div class="section-heading portal-heading">
+          <button class="back" data-back aria-label="Volver"><svg class="ui-icon"><use href="#i-chevron-left"/></svg></button>
+          <div><p class="eyebrow">PREFERENCIAS</p><h2>Tu cuenta, a tu manera</h2></div>
+          <span class="section-icon"><svg class="ui-icon"><use href="#i-user"/></svg></span>
+        </div>
+        <div class="preferences-layout">
+          <form id="profile-form" class="panel form-grid portal-profile-form">
+            <div class="panel-title"><span class="panel-icon"><svg class="ui-icon"><use href="#i-user"/></svg></span><div><p class="eyebrow">PREFERENCIAS</p><h3>Personaliza cómo te acompañamos</h3></div></div>
+            <label>Nombre o alias<input id="profile-name" placeholder="Tu nombre" maxlength="60" /></label>
+            <label>Sede preferida<select id="profile-branch"><option value="huancayo">Huancayo</option><option value="piura">Piura</option><option value="pucallpa">Pucallpa</option></select></label>
+            <label>Cómo prefieres las respuestas<select id="profile-communication"><option value="breve">Breves y directas</option><option value="equilibrada">Equilibradas</option><option value="detallada">Detalladas y explicadas</option></select></label>
+            <label>Cómo quieres que te acompañe<select id="profile-support"><option value="guiado">Guíame paso a paso</option><option value="comparativo">Ayúdame a comparar opciones</option><option value="autonomo">Dame información y yo decido</option></select></label>
+            <p class="microcopy profile-ai-note">Puedes ajustar el tono de acompañamiento sin alterar los criterios de seguridad de la orientación.</p>
+            <button class="primary" type="submit">Guardar perfil y personalización</button>
+          </form>
+          <div class="preferences-side">
+            <details class="portal-more" id="portal-more" open>
+              <summary><span><svg class="ui-icon"><use href="#i-shield"/></svg></span><span><b>Documentos, instalación y privacidad</b><small>Accesos complementarios para tu espacio</small></span><span class="more-chevron">⌄</span></summary>
+              <div class="portal-more-content">
+                <div class="panel"><div class="panel-title"><span class="panel-icon"><svg class="ui-icon"><use href="#i-download"/></svg></span><div><p class="eyebrow">DOCUMENTOS</p><h3>Resumen de orientación</h3></div></div><p class="muted">Guarda tu último resumen para consultarlo cuando lo necesites.</p><button class="secondary full" id="portal-download">Descargar último resumen</button></div>
+                <div class="panel install-panel"><div class="panel-title"><span class="panel-icon"><svg class="ui-icon"><use href="#i-home"/></svg></span><div><p class="eyebrow">ACCESO RÁPIDO</p><h3>Lleva D’Lorgia contigo</h3></div></div><p class="muted">Añade D’Lorgia a tu pantalla de inicio y vuelve a tu recorrido fácilmente.</p><button class="secondary full" id="install-app" type="button">Instalar D’Lorgia Orienta</button><small id="install-status" class="microcopy"></small></div>
+                <div class="portal-privacy-note"><svg class="ui-icon"><use href="#i-shield"/></svg><p>Parte de tu información puede conservarse en este dispositivo. Evita guardar datos médicos sensibles en recordatorios o notas.</p></div>
+              </div>
+            </details>
+            <div class="panel session-panel"><div class="panel-title"><span class="panel-icon"><svg class="ui-icon"><use href="#i-shield"/></svg></span><div><p class="eyebrow">CUENTA</p><h3>Tu sesión</h3></div></div><div id="account-summary" class="account-summary"></div><p class="muted">Tus preferencias e historial se mantienen separados entre cuentas en este navegador.</p><button class="secondary full" id="logout-app" type="button"><svg class="ui-icon"><use href="#i-logout"/></svg> Cerrar sesión</button></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside id="recovery-center" class="recovery-center hidden" aria-live="assertive">
+      <button id="recovery-close" class="recovery-close" type="button" aria-label="Cerrar">×</button>
+      <div class="recovery-icon"><svg class="ui-icon"><use href="#i-shield"/></svg></div>
+      <div><small>RECUPERACIÓN SEGURA</small><b>La app puede continuar</b><p id="recovery-message">Tu progreso local sigue disponible.</p></div>
+      <div class="recovery-actions"><button id="recovery-retry" class="primary" type="button">Reintentar</button><button id="recovery-home" class="secondary" type="button">Ir a Inicio</button></div>
+    </aside>
+
+    <nav class="bottom-nav" aria-label="Navegación principal del paciente">
+      <button data-nav="home" aria-label="Ir a Inicio"><b><svg class="ui-icon"><use href="#i-home"/></svg></b><span>Inicio</span></button>
+      <button data-nav="catalog" aria-label="Explorar tratamientos"><b><svg class="ui-icon"><use href="#i-scan"/></svg></b><span>Tratamientos</span></button>
+      <button data-nav="assistant" class="nav-advisor" aria-label="Abrir Asesor"><b><svg class="ui-icon"><use href="#i-sparkles"/></svg></b><span>Asesor</span></button>
+      <button data-nav="followup" aria-label="Abrir Seguimiento"><b><svg class="ui-icon"><use href="#i-bell"/></svg></b><span>Seguimiento</span></button>
+      <button data-nav="portal" aria-label="Abrir Mi espacio"><b><svg class="ui-icon"><use href="#i-user"/></svg></b><span>Mi espacio</span></button>
+    </nav>
+  </div>
+  <script type="module" src="/assets/app-v400.js"></script>
+</body>
+</html>

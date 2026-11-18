@@ -1,0 +1,21 @@
+/* Superficies, formularios y microcomponentes compartidos · v4.3 */
+:where(.panel,.panel-card,.login-card,.kpi-card,.treatment-card,.quick-card,.insight-card,.data-surface){border-color:var(--dl-border)!important;box-shadow:var(--dl-shadow)}
+:where(.primary,.secondary,.ghost,.ghost-button,.mini-button,.icon-button,.auth-submit,.nav-item,.quick-card,.treatment-card){transition:background-color .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+:where(.primary,.auth-submit){background:var(--dl-forest)!important;color:#fff!important;border-radius:var(--dl-radius-sm);min-height:45px}
+:where(.primary,.auth-submit):hover{background:var(--dl-forest-hover)!important}
+:where(.primary,.auth-submit):active{transform:translateY(1px)}
+:where(input,select,textarea){color:var(--dl-ink);accent-color:var(--dl-forest)}
+:where(input,select,textarea):focus-visible{box-shadow:var(--dl-focus)}
+:where(button,a){-webkit-tap-highlight-color:transparent}
+:where(.auth-feedback.show,.feedback:not(:empty)){font-size:13px!important;line-height:1.55!important;padding:12px 14px!important;max-height:none!important;border-radius:12px!important;overflow:visible!important}
+.auth-feedback.show{background:var(--dl-error-surface);color:var(--dl-error)!important;border:1px solid #E7C9C0}
+:where(.app-toast,.admin-toast){font-size:13px!important;line-height:1.55!important;max-width:min(94vw,475px);padding:14px 17px!important;border-radius:15px;box-shadow:0 20px 46px rgba(20,40,32,.22)!important}
+:where(.app-toast,.admin-toast).error{background:var(--dl-error)!important}
+:where(.empty-state p,.empty-state b,.microcopy,.panel p,.page-head p,.hero-copy>p,.login-copy>p){line-height:1.58}
+:where(.topbar,.login-card,.panel,.panel-card,.data-surface,.sidebar){background-color:var(--dl-paper)}
+:where(.status-pill,.soft-badge,.meta-chip){border-color:var(--dl-border)}
+:where(.eyebrow){color:var(--dl-gold-ink)!important;font-size:11px}
+:where(.pulse-card .eyebrow,.guide-result-hero .eyebrow){color:#EACB90!important}
+:where(.treatment-form label,.login-card label,.form-grid label){font-size:13px;line-height:1.5}
+:where(.empty-state){text-align:center}
+:where(.topbar,.bottom-nav,.sidebar){backdrop-filter:blur(12px)}
