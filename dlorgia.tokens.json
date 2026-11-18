@@ -1,0 +1,155 @@
+{
+  "$description": "D’Lorgia Atelier v4.4 · Editorial Wellness. Tokens comunes para paciente y centro administrativo; contrastes medidos antes de publicar.",
+  "color": {
+    "forest": {
+      "$type": "color",
+      "$value": "#183E35"
+    },
+    "forestHover": {
+      "$type": "color",
+      "$value": "#245A4C"
+    },
+    "cream": {
+      "$type": "color",
+      "$value": "#F6F2E9"
+    },
+    "paper": {
+      "$type": "color",
+      "$value": "#FFFDFA"
+    },
+    "ink": {
+      "$type": "color",
+      "$value": "#1A3029"
+    },
+    "muted": {
+      "$type": "color",
+      "$value": "#52665B"
+    },
+    "sage": {
+      "$type": "color",
+      "$value": "#DAE6DB"
+    },
+    "gold": {
+      "$type": "color",
+      "$value": "#B88B50"
+    },
+    "goldInk": {
+      "$type": "color",
+      "$value": "#755324"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "#D6E1D7"
+    },
+    "error": {
+      "$type": "color",
+      "$value": "#873F35"
+    },
+    "errorSurface": {
+      "$type": "color",
+      "$value": "#FCF2EC"
+    },
+    "successSurface": {
+      "$type": "color",
+      "$value": "#E7F3EB"
+    },
+    "deepForest": {
+      "$type": "color",
+      "$value": "#143C30"
+    },
+    "canvas": {
+      "$type": "color",
+      "$value": "#F3F6F1"
+    }
+  },
+  "font": {
+    "display": {
+      "$type": "fontFamily",
+      "$value": "Fraunces, Georgia, serif"
+    },
+    "body": {
+      "$type": "fontFamily",
+      "$value": "Manrope, Inter, system-ui, sans-serif"
+    }
+  },
+  "radius": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "18px"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "28px"
+    },
+    "pill": {
+      "$type": "dimension",
+      "$value": "999px"
+    },
+    "device": {
+      "$type": "dimension",
+      "$value": "33px"
+    }
+  },
+  "spacing": {
+    "1": {
+      "$type": "dimension",
+      "$value": "4px"
+    },
+    "2": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "3": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "4": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "5": {
+      "$type": "dimension",
+      "$value": "24px"
+    },
+    "6": {
+      "$type": "dimension",
+      "$value": "32px"
+    },
+    "7": {
+      "$type": "dimension",
+      "$value": "48px"
+    }
+  },
+  "motion": {
+    "short": {
+      "$type": "duration",
+      "$value": "140ms"
+    },
+    "standard": {
+      "$type": "duration",
+      "$value": "240ms"
+    },
+    "ambient": {
+      "$type": "duration",
+      "$value": "32s"
+    },
+    "screen": {
+      "$type": "duration",
+      "$value": "380ms"
+    }
+  },
+  "layout": {
+    "appFrameWidth": {
+      "$type": "dimension",
+      "$value": "560px"
+    },
+    "bottomDockHeight": {
+      "$type": "dimension",
+      "$value": "83px"
+    }
+  }
+}

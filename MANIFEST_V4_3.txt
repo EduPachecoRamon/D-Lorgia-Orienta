@@ -1,0 +1,9 @@
+D’Lorgia Orienta v4.3 — Identity & Polish
+Release: 4.3.0
+Base: ZIP original de GitHub main (commit 71bca59749ed2e7316fabdb659ece32282ede292)
+Pruebas: 43/43
+Sin migración de base de datos nueva.
+Sin claves privadas.
+
+Incluye código Node, UI paciente, Admin Pulse, esquema Supabase,
+fuentes de diseño y documentación de instalación.

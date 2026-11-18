@@ -1,0 +1,25 @@
+D’Lorgia Orienta — v4.4 ATELIER
+Paquete completo paciente + admin + backend Node.js + Supabase schema existente
+
+Nuevos archivos principales:
+  public/assets/dlorgia-ateliers-v44.css
+  public/assets/dlorgia-admin-v44.css
+  public/assets/dlorgia-admin-a11y.js
+  public/assets/dlorgia-atmosphere.webp
+  docs/V4_4_ATELIER.md
+  INSTALAR_V4_4.md
+  test/atelier-v44.test.js
+
+Archivos modificados principales:
+  public/index.html
+  public/admin.html
+  public/assets/app-v400.js
+  public/assets/admin-v420.js
+  public/service-worker.js
+  src/server.js (MIME WebP)
+  package.json, package-lock.json
+  dlorgia.tokens.json
+
+Pruebas Node: 49/49.
+Verificación visual y funcional: Chromium con documentos renderizados y API simulada.
+Sin nuevas tablas SQL ni cambios incompatibles de rutas.

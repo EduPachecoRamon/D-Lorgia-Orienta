@@ -1,0 +1,12 @@
+D'LORGIA ORIENTA v4.6 PMV EMPRESA
+
+* Backend: servidor Node y Supabase Auth/PostgreSQL
+* 2 roles: paciente / administrador; bootstrap protegido por DLORGIA_ADMIN_EMAILS
+* Admin → Equipo y permisos: paginación, promoción/revocación, auditoría
+* Nuevas rutas públicas: /experiencias, /sedes
+* /conoce ampliada y catálogo del paciente con fotografías contextuales
+* 12 imágenes externas referenciadas desde www.dlorgia.com; respaldo artístico local
+* Manual de instalación: LEEME_V4_6_PMV.md
+* Valor del prototipo: docs/PMV_V4_6_VALOR.md
+* Verificación: 61/61 tests, incl. flujo HTTP de roles con Supabase simulado
+* No se ha realizado deployment ni comprobación con una base real.
