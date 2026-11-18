@@ -1,0 +1,11 @@
+/* v4.9: entrada clara con ayuda visible, sin opción de invitado que confunda el registro. */
+.app-shell.entry-mode .auth-guide-v49{display:flex;align-items:center;justify-content:center;gap:9px;margin:16px auto 0;min-height:40px;padding:9px 11px;text-align:center;color:#28614e;font-size:13px;line-height:1.45;font-weight:800;text-underline-offset:4px}
+.app-shell.entry-mode #login .auth-card{box-shadow:0 22px 55px #23463815!important}
+.app-shell.entry-mode #login .auth-card .login-note{font-size:12px!important;line-height:1.65!important}
+.app-shell.entry-mode .auth-choice-v48{line-height:1.55}
+.app-shell.entry-mode .auth-mode-switch button{letter-spacing:0!important}
+.app-shell.entry-mode .auth-submit{font-size:15px!important}
+.welcome-art-v49{background:linear-gradient(140deg,#b7cfc0,#e8eee6)!important;display:flex;flex-direction:column;justify-content:center;align-items:center;border:1px solid #c6d8c9}
+.welcome-art-v49 .welcome-art-mark{font:600 clamp(75px,15vw,160px)/1 Fraunces,Georgia,serif;color:#183e35;text-shadow:0 8px 24px #183e351a}
+.welcome-art-v49 small{font:850 15px Manrope,sans-serif;letter-spacing:.3em;color:#9c794d}
+@media(max-width:719px){.app-shell.entry-mode .auth-guide-v49{font-size:12px}.app-shell.entry-mode .auth-card{max-width:420px!important}}

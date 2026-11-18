@@ -1,6 +1,6 @@
 /* Fotos enlazadas al dominio oficial; respaldo local si la imagen falla. */
 document.querySelectorAll('img[data-official-photo]').forEach(image => {
-  image.addEventListener('error', () => { image.src = '/assets/dlorgia-atmosphere.webp'; image.classList.add('official-image-fallback'); }, {once:true});
+  image.addEventListener('error', () => { image.removeAttribute('src'); image.style.display='none'; image.parentElement?.classList.add('official-image-unavailable'); }, {once:true});
 });
 // Filtros y búsqueda instantánea sin llamadas a API ni datos personales.
 const filters = [...document.querySelectorAll('[data-gallery-filter]')];

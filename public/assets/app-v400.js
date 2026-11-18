@@ -906,11 +906,16 @@ function renderCatalog() {
   if ($('#catalog-results-count')) $('#catalog-results-count').textContent = items.length + (items.length === 1 ? ' tratamiento encontrado' : ' tratamientos encontrados') + (term ? ' para tu búsqueda' : '');
   const guide = getPersonalGuide();
   const matchMap = new Map((guide?.matches || []).map((m) => [m.id, m]));
+  const usedCatalogPhotos = new Set();
   $('#catalog-list').innerHTML = items.length ? items.map((x) => {
     const match = matchMap.get(x.id);
+    const photoUrl = officialTreatmentImage(x);
+    const uniquePhoto = photoUrl && !usedCatalogPhotos.has(photoUrl);
+    if (uniquePhoto) usedCatalogPhotos.add(photoUrl);
+    const visual = uniquePhoto ? `<img class="official-treatment-img" src="${photoUrl}" alt="" loading="lazy" decoding="async">` : `<span class="treatment-photo-empty">${escapeHtml(x.category || 'D’Lorgia')}</span>`;
     return `
     <button class="treatment-card ${match ? 'guide-ranked' : ''}" data-treatment="${escapeHtml(x.id)}">
-      <span class="treatment-photo"><img class="official-treatment-img" src="${officialTreatmentImage(x)}" alt="" loading="lazy" decoding="async"></span>
+      <span class="treatment-photo">${visual}</span>
       <span><b>${escapeHtml(x.name)}</b><small>${escapeHtml(x.short)}</small>${match ? `<em class="guide-match-badge">${icon('compass','ui-icon mini')} #${match.rank} · Afinidad ${escapeHtml(match.affinity.toLowerCase())}</em>` : ''}</span>
       <span class="card-arrow">${icon('chevron-right')}</span>
     </button>`;

@@ -25,6 +25,7 @@ export function officialTreatmentImage(item){
 }
 export function handleOfficialImageError(img){
   if(!img)return;
-  img.src='/assets/dlorgia-atmosphere.webp';
-  img.classList.add('official-image-fallback');
+  img.removeAttribute('src');
+  img.style.display='none';
+  img.parentElement?.classList.add('official-image-unavailable');
 }

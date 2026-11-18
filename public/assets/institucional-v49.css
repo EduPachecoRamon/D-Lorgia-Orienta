@@ -1,0 +1,19 @@
+/* v4.9: identidad institucional sin fondos fotográficos artificiales.
+   Las fotografías enlazadas vienen del dominio público de D’Lorgia, no están copiadas aquí.
+   Se sustituyen por recursos locales cuando la empresa facilita los originales autorizados. */
+body::before{background:radial-gradient(circle at 5% 9%,#e2eee4 0%,transparent 34%),radial-gradient(circle at 85% 72%,#f5eadd 0%,transparent 40%),#f6f2e9!important}
+.app-shell .hero-visual.visual-home{background:linear-gradient(90deg,rgba(18,57,46,.35),rgba(29,72,55,.08)),url('https://www.dlorgia.com/media/fotos/ipl-rosacea.jpg') center/cover,#dbe9db!important}
+.app-shell #portal .portal-cover::before{background:linear-gradient(90deg,#173e3529,#183e3512),url('https://www.dlorgia.com/media/fotos/alta-frecuencia-facial-2.jpg') center/cover!important;opacity:.28!important}
+.app-shell .official-detail-cover{background:#e1ece3!important}
+.app-shell .welcome-art-v49{background:linear-gradient(135deg,#d4e2d6,#eef3e9)!important}
+/* Help (no photo required): distinctive typographic panel instead of reused AI-style art. */
+.help-image{background:linear-gradient(135deg,#bdd1c1,#e5eee6)!important;position:relative;display:grid;place-items:center;overflow:hidden}
+.help-image::before{content:'DL';font:600 65px Fraunces,Georgia,serif;color:#215641;background:#ffffffb8;width:125px;height:125px;display:grid;place-items:center;border:1px solid #c9a36d;border-radius:100%;box-shadow:0 0 0 12px #ffffff44}
+.hero-public-art{background:linear-gradient(130deg,rgba(22,73,54,.12),transparent 65%),url('https://www.dlorgia.com/media/fotos/colormax-manchas.jpg') center/cover,#dce7da!important}
+.gallery-hero-illustration{background:#e1e9df!important}
+.admin-app .marketing-hero img{object-fit:cover}
+.admin-app .login-art{background:linear-gradient(145deg,#164137,#46715c)!important}
+.admin-app .atelier-hero{background:linear-gradient(90deg,rgba(13,50,39,.94),rgba(21,69,49,.74),rgba(28,81,62,.18)),url('https://www.dlorgia.com/media/fotos/colormax-acne.jpg') center/cover,#244b3e!important}
+.admin-app .campaign-art{background:linear-gradient(135deg,#c8dbcd,#edf3e9)!important;position:relative}
+.admin-app .campaign-art::after{content:'D’LORGIA · ORIENTA';position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#20503e;font:600 24px Fraunces,Georgia,serif;padding:24px}
+@media(prefers-reduced-motion:reduce){.app-shell .hero-visual.visual-home{background-attachment:scroll!important}}
