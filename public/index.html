@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="/assets/foco-v50.css" />
   <link rel="stylesheet" href="/assets/fotos-v49.css" />
 <link rel="stylesheet" href="/assets/institucional-v49.css"><link rel="stylesheet" href="/assets/foco-v51.css" />
-<link rel="stylesheet" href="/assets/experiencia-v52.css" /><link rel="stylesheet" href="/assets/config-retro-v53.css" /></head>
+<link rel="stylesheet" href="/assets/experiencia-v52.css" /><link rel="stylesheet" href="/assets/config-retro-v53.css" /><link rel="stylesheet" href="/assets/recorrido-v54.css" /></head>
 <body>
   <svg class="svg-sprite" aria-hidden="true" focusable="false">
     <defs>
@@ -415,11 +415,12 @@
         </div>
         <div id="summary-content" class="panel"></div>
         <div class="action-stack">
-          <button class="primary" data-nav="assistant">Preguntar a mi asesor →</button>
-          <button class="secondary" data-nav="evaluation">Solicitar evaluación</button>
-          <button class="secondary" data-nav="followup">Crear recordatorio</button>
+          <button class="primary" data-nav="evaluation">Preparar contacto con D’Lorgia →</button>
+          <button class="secondary" data-nav="assistant">Preguntar a mi asesor</button>
+          <button class="secondary" data-nav="followup">Organizar seguimiento</button>
           <button class="secondary" id="download-summary">Descargar resumen</button>
         </div>
+        <div id="v54-summary-contact"></div>
       </section>
 
       <section class="screen" id="evaluation" data-icon="◇" data-icon2="✓">
@@ -443,6 +444,7 @@
           <button class="primary" type="submit">Reservar horario y preparar solicitud</button>
         </form>
         <div id="evaluation-result" class="hidden"></div>
+        <div id="v54-evaluation-contact"></div>
       </section>
 
       <section class="screen" id="followup" data-icon="◷" data-icon2="✓">
@@ -451,11 +453,14 @@
           <div><p class="eyebrow">SEGUIMIENTO</p><h2>Tu proceso, paso a paso</h2></div>
           <span class="section-icon"><svg class="ui-icon"><use href="#i-bell"/></svg></span>
         </div>
-        <p class="muted">Convierte tu orientación en acciones concretas. Tus recordatorios se conservan en tu espacio personal.</p>
+        <p class="muted v54-followup-intro">Cada parada te lleva a una pantalla real. Avanza a tu ritmo: este mapa registra acciones digitales, no progreso médico.</p>
         <div id="followup-content"></div>
 
-        <div class="panel reminder-builder">
-          <div class="panel-title"><span class="panel-icon"><svg class="ui-icon"><use href="#i-bell"/></svg></span><div><p class="eyebrow">NUEVA ALARMA</p><h3>Crear recordatorio</h3></div></div>
+        <div class="panel reminder-builder v54-reminder-builder" id="v54-reminder-builder">
+          <div class="v54-reminder-heading">
+            <div><p class="eyebrow">TU AGENDA PERSONAL</p><h3>Un recordatorio para lo que sigue</h3><p>Elige fecha y hora; lo verás también en Mi espacio.</p></div>
+            <div class="v54-alarm-art" aria-hidden="true"><svg viewBox="0 0 180 170" focusable="false"><circle class="v54-alarm-glow" cx="90" cy="82" r="67"/><g class="v54-alarm-bells"><path d="M35 45 17 29q21-26 46-7l-9 24M125 45l9-23q24-16 45 9l-18 17"/></g><circle class="v54-alarm-body" cx="90" cy="87" r="59"/><circle class="v54-alarm-face" cx="90" cy="87" r="44"/><g class="v54-alarm-hands"><path d="M90 87V57M90 87l-24 8"/></g><circle class="v54-alarm-pin" cx="90" cy="87" r="5"/><path class="v54-alarm-feet" d="m55 137-17 22m87-22 17 22"/></svg><small>UN PASO A LA VEZ</small></div>
+          </div>
           <div class="form-grid compact-grid">
             <label>Tipo<select id="reminder-type"><option value="evaluacion">Evaluación</option><option value="cuidado">Revisar cuidados</option><option value="seguimiento">Seguimiento</option><option value="personalizado">Personalizado</option></select></label>
             <label>Recordatorio<input id="reminder-title" placeholder="Ej. Revisar cuidados posteriores" maxlength="80" /></label>
@@ -463,14 +468,15 @@
             <label>Hora<input id="reminder-time" type="time" /></label>
             <button class="primary" id="add-reminder" type="button">Guardar alarma</button>
           </div>
-          <p class="microcopy">Si autorizas notificaciones, la app puede avisarte mientras esté abierta. Para producción se usarían notificaciones push del sistema.</p>
+          <p class="microcopy">Los recordatorios quedan guardados en tu espacio. Las notificaciones del navegador solo pueden aparecer si la app está abierta y tienen permiso; no son alarmas del sistema en segundo plano.</p>
         </div>
 
         <div class="panel">
           <div class="panel-title"><span class="panel-icon"><svg class="ui-icon"><use href="#i-circle-check"/></svg></span><div><p class="eyebrow">MIS ALARMAS</p><h3>Recordatorios guardados</h3></div></div>
           <div id="reminders-list" class="reminders-list"></div>
-          <button class="secondary full" id="enable-notifications" type="button">Activar notificaciones del navegador</button>
+          <button class="secondary full" id="enable-notifications" type="button">Permitir avisos mientras uso la app</button>
         </div>
+        <div id="v54-followup-contact"></div>
       </section>
 
       <section class="screen" id="portal" data-icon="✧" data-icon2="◇">

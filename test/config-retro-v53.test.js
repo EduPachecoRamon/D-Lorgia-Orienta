@@ -76,7 +76,7 @@ test('v5.3: servidor aplica autorización a usuario propio y no borra citas ni c
 
 test('v5.3: PWA incluye configuración, foto y versión de caché coherente',()=>{
  const sw=read('public/service-worker.js');
- assert.match(sw,/dlorgia-orienta-v530-nubes/);
+ assert.match(sw,/dlorgia-orienta-v540-recorrido/);
  assert.match(sw,/\/assets\/config-retro-v53\.css/);
  assert.match(sw,/\/assets\/fotos-dlorgia\/manchas-piel-referencia\.webp/);
  assert.ok(existsSync(join(root,'public/assets/config-retro-v53.css')));

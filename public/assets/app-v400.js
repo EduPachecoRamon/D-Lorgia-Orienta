@@ -1,7 +1,7 @@
 import { officialTreatmentImage, treatmentPhotoInfo, handleOfficialImageError } from './dlorgia-imagery46.js';
 import {humanMessage} from './dlorgia-feedback.js';
 import {initAmbient} from './dlorgia-ambient.js';
-const DLORGIA_BUILD = '5.3.0-config-retro';
+const DLORGIA_BUILD = '5.4.0-recorrido';
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => [...document.querySelectorAll(sel)];
 
@@ -691,6 +691,7 @@ $$('[data-v53-a11y]').forEach(input => input.addEventListener('change', () => {
 // Appointments already sent to the clinic are operational records; this button does not cancel them.
 const V53_LOCAL_PROGRESS = [...USER_SCOPED_KEYS];
 const V53_UI_PREFERENCES = [A11Y_KEY, 'dlorgia:frame:v50', V53_MOTION_KEY, V53_CLOUD_KEY];
+V53_LOCAL_PROGRESS.push('dlorgia:contactBranch:v54');
 function wipeLocalJourney() {
   for (const key of V53_LOCAL_PROGRESS) store.remove(key);
   for (const key of V53_UI_PREFERENCES) rawStore.remove(key);
@@ -796,6 +797,48 @@ function applyGuideToEvaluation() {
   if (interest && top && (!interest.value || interest.value === 'Orientación general')) interest.value = `Orientador Personal · ${top.name}`;
 }
 
+
+// v5.4: a patient-initiated, source-backed handoff to D’Lorgia.
+// Never silently transmit form values or imply a booking occurred by opening WhatsApp.
+let v54BranchDirectory = null;
+const V54_CONTACT_BRANCH_KEY = 'dlorgia:contactBranch:v54';
+function v54SelectedBranch() {
+  const current = store.get(V54_CONTACT_BRANCH_KEY, null) || getProfile()?.branch || 'huancayo';
+  return v54BranchDirectory?.[current] ? current : Object.keys(v54BranchDirectory || {})[0] || '';
+}
+function v54TreatmentContext() {
+  return catalog.find(x => x.id === selectedTreatment) || currentOrientation?.treatment || catalog.find(x => x.id === getPersonalGuide()?.matches?.[0]?.id) || null;
+}
+function renderContactBridge(selector, context = '') {
+  const target = $(selector);
+  if (!target) return;
+  const current = context || v54TreatmentContext()?.name || 'una evaluación de orientación';
+  const entries = Object.entries(v54BranchDirectory || {}).filter(([,branch]) => /^\d{9,15}$/.test(String(branch?.phone || '')));
+  const branch = v54SelectedBranch();
+  target.innerHTML = `<section class="v54-contact-bridge" aria-label="Continuar con el equipo de D’Lorgia">
+    <div class="v54-contact-copy"><span class="v54-contact-kicker">DESPUÉS DE ORIENTARTE</span><h3>Ahora puedes hablar con D’Lorgia.</h3><p>Lleva tus preguntas al equipo. Confirma con la sede qué opciones y horarios corresponden a tu caso; aquí no se hace un diagnóstico.</p></div>
+    <div class="v54-contact-actions">${entries.length ? `<label>Elige una sede<select class="v54-branch-select" aria-label="Sede para contactar">${entries.map(([id,item]) => `<option value="${escapeHtml(id)}" ${id===branch?'selected':''}>${escapeHtml(item.name || id)}</option>`).join('')}</select></label><a class="v54-contact-whatsapp" href="#" target="_blank" rel="noopener noreferrer">Consultar por WhatsApp ↗</a>` : `<p class="v54-branch-unavailable">El contacto directo no está disponible por ahora. Consulta los datos de la sede.</p>`}
+      <button type="button" class="v54-contact-eval">Ver evaluación y horarios</button><a class="v54-contact-sedes" href="/sedes">Ver información de sedes</a>
+    </div><p class="v54-contact-footnote">WhatsApp abre un mensaje que podrás revisar y enviar tú mismo. Abrirlo no solicita ni confirma una cita.</p>
+  </section>`;
+  const sel=target.querySelector('.v54-branch-select');
+  const link=target.querySelector('.v54-contact-whatsapp');
+  const update=()=>{
+    if(!link||!sel)return;
+    const item=v54BranchDirectory?.[sel.value];
+    if(!item || !/^\d{9,15}$/.test(String(item.phone))){link.removeAttribute('href');return;}
+    const message=`Hola, encontré información en D’Lorgia Orienta y me gustaría consultar con el equipo de ${item.name} sobre ${current}. ¿Cómo puedo recibir orientación profesional y conocer los pasos siguientes?`;
+    link.href=`https://wa.me/${item.phone}?text=${encodeURIComponent(message)}`;
+  };
+  sel?.addEventListener('change',()=>{store.set(V54_CONTACT_BRANCH_KEY, sel.value);if ($('#eval-branch')) $('#eval-branch').value=sel.value;update();});
+  update();
+  target.querySelector('.v54-contact-eval')?.addEventListener('click',()=>{
+    if(sel && $('#eval-branch')) $('#eval-branch').value=sel.value;
+    if(current && $('#eval-interest')) $('#eval-interest').value=current;
+    show('evaluation');
+  });
+}
+
 function show(id, push = true) {
   if (!document.getElementById(id)) return;
   $$('.screen').forEach((el) => el.classList.toggle('active', el.id === id));
@@ -816,15 +859,15 @@ function show(id, push = true) {
   if (id === 'settings') refreshSettingsScreen();
   if (id === 'home') renderHome();
   if (id === 'guide') renderGuide();
-  if (id === 'summary') renderSummary();
-  if (id === 'followup') renderFollowUp();
+  if (id === 'summary') { renderSummary(); renderContactBridge('#v54-summary-contact', currentOrientation?.treatment?.name || 'una evaluación de orientación'); }
+  if (id === 'followup') { renderFollowUp(); setReminderDefaults(); renderContactBridge('#v54-followup-contact', currentOrientation?.treatment?.name || getPersonalGuide()?.matches?.[0]?.name || 'una evaluación de orientación'); }
   if (id === 'portal') renderPortal();
   if (id === 'journey-space') renderJourneySpace();
   if (id === 'preferences-space') renderPreferencesSpace();
   if (id === 'catalog') renderCatalog();
   if (id === 'assistant') renderAdvisor();
   if (id === 'calculator') applyGuideToCalculator();
-  if (id === 'evaluation') applyGuideToEvaluation();
+  if (id === 'evaluation') { applyGuideToEvaluation(); renderContactBridge('#v54-evaluation-contact', 'una evaluación profesional'); }
   if (activeIdentity?.remote && ['home','followup','portal','journey-space','preferences-space','evaluation'].includes(id)) {
     syncRemoteStateFresh(id === 'followup' || id === 'portal' || id === 'journey-space' || id === 'preferences-space').then((changed) => {
       if (!changed || document.querySelector('.screen.active')?.id !== id) return;
@@ -1135,6 +1178,7 @@ function renderGuideResult(result) {
     <div class="v52-result-section-title"><span>OPCIONES PARA EXPLORAR</span><h3>Empieza por una. Las demás siguen aquí.</h3><p>El orden solo refleja afinidad con tus respuestas; la evaluación profesional determina qué corresponde.</p></div>
     <div class="guide-matches v52-result-matches">${matchCards || '<div class="empty">Todavía no hay opciones. Puedes ajustar tus respuestas.</div>'}</div>
     <div class="v52-result-next"><div><span>¿QUIERES CONTINUAR?</span><strong>Habla con D’Lorgia cuando estés listo.</strong><p>La solicitud de evaluación no equivale a una cita confirmada.</p></div><button type="button" id="guide-route-evaluation" class="primary">Solicitar evaluación →</button></div>
+    <div id="v54-guide-contact"></div>
     <details class="v52-result-tools"><summary>Otras herramientas para continuar</summary><div class="guide-route-grid"><button data-nav="catalog">${icon('scan')}<b>Tratamientos</b><span>Revisa todas las fichas.</span></button><button id="guide-route-advisor">${icon('sparkles')}<b>Asesor</b><span>Aclara tus dudas generales.</span></button><button data-nav="followup">${icon('bell')}<b>Seguimiento</b><span>Recordatorios y continuidad.</span></button></div></details>
     <p class="v52-result-disclaimer">${escapeHtml(result.disclaimer || result.caution || 'Esta orientación no sustituye una evaluación profesional.')}</p>
     <div class="guide-actions"><button class="secondary" id="guide-adjust">Ajustar respuestas</button><button class="ghost" id="guide-restart">Empezar de nuevo</button></div>
@@ -1146,6 +1190,7 @@ function renderGuideResult(result) {
   $('#v51-result-home')?.addEventListener('click', () => show('home'));
   $('#guide-route-advisor')?.addEventListener('click', () => { if (top?.id) selectedTreatment = top.id; advisorFocus = 'orientacion'; show('assistant'); });
   $('#guide-route-evaluation')?.addEventListener('click', () => openGuideEvaluation(top?.id));
+  renderContactBridge('#v54-guide-contact', top?.name || 'una evaluación');
   $('#guide-adjust')?.addEventListener('click', () => { resetGuideDraft(true); guideStep = 1; renderGuide(); });
   $('#guide-restart')?.addEventListener('click', () => { clearGuideDraft(); resetGuideDraft(false); guideStep = 0; renderGuide(); });
 }
@@ -1218,24 +1263,31 @@ function openDetail(id, push = true) {
   $('#detail-name').textContent = treatment.name;
   $('#detail-content').innerHTML = `
     <div class="official-detail-cover"><img class="official-detail-img" src="${officialTreatmentImage(treatment)}" alt="" loading="lazy" decoding="async"><span>${escapeHtml(treatmentPhotoInfo(treatment)?.caption || 'Imagen de referencia')} · No representa un resultado garantizado</span></div>
-    <div class="detail-hero">
-      <p class="eyebrow">${escapeHtml(treatment.category)}</p>
-      <h3>${escapeHtml(treatment.name)}</h3>
-      <p>${escapeHtml(treatment.description)}</p>
+    <div class="detail-hero v54-detail-intro">
+      <p class="eyebrow">${escapeHtml(treatment.category)} · INFORMACIÓN GENERAL</p>
+      <h3>¿En qué consiste esta opción?</h3>
+      <p>${escapeHtml(treatment.description || treatment.short || 'Conoce los objetivos generales de esta alternativa antes de conversar con el equipo.')}</p>
+    </div>
+    <div class="v54-detail-facts">
+      <article><span>01 · PROPÓSITO</span><h4>¿Qué busca abordar?</h4><p>${escapeHtml(treatment.objective || treatment.short || 'Los objetivos se definen junto con el equipo profesional.')}</p></article>
+      <article><span>02 · RECUPERACIÓN</span><h4>¿Qué conviene preguntar?</h4><p>${escapeHtml(treatment.recovery || 'Los cuidados y posibles tiempos de recuperación dependen de la evaluación individual.')}</p></article>
+      <article><span>03 · PLAN PERSONAL</span><h4>¿Cuántas sesiones?</h4><p>${escapeHtml(treatment.sessions || 'La necesidad de sesiones se determina durante la evaluación con D’Lorgia.')}</p></article>
     </div>
     ${guideMatch ? `<div class="panel detail-guide-match"><div class="panel-title"><span class="panel-icon">${icon('compass')}</span><div><p class="eyebrow">ORIENTADOR PERSONAL · #${guideMatch.rank}</p><h3>Afinidad ${escapeHtml(guideMatch.affinity.toLowerCase())} con tu perfil</h3></div></div><div class="affinity-track"><span style="width:${Math.max(18,Math.min(100,guideMatch.score))}%"></span></div><div class="guide-why compact"><b>Por qué aparece en tu ruta</b>${list(guideMatch.reasons)}</div><button class="ghost full" id="detail-guide-profile">Revisar mi perfil del Orientador</button></div>` : `<div class="panel detail-guide-empty"><div class="panel-title"><span class="panel-icon">${icon('compass')}</span><div><p class="eyebrow">ORIENTADOR PERSONAL</p><h3>¿Quieres comparar esta opción con tus prioridades?</h3></div></div><p class="muted">El Orientador puede cruzar este tratamiento con tu objetivo, recuperación e intensidad preferida.</p><button class="secondary full" id="detail-guide-start">Usar en Orientador Personal</button></div>`}
-    <div class="panel"><div class="panel-title"><span class="panel-icon">${icon('target')}</span><div><p class="eyebrow">OBJETIVO</p><h3>¿Qué busca orientar?</h3></div></div><p class="muted">${escapeHtml(treatment.objective || treatment.short)}</p></div>
-    <div class="action-stack">
-      <button class="primary" id="detail-calc">Orientar mis expectativas →</button>
-      <button class="secondary" id="detail-assistant">Consultar a mi asesor</button>
-      <button class="secondary detail-save ${isSaved ? 'is-saved' : ''}" id="detail-save">${icon(isSaved ? 'circle-check' : 'heart')} ${isSaved ? 'Guardado en Mi espacio' : 'Guardar para revisar'}</button>
-    </div>`;
+
+    <details class="v54-treatment-questions"><summary>Preguntas útiles para el equipo</summary><ul><li>¿Es adecuada esta opción para mis objetivos y necesidades?</li><li>¿Qué evaluación previa, cuidados y posibles limitaciones debo conocer?</li><li>¿Qué alternativas existen y cómo se confirma un plan individual?</li></ul></details>
+    <div class="v54-detail-next"><div><small>QUÉ PUEDES HACER AHORA</small><h3>Una decisión informada empieza con una conversación.</h3><p>Revisa expectativas, guarda la ficha o consulta a D’Lorgia. La aplicación no recomienda tratamientos de forma clínica.</p></div>
+      <div class="v54-detail-actions"><button class="primary" id="detail-calc">Orientar mis expectativas →</button><button class="secondary" id="detail-assistant">Preguntar al Asesor</button><button class="secondary" id="detail-followup">Abrir mi seguimiento</button><button class="secondary detail-save ${isSaved ? 'is-saved' : ''}" id="detail-save">${icon(isSaved ? 'circle-check' : 'heart')} ${isSaved ? 'Guardado en Mi espacio' : 'Guardar para revisar'}</button></div>
+    </div>
+    <div id="v54-detail-contact"></div>`;
   if ($('#treatment-select')) $('#treatment-select').value = id;
   $('#detail-calc').onclick = () => show('calculator');
   $('#detail-assistant').onclick = () => { advisorFocus = 'orientacion'; show('assistant'); };
+  $('#detail-followup').onclick = () => show('followup');
   $('#detail-save').onclick = () => toggleSavedTreatment(id);
   if ($('#detail-guide-profile')) $('#detail-guide-profile').onclick = () => { guideStep = 'result'; show('guide'); };
   if ($('#detail-guide-start')) $('#detail-guide-start').onclick = () => { resetGuideDraft(true); guideDraft.treatmentId = id; guideStep = 1; show('guide'); };
+  renderContactBridge('#v54-detail-contact', treatment.name);
   show('detail', push);
 }
 
@@ -1471,14 +1523,17 @@ function saveReminder() {
   const date = $('#reminder-date').value;
   const time = $('#reminder-time').value;
   const type = $('#reminder-type').value;
-  if (!title) return alert('Escribe qué quieres recordar.');
-  if (!date) return alert('Selecciona una fecha.');
+  if (!title) { toast('Escribe qué quieres recordar.'); $('#reminder-title')?.focus(); return; }
+  if (!date || !time) { toast('Selecciona fecha y hora para tu recordatorio.'); return; }
+  const reminderDate = new Date(`${date}T${time}:00`);
+  if (!Number.isFinite(reminderDate.getTime()) || reminderDate.getTime() <= Date.now()) { toast('Elige un momento futuro para el recordatorio.'); $('#reminder-date')?.focus(); return; }
 
   const items = getReminders();
   items.push({ id: `${Date.now()}`, title, date, time, type, done: false, notified: false, createdAt: new Date().toISOString() });
   items.sort((a, b) => reminderTimestamp(a) - reminderTimestamp(b));
   setReminders(items.slice(0, 30));
   $('#reminder-title').value = '';
+  toast('Recordatorio guardado en Mi espacio.', 'ok');
   renderFollowUp();
   renderPortal();
 }
@@ -1520,20 +1575,34 @@ function renderFollowUp() {
   const guide = getPersonalGuide();
   const evalData = store.get('dlorgia:lastEvaluation');
   const reminders = getReminders();
-  const hasFollowup = reminders.length > 0;
-  const hasAdvisorContinuity = getAdvisorMemory().some((item) => item.role === 'assistant');
-  const treatment = currentOrientation?.treatment?.name || guide?.matches?.[0]?.name || 'Orientación pendiente';
-  const evalStatusLabel = evalData?.status === 'confirmed' ? 'Confirmada por el equipo' : evalData?.status === 'completed' ? 'Atención completada' : evalData?.status === 'cancelled' ? 'Cancelada' : evalData ? 'Pendiente de confirmación' : 'Pendiente';
+  const hasAdvisorContinuity = getAdvisorMemory().some(item => item.role === 'assistant');
+  const hasReminder = reminders.length > 0;
+  const treatment = currentOrientation?.treatment?.name || guide?.matches?.[0]?.name || 'Tu recorrido aún no tiene un tratamiento elegido';
+  const hasContactRecord = Boolean(evalData);
+  const evalStatus = evalData?.status === 'confirmed' ? 'Evaluación confirmada' : evalData?.status === 'completed' ? 'Evaluación completada' : evalData?.status === 'cancelled' ? 'Solicitud cancelada' : hasContactRecord ? 'Solicitud registrada; confirma con la sede' : 'Pendiente de contactar al equipo';
+  const steps=[
+    {name:'Orientador Personal',summary:guide?'Ya organizaste tus intereses y preferencias.':'Cuéntanos qué te interesa.',done:Boolean(guide),target:'guide',action:'Abrir Orientador'},
+    {name:'Tratamiento y expectativas',summary:currentOrientation?'Tienes un resumen digital guardado.':'Consulta una ficha y conoce qué esperar.',done:Boolean(currentOrientation),target:currentOrientation?'summary':'catalog',action:currentOrientation?'Revisar mi resumen':'Explorar tratamientos'},
+    {name:'Conectar con D’Lorgia',summary:evalStatus,done:evalData?.status==='confirmed'||evalData?.status==='completed',inProgress:hasContactRecord && !['confirmed','completed','cancelled'].includes(evalData.status),target:'evaluation',action:'Ver evaluación y contacto'},
+    {name:'Organizar recordatorios',summary:hasReminder?`${reminders.length} recordatorio${reminders.length===1?'':'s'} guardado${reminders.length===1?'':'s'}.`:'Guarda fechas e indicaciones que quieras revisar.',done:hasReminder,target:'reminders',action:'Crear o revisar alarmas'},
+    {name:'Resolver dudas y continuar',summary:hasAdvisorContinuity?'Ya consultaste al Asesor digital.':'Prepara tus preguntas para el equipo.',done:hasAdvisorContinuity,target:'assistant',action:'Abrir Asesor'}
+  ];
+  const next = steps.find(step=>!step.done && !step.inProgress) || steps[2];
   const follow = $('#followup-content');
   if (follow) {
-    follow.innerHTML = `
-      <div class="panel"><p class="eyebrow">PROCESO ACTUAL</p><h3>${escapeHtml(treatment)}</h3><div class="timeline">
-        <div class="timeline-item ${guide ? 'done' : ''}"><span class="dot">${guide ? '✓' : '1'}</span><div><b>Orientador Personal</b><p>${guide ? `Perfil creado con ${escapeHtml(guide.guide?.name || 'D’Lorgia')}; ${guide.matches?.length || 0} caminos quedaron listos para explorar.` : 'Define objetivo, prioridades y preferencias para construir tu ruta.'}</p></div></div>
-        <div class="timeline-item ${currentOrientation ? 'done' : ''}"><span class="dot">${currentOrientation ? '✓' : '2'}</span><div><b>Orientación de expectativas</b><p>${currentOrientation ? 'Resumen generado y guardado en tu espacio.' : 'Explora un tratamiento y genera una orientación más específica.'}</p></div></div>
-        <div class="timeline-item ${evalData?.status === 'confirmed' || evalData?.status === 'completed' ? 'done' : ''}"><span class="dot">${evalData?.status === 'confirmed' || evalData?.status === 'completed' ? '✓' : '3'}</span><div><b>Evaluación profesional</b><p>${evalData ? `${escapeHtml(evalStatusLabel)} · ${escapeHtml(evalData.branch)}${evalData.date ? ` · ${escapeHtml(evalData.date)}` : ''}.` : 'Pendiente. El equipo profesional confirma la decisión clínica.'}</p></div></div>
-        <div class="timeline-item ${hasFollowup ? 'done' : ''}"><span class="dot">${hasFollowup ? '✓' : '4'}</span><div><b>Cuidados y seguimiento</b><p>${hasFollowup ? `${reminders.length} recordatorio${reminders.length === 1 ? '' : 's'} guardado${reminders.length === 1 ? '' : 's'} para tu continuidad.` : 'Guarda recordatorios para revisar indicaciones y próximos pasos.'}</p></div></div>
-        <div class="timeline-item ${hasAdvisorContinuity ? 'done' : ''}"><span class="dot">${hasAdvisorContinuity ? '✓' : '5'}</span><div><b>Continuidad con el Asesor</b><p>${hasAdvisorContinuity ? 'Ya usaste el Asesor como apoyo para comprender tu proceso.' : 'Registra dudas y vuelve al Asesor cuando necesites comprender mejor el proceso.'}</p></div></div>
-      </div></div>`;
+    follow.innerHTML = `<section class="v54-journey-panel"><div class="v54-journey-heading"><div><span class="v54-overline">TU MAPA DE CONTINUIDAD · 5 PARADAS</span><h3>${escapeHtml(treatment)}</h3><p>Elige una parada para ir directamente a esa sección. Puedes volver cuando quieras.</p></div><div class="v54-journey-count"><strong>${steps.filter(s=>s.done).length}<span>/ 5</span></strong><small>acciones digitales</small></div></div>
+      <div class="v54-journey-map"><svg class="v54-journey-path" viewBox="0 0 1000 200" preserveAspectRatio="none" aria-hidden="true"><path d="M95 53 C145 55 135 154 300 154 S395 45 500 53 S615 158 700 154 S850 55 905 55"/></svg>
+        ${steps.map((step,index)=>`<button type="button" class="v54-journey-step ${step.done?'is-complete':step.inProgress?'is-progress':'is-pending'}" data-v54-step="${escapeHtml(step.target)}" aria-label="Paso ${index+1}: ${escapeHtml(step.name)}. ${escapeHtml(step.action)}"><span class="v54-step-number">${step.done?'✓':index+1}</span><span class="v54-step-label"><strong>${escapeHtml(step.name)}</strong><small>${escapeHtml(step.summary)}</small><em>${escapeHtml(step.action)} ↗</em></span></button>`).join('')}</div>
+      <div class="v54-journey-next"><span><b>Siguiente paso disponible</b><small>${escapeHtml(next.name)}. Este es un recorrido informativo, no un estado clínico.</small></span><button type="button" id="v54-journey-next">${escapeHtml(next.action)} →</button></div>
+    </section>`;
+    const jump=(destination)=>{
+      if(destination==='reminders'){
+        document.getElementById('v54-reminder-builder')?.scrollIntoView({behavior:getA11yPrefs().reduceMotion?'auto':'smooth',block:'start'});
+        $('#reminder-title')?.focus({preventScroll:true});
+      } else show(destination);
+    };
+    follow.querySelectorAll('[data-v54-step]').forEach(btn=>btn.addEventListener('click',()=>jump(btn.dataset.v54Step)));
+    $('#v54-journey-next')?.addEventListener('click',()=>jump(next.target));
   }
   renderReminderList($('#reminders-list'));
 }
@@ -1629,9 +1698,12 @@ function checkDueReminders() {
 
 function setReminderDefaults() {
   if (!$('#reminder-date') || !$('#reminder-time')) return;
-  if (!$('#reminder-date').value) {
-    const d = new Date(Date.now() + 24 * 60 * 60 * 1000);
-    $('#reminder-date').value = d.toISOString().slice(0, 10);
+  const localDate = d => [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');
+  const now = new Date();
+  $('#reminder-date').min = localDate(now);
+  if (!$('#reminder-date').value || $('#reminder-date').value < $('#reminder-date').min) {
+    const tomorrow = new Date(now); tomorrow.setDate(tomorrow.getDate()+1);
+    $('#reminder-date').value = localDate(tomorrow);
   }
   if (!$('#reminder-time').value) $('#reminder-time').value = '09:00';
   if (!$('#reminder-title').value && currentOrientation?.treatment?.name) {
@@ -1741,7 +1813,7 @@ async function installPWA() {
 
 async function registerServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
-  try { const reg = await navigator.serviceWorker.register('/service-worker.js?v=520', { updateViaCache: 'none' }); await reg.update(); }
+  try { const reg = await navigator.serviceWorker.register('/service-worker.js?v=540', { updateViaCache: 'none' }); await reg.update(); }
   catch (error) { console.warn('Service worker no disponible', error); }
 }
 
@@ -1777,7 +1849,7 @@ async function init() {
     if ($('#reset-user')) $('#reset-user').placeholder = 'Correo';
     const resetButton = $('#reset-form .auth-submit span'); if (resetButton) resetButton.textContent = 'Enviar recuperación';
   }
-  const [catResult, cfgResult] = await Promise.allSettled([api('/api/catalog'), api('/api/config')]);
+  const [catResult, cfgResult, branchesResult] = await Promise.allSettled([api('/api/catalog'), api('/api/config'), api('/api/branches')]);
 
   if (catResult.status === 'fulfilled') {
     catalog = catResult.value.items || [];
@@ -1792,6 +1864,8 @@ async function init() {
 
   if (cfgResult.status === 'fulfilled') config = cfgResult.value;
   else console.error(cfgResult.reason);
+  if (branchesResult.status === 'fulfilled') v54BranchDirectory = branchesResult.value.branches || null;
+  else console.warn('Directorio de sedes temporalmente no disponible');
 
   const status = $('#assistant-status');
   if (status) {

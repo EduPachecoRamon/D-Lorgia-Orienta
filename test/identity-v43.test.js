@@ -40,6 +40,6 @@ test('sin etiquetas técnicas de prototipo en páginas públicas',()=>{
  assert.match(admin,/dlorgia-signature\.svg/);
 });
 test('service worker rota caché y precarga recursos de v4.3',()=>{
- assert.match(sw,/dlorgia-orienta-v530-nubes/);
+ assert.match(sw,/dlorgia-orienta-v540-recorrido/);
  for(const name of [...shared,'dlorgia-patient.css','dlorgia-admin.css','dlorgia-ambient.js','dlorgia-feedback.js']) assert.ok(sw.includes(name));
 });
