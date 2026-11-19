@@ -1,4 +1,4 @@
-import { officialTreatmentImage, treatmentPhotoInfo, handleOfficialImageError } from './dlorgia-imagery46.js';
+import { officialTreatmentImage, treatmentPhotoInfo, catalogTreatmentPhotoInfo, handleOfficialImageError } from './dlorgia-imagery46.js';
 import {humanMessage} from './dlorgia-feedback.js';
 import {initAmbient} from './dlorgia-ambient.js';
 const DLORGIA_BUILD = '5.3.0-configuracion';
@@ -1155,7 +1155,7 @@ function renderCatalog() {
   const matchMap = new Map((guide?.matches || []).map((m) => [m.id, m]));
   $('#catalog-list').innerHTML = items.length ? items.map((x) => {
     const match = matchMap.get(x.id);
-    const visual = treatmentPhotoInfo(x);
+    const visual = catalogTreatmentPhotoInfo(x);
     const photo = visual ? `<span class="treatment-photo"><img class="official-treatment-img" src="${visual.src}" alt="" loading="lazy" decoding="async"><small class="v52-photo-caption">${escapeHtml(visual.caption)}</small></span>` : `<span class="treatment-photo v52-no-photo"><span>${escapeHtml(x.category || 'D’Lorgia')}</span></span>`;
     return `<button type="button" class="treatment-card v52-treatment-card ${match ? 'guide-ranked' : ''}" data-treatment="${escapeHtml(x.id)}" aria-label="Conocer ${escapeHtml(x.name)}">
       ${photo}
