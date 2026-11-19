@@ -49,6 +49,7 @@ test('v5.2 catálogo usa fotos locales distintas y etiquetas honestas',()=>{
  const fileNames=['facial-cosmetologia','huancayo-consultorio-02','piel-marcas-acne','ficha-melasma','equipo-tecnologia-corporal','consulta-capilar','depilacion-pierna','eliminacion-tatuaje'];
  for(const file of fileNames){assert.match(image,new RegExp(file));assert.ok(existsSync(join(root,'public/assets/fotos-dlorgia',file+'.webp')));}
  assert.match(image,/export function treatmentPhotoInfo/);
+ assert.match(image,/export function catalogTreatmentPhotoInfo/);
  assert.match(app,/const visual = treatmentPhotoInfo\(x\)/);
  assert.match(app,/v52-photo-caption/);
  assert.match(html,/v52-catalog-intro/);
