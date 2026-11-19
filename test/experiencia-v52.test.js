@@ -50,7 +50,7 @@ test('v5.2 catálogo usa fotos locales distintas y etiquetas honestas',()=>{
  for(const file of fileNames){assert.match(image,new RegExp(file));assert.ok(existsSync(join(root,'public/assets/fotos-dlorgia',file+'.webp')));}
  assert.match(image,/export function treatmentPhotoInfo/);
  assert.match(image,/export function catalogTreatmentPhotoInfo/);
- assert.match(app,/const visual = treatmentPhotoInfo\(x\)/);
+ assert.match(app,/const visual = catalogTreatmentPhotoInfo\(x\)/);
  assert.match(app,/v52-photo-caption/);
  assert.match(html,/v52-catalog-intro/);
  assert.doesNotMatch(app,/const usedCatalogPhotos = new Set\(\)/);
@@ -58,7 +58,7 @@ test('v5.2 catálogo usa fotos locales distintas y etiquetas honestas',()=>{
 
 test('v5.2 actualiza la PWA con imágenes y hojas que realmente existen',()=>{
  const sw=read('public/service-worker.js');
- assert.match(sw,/dlorgia-orienta-v520-experiencia/);
+ assert.match(sw,/dlorgia-orienta-v530-retro-settings/);
  assert.match(sw,/\/assets\/experiencia-v52\.css/);
  const core=sw.match(/const CORE = \[([\s\S]*?)\];/);
  assert.ok(core);
