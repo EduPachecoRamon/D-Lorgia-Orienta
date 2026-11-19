@@ -21,7 +21,7 @@ test('v5.0 abre la app como inicio y conserva Google y registro',()=>{
 
 test('v5.0 bienvenida guiada de 3 pasos se muestra una vez por cuenta y se repite desde ajustes',()=>{
  const html=read('public/index.html'),js=read('public/assets/app-v400.js');
- for(const id of ['v50-tour-dialog','v50-tour-next','v50-tour-prev','v50-tour-skip','v50-settings-dialog','v50-settings-replay','v50-profile-tour']){
+ for(const id of ['v50-tour-dialog','v50-tour-next','v50-tour-prev','v50-tour-skip','settings','v50-settings-replay','v50-profile-tour']){
    assert.match(html,new RegExp(`id="${id}"`));
  }
  assert.match(js,/store\.get\('dlorgia:tourSeen:v50'/);
@@ -31,7 +31,7 @@ test('v5.0 bienvenida guiada de 3 pasos se muestra una vez por cuenta y se repit
  assert.match(js,/face.addEventListener\('mouseenter'/);
  assert.match(js,/face.addEventListener\('focus'/);
  assert.match(js,/face.addEventListener\('click'/);
- assert.match(js,/closeAppDialog\('#v50-settings-dialog'\)/);
+ assert.match(js,/function openSettingsScreen\(\)/);
  assert.match(html,/id="v50-phone-frame"/);
  assert.match(js,/prefers-reduced-motion|renderFramePreference/);
 });
@@ -54,7 +54,7 @@ test('v5.0 las páginas indexables son informativas, no el inicio privado',()=>{
  assert.doesNotMatch(seo,/\s'\/':\s*\{/);
  assert.match(seo,/\/guia/);
  const sw=read('public/service-worker.js');
- assert.match(sw,/dlorgia-orienta-v520-experiencia/);
+ assert.match(sw,/dlorgia-orienta-v530-nubes/);
  assert.match(sw,/\/assets\/foco-v50.css/);
 });
 

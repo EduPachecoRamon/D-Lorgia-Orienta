@@ -14,7 +14,7 @@ import { buildPersonalGuide } from './services/personal-guide.js';
 import { branches } from './data/knowledge.js';
 import { getSchedule, reserveSlot, getSchedulingInfo } from './services/scheduling.js';
 import { authState, registerRemote, loginRemote, refreshRemote, recoverRemote, currentUser, requireAdmin, updateProfile, stateForUser, adminOverview } from './services/accounts.js';
-import { getSupabaseState, dbSelect, dbInsert, dbUpdate, eq, countRows } from './services/supabase.js';
+import { getSupabaseState, dbSelect, dbInsert, dbUpdate, dbDelete, eq, countRows } from './services/supabase.js';
 import { googleOAuthStatus, startGoogleOAuth, finishGoogleOAuth, oauthPublicOrigin } from './services/google-oauth.js';
 import { seoHeadFor, sitemapXml, robotsTxt, searchConsoleVerificationTag } from './services/seo.js';
 
@@ -462,6 +462,29 @@ const server = http.createServer(async (req, res) => {
       const auth = await currentUser(req);
       return json(res, 200, await stateForUser(auth.user.id));
     } catch (error) { return json(res, error.status || 401, { error: error.message }); }
+  }
+
+  // v5.3: delete only the authenticated user's digital journey. Keep appointment audit events; never remove Auth,
+  // roles, profile identity or appointments already managed by the clinic.
+  if (req.method === 'DELETE' && url.pathname === '/api/me/progress') {
+    try {
+      const auth = await currentUser(req);
+      if (!getSupabaseState().databaseConfigured) return json(res, 503, { error: 'No es posible borrar el progreso del servidor en este momento.' });
+      const userFilter = eq('user_id', auth.user.id);
+      const guides = await dbDelete('personal_guides', userFilter);
+      const events = await dbDelete('journey_events', `${userFilter}&${eq('source','patient')}&event_type=in.(guide_completed,treatment_viewed,treatment_saved)`);
+      // Account fields name, email, username, role remain intact.
+      await dbUpdate('profiles', eq('id', auth.user.id), {
+        branch: 'huancayo', response_style: 'equilibrada', guidance_style: 'guiado'
+      });
+      return json(res, 200, { ok: true, deleted: {
+        guides: Array.isArray(guides) ? guides.length : 0,
+        journeyEvents: Array.isArray(events) ? events.length : 0
+      }, accountPreserved: true, appointmentsPreserved: true });
+    } catch (error) {
+      if (error.status === 401) return json(res, 401, { error: 'Inicia sesión para reiniciar tu recorrido.' });
+      return json(res, 503, { error: 'No se pudo completar el borrado sincronizado. Comprueba tu conexión y reintenta.' });
+    }
   }
 
   if (req.method === 'PATCH' && url.pathname === '/api/profile') {

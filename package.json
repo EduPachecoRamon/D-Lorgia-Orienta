@@ -3,7 +3,7 @@
   "version": "5.3.0",
   "private": true,
   "type": "module",
-  "description": "D’Lorgia Orienta v5.3: configuración retro integrada, nubes opcionales, accesibilidad y catálogo mejorado.",
+  "description": "D’Lorgia Orienta v5.3: Configuración retro adaptable con nubes animadas, fotos sin flyers, reinicio protegido del progreso local y sincronizado.",
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",

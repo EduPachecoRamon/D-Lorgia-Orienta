@@ -46,15 +46,19 @@ test('v5.1: la bienvenida no dirige a resultado viejo al completar una sesión g
   assert.doesNotMatch(finish, /guideStep = getPersonalGuide\(\) \? 'result' : 0/);
 });
 
-test('v5.1: el reinicio requiere REINICIAR y nunca elimina cuenta ni solicitudes remotas', () => {
-  const html = read('public/index.html'), js = read('public/assets/app-v400.js');
-  for (const id of ['v51-reset-start', 'v51-reset-dialog', 'v51-reset-phrase', 'v51-reset-confirm']) assert.match(html, new RegExp(`id="${id}"`));
-  assert.match(html, /no elimina mi cuenta ni solicitudes/);
-  assert.match(js, /v51ResetInput\.value\.trim\(\)!=='REINICIAR'/);
-  assert.match(js, /for \(const key of V51_LOCAL_PROGRESS\) store\.remove\(key\)/);
-  const reset = js.slice(js.indexOf('const V51_LOCAL_PROGRESS'), js.indexOf("$('#v50-settings-open')"));
-  for (const forbidden of ['dlorgia:lastEvaluation', 'dlorgia:profile', 'dlorgia:remote:session:v1', 'AUTH_ACCOUNTS_KEY']) assert.doesNotMatch(reset, new RegExp(`['"]${forbidden.replaceAll(':','\\:')}['"]`));
-  assert.match(js, /closeAppDialog\('#v51-reset-dialog'\)/);
+test('v5.3: reinicio completo de recorrido, conservando la identidad y solicitudes clínicas', () => {
+  const html = read('public/index.html'), js = read('public/assets/app-v400.js'), server = read('src/server.js');
+  for (const id of ['v51-reset-start', 'v51-reset-dialog', 'v51-reset-phrase', 'v51-reset-confirm', 'settings']) assert.match(html, new RegExp(`id="${id}"`));
+  assert.match(html, /Tu cuenta permanece/);
+  assert.match(js, /v51ResetInput\?\.value\.trim\(\) !== 'REINICIAR'/);
+  assert.match(js, /for \(const key of V53_LOCAL_PROGRESS\) store\.remove\(key\)/);
+  assert.match(js, /V53_LOCAL_PROGRESS = \[\.\.\.USER_SCOPED_KEYS\]/);
+  assert.match(js, /await api\('\/api\/me\/progress', \{ method:'DELETE'/);
+  assert.match(server, /req\.method === 'DELETE' && url\.pathname === '\/api\/me\/progress'/);
+  assert.match(server, /dbDelete\('personal_guides'/);
+  assert.match(server, /dbDelete\('journey_events'/);
+  const slice = server.slice(server.indexOf('v5.3: delete only'), server.indexOf("if (req.method === 'PATCH' && url.pathname === '/api/profile')"));
+  assert.doesNotMatch(slice,/dbDelete\('appointments'|dbDelete\('profiles'|auth\.admin\.deleteUser/);
 });
 
 test('v5.1: resultados muestran acciones compactas y detalles opcionales', () => {
@@ -62,5 +66,5 @@ test('v5.1: resultados muestran acciones compactas y detalles opcionales', () =>
   assert.match(js, /v51-result-head/);
   assert.match(js, /<details class="v51-match-more">/);
   assert.match(js, /v51-result-home/);
-  assert.match(read('public/service-worker.js'), /dlorgia-orienta-v520-experiencia/);
+  assert.match(read('public/service-worker.js'), /dlorgia-orienta-v530-nubes/);
 });

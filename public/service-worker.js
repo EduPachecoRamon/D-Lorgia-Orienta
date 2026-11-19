@@ -1,4 +1,4 @@
-const CACHE = 'dlorgia-orienta-v530-retro-settings';
+const CACHE = 'dlorgia-orienta-v530-nubes';
 const CORE = [
   '/app', '/', '/guia',
   '/assets/portada-v49.css',
@@ -9,9 +9,9 @@ const CORE = [
   '/assets/foco-v50.css',
   '/assets/foco-v51.css',
   '/assets/experiencia-v52.css',
-  '/assets/configuracion-v53.css',
+  '/assets/config-retro-v53.css',
+  '/assets/fotos-dlorgia/manchas-piel-referencia.webp',
   '/assets/fotos-dlorgia/ficha-melasma.webp',
-  '/assets/fotos-dlorgia/piel-manchas-comparativa.webp',
   '/assets/fotos-dlorgia/consulta-capilar.webp',
   '/assets/fotos-dlorgia/depilacion-pierna.webp',
   '/assets/fotos-dlorgia/huancayo-sala-01.webp',

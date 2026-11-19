@@ -1,0 +1,71 @@
+/* v5.3 · Configuración como apartado propio: inspirado en ventanas retro, no imita un sistema operativo. */
+.app-shell #settings.v53-settings-screen{position:relative;isolation:isolate;min-height:calc(100dvh - 165px);padding:clamp(16px,4vw,42px) clamp(12px,4vw,34px) 76px;overflow:hidden;background:linear-gradient(147deg,#c7e1db 0%,#e5eddf 46%,#faefdb 100%)!important}
+.app-shell #settings.v53-settings-screen::before,.app-shell #settings.v53-settings-screen::after{display:none!important}
+.v53-cloudscape{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;background:radial-gradient(circle at 87% 4%,#fff6e7cc,transparent 29%),linear-gradient(165deg,#d3e9e5a8,#f9f1dda0)}
+.v53-cloud{position:absolute;left:-370px;width:320px;height:130px;opacity:.63;filter:drop-shadow(0 10px 18px #fff8);background:radial-gradient(ellipse 38% 45% at 17% 69%,#fff 97%,transparent 100%),radial-gradient(ellipse 32% 67% at 41% 55%,#fff 97%,transparent 100%),radial-gradient(ellipse 34% 54% at 68% 65%,#fff 97%,transparent 100%),radial-gradient(ellipse 24% 40% at 85% 75%,#fff 97%,transparent 100%);animation:v53-cloud-travel 65s linear infinite}
+.v53-cloud-one{top:3%;animation-duration:67s;animation-delay:-38s;transform:scale(1.15)}
+.v53-cloud-two{top:31%;animation-duration:90s;animation-delay:-65s;opacity:.38;transform:scale(.75)}
+.v53-cloud-three{top:66%;animation-duration:75s;animation-delay:-7s;opacity:.43;transform:scale(1.05)}
+.v53-cloud-four{top:81%;animation-duration:105s;animation-delay:-82s;opacity:.48;transform:scale(.7)}
+@keyframes v53-cloud-travel{from{left:-370px}to{left:calc(100% + 370px)}}
+.v53-settings-screen:not(.v53-cloud-enabled) .v53-cloud{display:none}
+.v53-settings-screen:not(.v53-motion-enabled) .v53-cloud{animation:none;left:10%!important}
+.v53-settings-screen:not(.v53-motion-enabled) .v53-cloud-two{left:62%!important}
+.v53-settings-screen:not(.v53-motion-enabled) .v53-cloud-three{left:44%!important}
+.v53-settings-screen:not(.v53-motion-enabled) .v53-cloud-four{left:75%!important}
+.app-shell #settings .v53-retro-window{position:relative;z-index:2;max-width:1100px;margin:0 auto;overflow:hidden;background:#fffcf4;border:3px solid #23453c;border-radius:13px;box-shadow:inset 0 0 0 3px #f4ddb1,0 24px 54px #193c3750;min-height:510px}
+.app-shell #settings .v53-titlebar{display:flex;gap:11px;align-items:center;background:linear-gradient(100deg,#104435 0%,#185d49 62%,#26705b 100%);border-bottom:4px double #e8cb91;color:#f9e9c3;padding:11px 16px;min-height:64px}
+.v53-titlebar .v53-title-icon{font-size:23px;color:#f3cd77}
+.v53-titlebar strong{display:flex;align-items:baseline;gap:13px;font:600 clamp(20px,2.5vw,28px)/1 Fraunces,Georgia,serif}
+.v53-titlebar strong small{font:800 10px/1 Manrope,system-ui,sans-serif;letter-spacing:.12em;color:#e7d6a4}
+.v53-titlebar .v53-window-decoration{margin-left:auto;color:#fbecd0;letter-spacing:9px;font-size:19px;white-space:nowrap}
+.app-shell #settings .v53-titlebar button{width:36px;height:34px;flex:0 0 36px;border:2px solid #122f29;background:#f2eddc;box-shadow:inset -3px -3px 0 #bdc5aa,inset 2px 2px 0 #fff;color:#163d31;font-size:27px;line-height:1;cursor:pointer}
+.v53-window-layout{display:grid;grid-template-columns:minmax(180px,232px) minmax(0,1fr);min-height:490px}
+.v53-settings-nav{display:flex;flex-direction:column;gap:7px;position:relative;padding:22px 15px;background:linear-gradient(180deg,#f4f0db,#e4eedb);border-right:1px solid #a0b6a3;min-width:0}
+.v53-settings-nav button{display:flex;align-items:center;text-align:left;gap:11px;min-height:46px;cursor:pointer;font:750 15px Manrope,system-ui,sans-serif;color:#1a4436;background:transparent;border:2px solid transparent;border-radius:5px;padding:8px 12px;white-space:nowrap}
+.v53-settings-nav button>span{display:grid;place-items:center;width:22px;font-size:20px;font-family:Georgia,serif}
+.v53-settings-nav button.is-active{color:#fff;background:#16503e;border-color:#c49c51;box-shadow:inset 0 0 0 1px #f5e2ad,0 4px 10px #27443820}
+.v53-settings-nav button:focus-visible,.v53-pane button:focus-visible,.v53-pane a:focus-visible{outline:3px solid #bc8642;outline-offset:3px}
+.v53-sidebar-sky{margin-top:auto;border-top:1px solid #a4b69d;padding:18px;min-height:96px;display:flex;align-items:center;justify-content:center;color:#bd994d;font-size:35px;gap:35px}
+.v53-settings-main{padding:clamp(20px,2.5vw,34px);min-width:0;display:flex;flex-direction:column}
+.v53-heading{border-bottom:1px solid #93b4a3;margin-bottom:16px;padding-bottom:14px}
+.v53-heading p{font:850 10px Manrope,system-ui,sans-serif;letter-spacing:.12em;color:#9b6b31;margin:0 0 8px}
+.v53-heading h1{font:500 clamp(25px,3vw,38px)/1.1 Fraunces,Georgia,serif;color:#183f33;margin:0 0 8px}
+.v53-heading>span{color:#617c6d;font:500 13px/1.5 Manrope,system-ui,sans-serif}
+.v53-pane{flex:1;min-width:0}
+.v53-pane[hidden]{display:none!important}
+.v53-pane h2{font:600 22px Fraunces,Georgia,serif;color:#164637;margin:2px 0 15px;border-bottom:1px solid #bacdbe;padding-bottom:8px}
+.v53-option{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:73px;padding:13px 5px;border-bottom:1px solid #dce6d8;color:#21483d}
+.v53-option>div,.v53-option>span{display:grid;gap:5px;flex:1;min-width:0}
+.v53-option b{font:800 14px Manrope,system-ui,sans-serif;line-height:1.35}
+.v53-option small{font:500 12px/1.5 Manrope,system-ui,sans-serif;color:#68796b}
+.v53-option input[type=checkbox]{appearance:none;flex:0 0 44px;width:44px;height:26px;border-radius:22px;border:1.5px solid #90a998;background:#c7d3bd;cursor:pointer;position:relative;transition:background .18s}
+.v53-option input[type=checkbox]::before{content:"";position:absolute;width:18px;height:18px;border-radius:50%;background:#fffdf0;box-shadow:0 1px 3px #23453550;top:2.5px;left:3px;transition:transform .18s}
+.v53-option input[type=checkbox]:checked{background:#175a44}
+.v53-option input[type=checkbox]:checked::before{transform:translateX(17px)}
+.v53-option input[type=checkbox]:focus-visible{outline:3px solid #bb8a4c;outline-offset:3px}
+.app-shell #settings .v53-solid-btn,.app-shell #settings .v53-danger-button{border:2px solid #163c30;border-radius:5px;background:#12513c;box-shadow:inset 0 0 0 1px #d6b46d;color:#fff8e5;white-space:nowrap;padding:10px 13px;cursor:pointer;font:800 12px Manrope,system-ui,sans-serif;min-height:42px}
+.v53-tip{padding:19px;margin:19px 0 0;border:1px solid #cbd7c7;background:#f2f5ec;border-radius:8px}
+.v53-tip b{color:#1a4938;font-size:16px}.v53-tip p,.v53-note{font-size:13px;line-height:1.7;color:#65766c}.v53-tip a,.v53-tip button,.v53-inline-link{color:#195c43;text-decoration:underline;text-underline-offset:4px;border:0;background:transparent;padding:6px 0;font-weight:800;font-size:13px;cursor:pointer}
+.v53-account-note{background:#ecf3e9;border:1px solid #bfd4c4;border-radius:9px;padding:14px 17px;margin-bottom:18px}
+.v53-account-note b{font-size:14px;color:#1c543e}.v53-account-note p{font-size:12px;line-height:1.6;margin:6px 0 0;color:#517060}
+.v53-danger-zone{display:grid;grid-template-columns:130px 1fr;gap:15px;align-items:center;background:#fff1e8;border:1.5px solid #ab594e;border-radius:8px;padding:18px;color:#6f231e}
+.v53-danger-zone h3{margin:3px 0;font:600 23px Fraunces,Georgia,serif;color:#792622}
+.v53-danger-zone p{font-size:12px;line-height:1.56;margin:8px 0;color:#573e35}
+.v53-danger-zone .v53-danger-label{color:#8b302b;letter-spacing:.08em;font-weight:900;font-size:10px;margin:0}
+.v53-danger-zone .v53-glitch-icon{width:115px;max-width:100%;color:#79422c;filter:drop-shadow(4px 4px 0 #e6c8a0)}
+.v53-glitch-icon svg{display:block;width:100%}
+.v53-danger-zone:hover .v53-glitch-icon{animation:v53-glitch 1.15s steps(1) infinite}
+@keyframes v53-glitch{0%,84%,100%{transform:translate(0)}87%{transform:translate(-3px,1px)}90%{transform:translate(3px,-1px)}93%{transform:translate(-1px,0)}}
+.app-shell #settings .v53-danger-button{margin-top:11px;background:#8d302a;border-color:#63221b;box-shadow:inset 0 0 0 1px #f1ce8d}
+.v53-window-foot{display:flex;gap:10px;justify-content:space-between;margin-top:auto;padding-top:18px;color:#879585;font-size:10px;letter-spacing:.06em}
+/* Localized image focal points: avoid random crops and text-heavy flyers. */
+.app-shell #catalog .v52-treatment-card img,.app-shell #guide .v52-match-visual>img{object-position:center 43%}
+.app-shell #catalog img[src*="manchas-piel-referencia"],.app-shell #guide img[src*="manchas-piel-referencia"]{object-position:center 42%!important}
+.app-shell #home img[src*="huancayo-fachada"]{object-position:center 65%}
+.app-shell #guide .v52-result-cover img{object-fit:cover;object-position:center 43%}
+@media(max-width:780px){.v53-window-layout{grid-template-columns:1fr}.v53-settings-nav{flex-direction:row;gap:5px;overflow-x:auto;min-width:0;border-right:0;border-bottom:1px solid #a3b8a7;padding:10px 11px;scrollbar-width:thin}.v53-settings-nav button{font-size:12px;min-height:42px;padding:7px 9px}.v53-settings-nav button>span{font-size:16px;width:16px}.v53-sidebar-sky{display:none}.v53-settings-main{min-height:400px}.v53-titlebar strong small{display:none}}
+@media(max-width:520px){.app-shell #settings.v53-settings-screen{padding:9px 8px 92px;min-height:calc(100dvh - 140px)}.app-shell #settings .v53-retro-window{border-width:2px;border-radius:7px;min-height:0}.app-shell #settings .v53-titlebar{min-height:52px;padding:7px 10px;gap:7px}.v53-titlebar strong{font-size:21px}.v53-titlebar .v53-window-decoration{letter-spacing:3px;font-size:12px}.app-shell #settings .v53-titlebar button{width:32px;height:31px;flex-basis:32px}.v53-settings-main{padding:16px;min-height:420px}.v53-heading h1{font-size:26px}.v53-option{gap:9px;align-items:center}.v53-option button{max-width:110px;white-space:normal!important}.v53-danger-zone{grid-template-columns:1fr;padding:14px}.v53-danger-zone .v53-glitch-icon{width:68px;height:56px}.v53-danger-zone h3{font-size:23px}}
+@media(prefers-reduced-motion:reduce){.v53-cloud,.v53-danger-zone:hover .v53-glitch-icon{animation:none!important}.v53-option input[type=checkbox],.v53-option input[type=checkbox]::before{transition:none!important}}
+body.dlorgia-motion-paused .v53-cloud,body.dlorgia-motion-paused .v53-danger-zone:hover .v53-glitch-icon{animation:none!important}
+body.a11y-high-contrast .v53-settings-main{background:#fffdf7}body.a11y-high-contrast .v53-option small{color:#334e3f}

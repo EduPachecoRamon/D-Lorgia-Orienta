@@ -1,7 +1,7 @@
-import { officialTreatmentImage, treatmentPhotoInfo, catalogTreatmentPhotoInfo, handleOfficialImageError } from './dlorgia-imagery46.js';
+import { officialTreatmentImage, treatmentPhotoInfo, handleOfficialImageError } from './dlorgia-imagery46.js';
 import {humanMessage} from './dlorgia-feedback.js';
 import {initAmbient} from './dlorgia-ambient.js';
-const DLORGIA_BUILD = '5.3.0-configuracion';
+const DLORGIA_BUILD = '5.3.0-config-retro';
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => [...document.querySelectorAll(sel)];
 
@@ -89,7 +89,6 @@ function bindAccessibilityPanel() {
       const next = { ...getA11yPrefs(), [key]: input.checked };
       saveA11yPrefs(next);
       applyA11yPrefs(next);
-      applyV53Appearance();
       toast(key === 'reduceMotion' ? (input.checked ? 'Movimiento reducido activado.' : 'Movimiento completo restaurado.') : 'Preferencias de accesibilidad actualizadas.', 'ok');
     });
   });
@@ -104,6 +103,7 @@ function animateScreenEntry(id) {
   clearTimeout(screen._screenTimer);
   screen._screenTimer = setTimeout(() => screen.classList.remove('screen-enter'), 420);
 }
+let progressRevision = 0;
 let remoteSyncBusy = false;
 let lastRemoteSyncAt = 0;
 
@@ -187,7 +187,9 @@ function applyRemoteProfile(profile) {
 async function syncRemoteState() {
   if (!activeIdentity?.remote || !authBackend.databaseConfigured) return;
   try {
+    const revision = progressRevision;
     const state = await api('/api/me/state');
+    if (revision !== progressRevision) return;
     applyRemoteProfile(state.profile);
     if (state.latestGuide?.result) setPersonalGuide(state.latestGuide.result);
     const latestAppointment = state.appointments?.[0];
@@ -594,11 +596,12 @@ function updateTourScene() {
   [...$('#v50-tour-dots').children].forEach((dot, index) => dot.classList.toggle('active', index === tourIndex));
   $('#v50-tour-prev').hidden = tourIndex === 0;
   $('#v50-tour-next').textContent = tourIndex === tourScenes.length - 1 ? (getPersonalGuide() ? 'Volver a mi inicio →' : 'Empezar mi orientación →') : 'Siguiente →';
-  // La escena ya asigna su foto correcta mediante scene.photo; no sobrescribirla.
+  const tourPhoto = $('#v51-tour-photo');
+  if (tourPhoto) tourPhoto.src = tourIndex === 2 ? '/assets/fotos-dlorgia/huancayo-consultorio-02.webp' : '/assets/fotos-dlorgia/huancayo-fachada.webp';
 }
 function startTour(replay = false) {
   if (!hasEntryAccess()) return;
-  closeAppDialog('#v50-settings-dialog');
+  if ($('#settings')?.classList.contains('active')) show('home');
   tourIndex = 0;
   updateTourScene();
   openAppDialog('#v50-tour-dialog');
@@ -624,108 +627,134 @@ function showProgressDialog() {
   renderPlan();
   openAppDialog('#v50-progress-dialog');
 }
-// v5.1: deliberate local-only reset. NEVER delete remote appointments, profile, auth, or account.
-const V51_LOCAL_PROGRESS = [
-  'dlorgia:lastOrientation','dlorgia:history','dlorgia:reminders:v3','dlorgia:savedTreatments',
-  'dlorgia:advisorMemory:v1','dlorgia:preferences:v1','dlorgia:onboardingComplete',
-  'dlorgia:personalGuide:v1','dlorgia:guideDraft:v1','dlorgia:chatDraft:v1',
-  'dlorgia:lastScreen:v1','dlorgia:welcomeSeen:v1','dlorgia:tourSeen:v50',
-  'dlorgia:lastEvaluation'
-];
-const v51ResetInput = $('#v51-reset-phrase');
-const v51ResetConfirm = $('#v51-reset-confirm');
-$('#v51-reset-start')?.addEventListener('click',()=>{
-  closeAppDialog('#v50-settings-dialog');
-  if (v51ResetInput) v51ResetInput.value='';
-  if (v51ResetConfirm) v51ResetConfirm.disabled=true;
-  openAppDialog('#v51-reset-dialog');
-  v51ResetInput?.focus();
-});
-v51ResetInput?.addEventListener('input',()=>{
-  if (v51ResetConfirm) v51ResetConfirm.disabled=v51ResetInput.value.trim()!=='REINICIAR';
-});
-for(const id of ['v51-reset-close','v51-reset-cancel']) $("#"+id)?.addEventListener('click',()=>closeAppDialog('#v51-reset-dialog'));
-v51ResetConfirm?.addEventListener('click',()=>{
-  if (!hasEntryAccess() || v51ResetInput?.value.trim()!=='REINICIAR') return;
-  for (const key of V51_LOCAL_PROGRESS) store.remove(key);
-  // Evitar reimportar datos del mismo recorrido en memoria; no tocar identidad, cuentas ni tokens.
-  currentOrientation=null; selectedTreatment=null; guideDraft={}; guideStep=0; advisorFocus='orientacion';
-  navStack=['home'];
-  closeAppDialog('#v51-reset-dialog');
+// v5.3 · A real settings screen with optional decorative sky; every visible control has behavior.
+const V53_MOTION_KEY = 'dlorgia:settings:motion:v53';
+const V53_CLOUD_KEY = 'dlorgia:settings:clouds:v53';
+let settingsReturnScreen = 'home';
+let resetBusy = false;
+function applyRetroAtmosphere() {
+  const screen = $('#settings');
+  const motion = rawStore.get(V53_MOTION_KEY, true) !== false;
+  const clouds = rawStore.get(V53_CLOUD_KEY, true) !== false;
+  screen?.classList.toggle('v53-motion-enabled', motion);
+  screen?.classList.toggle('v53-cloud-enabled', clouds);
+  if ($('#v53-background-motion')) $('#v53-background-motion').checked = motion;
+  if ($('#v53-clouds')) $('#v53-clouds').checked = clouds;
+}
+function setSettingsTab(key = 'experience') {
+  const valid = ['experience','appearance','accessibility','help','privacy'];
+  const selected = valid.includes(key) ? key : 'experience';
+  $$('[data-v53-settings-tab]').forEach(button => {
+    const current = button.dataset.v53SettingsTab === selected;
+    button.classList.toggle('is-active', current);
+    if (current) button.setAttribute('aria-current','page');
+    else button.removeAttribute('aria-current');
+  });
+  $$('[data-v53-settings-pane]').forEach(pane => {
+    const current = pane.dataset.v53SettingsPane === selected;
+    pane.hidden = !current;
+    pane.classList.toggle('is-active', current);
+  });
+}
+function refreshSettingsScreen() {
+  applyRetroAtmosphere();
+  renderFramePreference();
+  const prefs = getA11yPrefs();
+  $$('[data-v53-a11y]').forEach(input => { input.checked = Boolean(prefs[input.dataset.v53A11y]); });
+}
+function openSettingsScreen() {
+  if (!hasEntryAccess()) return;
+  const current = $('.screen.active')?.id || 'home';
+  if (current !== 'settings' && current !== 'login') settingsReturnScreen = current;
+  refreshSettingsScreen();
+  show('settings');
+}
+$$('[data-v53-settings-tab]').forEach(button => button.addEventListener('click', () => setSettingsTab(button.dataset.v53SettingsTab)));
+$('#v50-settings-open')?.addEventListener('click', openSettingsScreen);
+$('#v50-settings-close')?.addEventListener('click', () => show(settingsReturnScreen === 'settings' ? 'home' : settingsReturnScreen));
+$('#v50-settings-replay')?.addEventListener('click', () => startTour(true));
+$('#v50-profile-tour')?.addEventListener('click', () => startTour(true));
+$('#v50-settings-accessibility')?.addEventListener('click', () => $('#a11y-trigger')?.click());
+$('#v50-phone-frame')?.addEventListener('change', (e) => { rawStore.set('dlorgia:frame:v50', e.target.checked); renderFramePreference(); });
+$('#v53-background-motion')?.addEventListener('change', (e) => { rawStore.set(V53_MOTION_KEY, e.target.checked); applyRetroAtmosphere(); });
+$('#v53-clouds')?.addEventListener('change', (e) => { rawStore.set(V53_CLOUD_KEY, e.target.checked); applyRetroAtmosphere(); });
+$$('[data-v53-a11y]').forEach(input => input.addEventListener('change', () => {
+  const key = input.dataset.v53A11y;
+  const next = {...getA11yPrefs(), [key]: input.checked};
+  saveA11yPrefs(next);
+  applyA11yPrefs(next);
+  refreshSettingsScreen();
+}));
+
+// Progress is not authentication. Preserve all credentials, tokens, username, role and email.
+// In remote mode, the server clears this user's guides and patient journey events.
+// Appointments already sent to the clinic are operational records; this button does not cancel them.
+const V53_LOCAL_PROGRESS = [...USER_SCOPED_KEYS];
+const V53_UI_PREFERENCES = [A11Y_KEY, 'dlorgia:frame:v50', V53_MOTION_KEY, V53_CLOUD_KEY];
+function wipeLocalJourney() {
+  for (const key of V53_LOCAL_PROGRESS) store.remove(key);
+  for (const key of V53_UI_PREFERENCES) rawStore.remove(key);
+  progressRevision++;
+  currentOrientation = null;
+  selectedTreatment = null;
+  guideDraft = {};
+  guideStep = 0;
+  advisorFocus = 'orientacion';
+  selectedHomeArea = 'Todas';
+  if ($('#catalog-search')) $('#catalog-search').value = '';
+  if ($('#evaluation-result')) { $('#evaluation-result').classList.add('hidden'); $('#evaluation-result').replaceChildren(); }
   $('#orientation-result')?.classList.add('hidden');
   $('#guide-content')?.replaceChildren();
   $('#chat-log')?.replaceChildren();
-  if ($('#eval-interest')) $('#eval-interest').value = '';
-  if ($('#catalog-search')) $('#catalog-search').value = '';
-  renderHome();
-  show('home',false);
-  toast('Tu progreso local se reinició. Tu cuenta y solicitudes de evaluación siguen intactas.','ok');
+  if ($('#chat-input')) $('#chat-input').value = '';
+  if ($('#eval-interest')) $('#eval-interest').value = 'Orientación general';
+  activeCategory = 'Todas';
+  setHomeArea('Todas');
+  applyA11yPrefs();
+  refreshSettingsScreen();
+}
+const v51ResetInput = $('#v51-reset-phrase');
+const v51ResetConfirm = $('#v51-reset-confirm');
+$('#v51-reset-start')?.addEventListener('click', () => {
+  if (v51ResetInput) v51ResetInput.value = '';
+  if (v51ResetConfirm) v51ResetConfirm.disabled = true;
+  openAppDialog('#v51-reset-dialog');
+  v51ResetInput?.focus();
 });
-$('#v51-reset-dialog')?.addEventListener('click', e => {if(e.target===e.currentTarget) closeAppDialog('#v51-reset-dialog');});
-
-// v5.3: pestañas de configuración, controles persistentes y fondo de nubes.
-const V53_APPEARANCE_KEY = 'dlorgia:settings:appearance:v53';
-function getV53Appearance() {
-  return { animated:true, clouds:true, ...(rawStore.get(V53_APPEARANCE_KEY, {}) || {}) };
-}
-function applyV53Appearance() {
-  const prefs = getV53Appearance();
-  const reduced = getA11yPrefs().reduceMotion || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.body.classList.toggle('v53-settings-static', !prefs.animated || reduced);
-  document.body.classList.toggle('v53-settings-no-clouds', !prefs.clouds);
-  if ($('#v53-animated-bg')) $('#v53-animated-bg').checked = prefs.animated;
-  if ($('#v53-soft-clouds')) $('#v53-soft-clouds').checked = prefs.clouds;
-  if ($('#v53-reduce-motion')) $('#v53-reduce-motion').checked = Boolean(getA11yPrefs().reduceMotion);
-  if ($('#v53-large-text')) $('#v53-large-text').checked = Boolean(getA11yPrefs().largeText);
-  if ($('#v53-high-contrast')) $('#v53-high-contrast').checked = Boolean(getA11yPrefs().highContrast);
-}
-function selectV53SettingsTab(tab, focus = false) {
-  const tabs = $('[data-v53-tab]');
-  const target = tabs.find(x => x.dataset.v53Tab === tab) || tabs[0];
-  if (!target) return;
-  tabs.forEach(button => {
-    const selected = button === target;
-    button.setAttribute('aria-selected', String(selected));
-    button.tabIndex = selected ? 0 : -1;
-  });
-  $('.v53-panel').forEach(panel => { panel.hidden = panel.id !== 'v53-panel-' + target.dataset.v53Tab; });
-  if (focus) target.focus();
-}
-$('[data-v53-tab]').forEach(button => {
-  button.addEventListener('click', () => selectV53SettingsTab(button.dataset.v53Tab));
-  button.addEventListener('keydown', event => {
-    if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
-    event.preventDefault();
-    const tabs = $('[data-v53-tab]');
-    const current = tabs.indexOf(button);
-    const index = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (current + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
-    selectV53SettingsTab(tabs[index].dataset.v53Tab, true);
-  });
+v51ResetInput?.addEventListener('input', () => {
+  if (v51ResetConfirm) v51ResetConfirm.disabled = resetBusy || v51ResetInput.value.trim() !== 'REINICIAR';
 });
-$('#v53-go-reset')?.addEventListener('click', () => selectV53SettingsTab('experience', true));
-$('#v50-settings-open')?.addEventListener('click', () => { applyV53Appearance(); selectV53SettingsTab('experience'); openAppDialog('#v50-settings-dialog'); });
-$('#v53-settings-minimize')?.addEventListener('click', () => closeAppDialog('#v50-settings-dialog'));
-for (const [inputId, name] of [['v53-animated-bg','animated'],['v53-soft-clouds','clouds']]) {
-  $('#'+inputId)?.addEventListener('change', event => {
-    rawStore.set(V53_APPEARANCE_KEY, { ...getV53Appearance(), [name]:event.target.checked });
-    applyV53Appearance();
-  });
-}
-for (const [inputId, name] of [['v53-reduce-motion','reduceMotion'],['v53-large-text','largeText'],['v53-high-contrast','highContrast']]) {
-  $('#'+inputId)?.addEventListener('change', event => {
-    const next = { ...getA11yPrefs(), [name]:event.target.checked };
-    saveA11yPrefs(next); applyA11yPrefs(next); applyV53Appearance();
-  });
-}
-window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change', applyV53Appearance);
-applyV53Appearance();
-$('#v50-settings-close')?.addEventListener('click', () => closeAppDialog('#v50-settings-dialog'));
-$('#v50-settings-replay')?.addEventListener('click', () => startTour(true));
-$('#v50-profile-tour')?.addEventListener('click', () => startTour(true));
-$('#v50-settings-accessibility')?.addEventListener('click', () => { closeAppDialog('#v50-settings-dialog'); $('#a11y-trigger')?.click(); });
-$('#v50-phone-frame')?.addEventListener('change', (e) => { rawStore.set('dlorgia:frame:v50', e.target.checked); renderFramePreference(); });
+for (const id of ['v51-reset-close', 'v51-reset-cancel']) $('#'+id)?.addEventListener('click', () => {
+  if (!resetBusy) closeAppDialog('#v51-reset-dialog');
+});
+v51ResetConfirm?.addEventListener('click', async () => {
+  if (resetBusy || !hasEntryAccess() || v51ResetInput?.value.trim() !== 'REINICIAR') return;
+  resetBusy = true;
+  v51ResetConfirm.disabled = true;
+  v51ResetConfirm.textContent = 'Reiniciando…';
+  try {
+    if (activeIdentity?.remote) {
+      if (!authBackend.databaseConfigured || !navigator.onLine) throw new Error('Para borrar también tu progreso sincronizado, necesitas conexión y el servicio de datos disponible. No se borró nada en este dispositivo.');
+      await api('/api/me/progress', { method:'DELETE', timeout:23000 });
+    }
+    wipeLocalJourney();
+    closeAppDialog('#v51-reset-dialog');
+    setSettingsTab('experience');
+    navStack = ['home'];
+    show('home', false);
+    toast('Progreso reiniciado. La cuenta sigue activa y las solicitudes enviadas a la clínica permanecen vigentes.', 'ok');
+  } catch (error) {
+    toast(error.message || 'No se pudo terminar el reinicio. Inténtalo de nuevo.', 'error');
+  } finally {
+    resetBusy = false;
+    if (v51ResetConfirm) { v51ResetConfirm.textContent = 'Reiniciar recorrido'; v51ResetConfirm.disabled = (v51ResetInput?.value.trim() !== 'REINICIAR'); }
+  }
+});
+$('#v51-reset-dialog')?.addEventListener('click', event => {
+  if (!resetBusy && event.target === event.currentTarget) closeAppDialog('#v51-reset-dialog');
+});
 $('#v50-tour-next')?.addEventListener('click', () => { if (tourIndex < tourScenes.length - 1) { tourIndex++; updateTourScene(); } else finishTour(true); });
-$('#v50-tour-prev')?.addEventListener('click', () => { tourIndex = Math.max(0,tourIndex - 1); updateTourScene(); });
+$('#v50-tour-prev')?.addEventListener('click', () => { tourIndex = Math.max(0, tourIndex - 1); updateTourScene(); });
 $('#v50-tour-skip')?.addEventListener('click', () => finishTour());
 $('#v50-tour-close')?.addEventListener('click', () => finishTour());
 $('#v50-tour-dialog')?.addEventListener('close', () => store.set('dlorgia:tourSeen:v50', true));
@@ -733,10 +762,11 @@ $('#v50-progress-close')?.addEventListener('click', () => closeAppDialog('#v50-p
 $('#v50-progress-later')?.addEventListener('click', () => closeAppDialog('#v50-progress-dialog'));
 $('#v50-progress-continue')?.addEventListener('click', () => { closeAppDialog('#v50-progress-dialog'); show(currentOrientation ? 'summary' : 'guide'); });
 $('#v50-home-progress-open')?.addEventListener('click', showProgressDialog);
-for(const selector of ['#v50-tour-dialog','#v50-settings-dialog','#v50-progress-dialog']) {
+for (const selector of ['#v50-tour-dialog', '#v50-progress-dialog']) {
   $(selector)?.addEventListener('click', (event) => { if (event.target === event.currentTarget) closeAppDialog(selector); });
 }
 renderFramePreference();
+applyRetroAtmosphere();
 
 function setNavActive(id) {
   const tabId = ['journey-space','preferences-space'].includes(id) ? 'portal' : id;
@@ -783,6 +813,7 @@ function show(id, push = true) {
   if (viewport) viewport.scrollTo({ top: 0, behavior: 'auto' });
   else window.scrollTo({ top: 0, behavior: 'auto' });
 
+  if (id === 'settings') refreshSettingsScreen();
   if (id === 'home') renderHome();
   if (id === 'guide') renderGuide();
   if (id === 'summary') renderSummary();
@@ -1155,7 +1186,7 @@ function renderCatalog() {
   const matchMap = new Map((guide?.matches || []).map((m) => [m.id, m]));
   $('#catalog-list').innerHTML = items.length ? items.map((x) => {
     const match = matchMap.get(x.id);
-    const visual = catalogTreatmentPhotoInfo(x);
+    const visual = treatmentPhotoInfo(x);
     const photo = visual ? `<span class="treatment-photo"><img class="official-treatment-img" src="${visual.src}" alt="" loading="lazy" decoding="async"><small class="v52-photo-caption">${escapeHtml(visual.caption)}</small></span>` : `<span class="treatment-photo v52-no-photo"><span>${escapeHtml(x.category || 'D’Lorgia')}</span></span>`;
     return `<button type="button" class="treatment-card v52-treatment-card ${match ? 'guide-ranked' : ''}" data-treatment="${escapeHtml(x.id)}" aria-label="Conocer ${escapeHtml(x.name)}">
       ${photo}
@@ -1710,7 +1741,7 @@ async function installPWA() {
 
 async function registerServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
-  try { const reg = await navigator.serviceWorker.register('/service-worker.js?v=530', { updateViaCache: 'none' }); await reg.update(); }
+  try { const reg = await navigator.serviceWorker.register('/service-worker.js?v=520', { updateViaCache: 'none' }); await reg.update(); }
   catch (error) { console.warn('Service worker no disponible', error); }
 }
 
@@ -1799,7 +1830,7 @@ async function init() {
     show('login', false);
   } else {
     const last = store.get('dlorgia:lastScreen:v1', 'home');
-    const resumable = new Set(['home','guide','catalog','assistant','followup','portal','calculator','evaluation']);
+    const resumable = new Set(['home','guide','catalog','assistant','followup','portal','calculator','evaluation','settings']);
     const next = resumable.has(last) ? last : 'home';
     navStack = [next];
     show(next, false);

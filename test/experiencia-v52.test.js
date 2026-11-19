@@ -46,11 +46,10 @@ test('v5.2 Orientador destaca un primer camino sin prometer diagnóstico',()=>{
 
 test('v5.2 catálogo usa fotos locales distintas y etiquetas honestas',()=>{
  const image=read('public/assets/dlorgia-imagery46.js'),app=read('public/assets/app-v400.js'),html=read('public/index.html');
- const fileNames=['facial-cosmetologia','huancayo-consultorio-02','piel-marcas-acne','ficha-melasma','equipo-tecnologia-corporal','consulta-capilar','depilacion-pierna','eliminacion-tatuaje'];
+ const fileNames=['facial-cosmetologia','huancayo-consultorio-02','piel-marcas-acne','manchas-piel-referencia','equipo-tecnologia-corporal','consulta-capilar','depilacion-pierna','eliminacion-tatuaje'];
  for(const file of fileNames){assert.match(image,new RegExp(file));assert.ok(existsSync(join(root,'public/assets/fotos-dlorgia',file+'.webp')));}
  assert.match(image,/export function treatmentPhotoInfo/);
- assert.match(image,/export function catalogTreatmentPhotoInfo/);
- assert.match(app,/const visual = catalogTreatmentPhotoInfo\(x\)/);
+ assert.match(app,/const visual = treatmentPhotoInfo\(x\)/);
  assert.match(app,/v52-photo-caption/);
  assert.match(html,/v52-catalog-intro/);
  assert.doesNotMatch(app,/const usedCatalogPhotos = new Set\(\)/);
@@ -58,7 +57,7 @@ test('v5.2 catálogo usa fotos locales distintas y etiquetas honestas',()=>{
 
 test('v5.2 actualiza la PWA con imágenes y hojas que realmente existen',()=>{
  const sw=read('public/service-worker.js');
- assert.match(sw,/dlorgia-orienta-v530-retro-settings/);
+ assert.match(sw,/dlorgia-orienta-v530-nubes/);
  assert.match(sw,/\/assets\/experiencia-v52\.css/);
  const core=sw.match(/const CORE = \[([\s\S]*?)\];/);
  assert.ok(core);
@@ -76,7 +75,7 @@ test('v5.2 HTTP publica /app y CSS, y mantiene /health', {timeout:20000}, async(
   const res=await fetch(base+'/app');assert.equal(res.status,200);
   assert.match(await res.text(),/v52-topic-pick/);
   const css=await fetch(base+'/assets/experiencia-v52.css');assert.equal(css.status,200);
-  const image=await fetch(base+'/assets/fotos-dlorgia/ficha-melasma.webp');assert.equal(image.status,200);
+  const image=await fetch(base+'/assets/fotos-dlorgia/manchas-piel-referencia.webp');assert.equal(image.status,200);
   assert.ok((await image.arrayBuffer()).byteLength>2000);
  }finally{child.kill('SIGTERM');}
 });

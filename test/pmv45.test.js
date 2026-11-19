@@ -28,7 +28,7 @@ test('primera entrada muestra guía y su recorrido', () => {
 test('páginas independientes para difusión y ayuda', () => {
   for (const route of ['/conoce','/ayuda','/admin/ayuda']) assert.ok(server.includes(`'${route}'`));
   for (const name of ['conoce.html','ayuda.html','admin-ayuda.html']) assert.match(read('public/'+name), /<main/);
-  assert.match(sw,/dlorgia-orienta-v520-experiencia/);
+  assert.match(sw,/dlorgia-orienta-v530-nubes/);
 });
 test('centro admin de atención con acciones útiles y enlace de difusión', () => {
   for(const id of ['attention-metrics','attention-appointments','attention-guides','copy-campaign-link']) assert.match(adminHtml,new RegExp(`id="${id}"`));
