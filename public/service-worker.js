@@ -1,4 +1,4 @@
-const CACHE = 'dlorgia-orienta-v500-enfoque';
+const CACHE = 'dlorgia-orienta-v510-fotos';
 const CORE = [
   '/app', '/', '/guia',
   '/assets/portada-v49.css',
@@ -7,6 +7,10 @@ const CORE = [
   '/assets/guia-v49.js',
   '/assets/acceso-v49.css',
   '/assets/foco-v50.css',
+  '/assets/foco-v51.css',
+  '/assets/fotos-dlorgia/huancayo-productos-01.webp',
+  '/assets/fotos-dlorgia/huancayo-consultorio-01.webp',
+  '/assets/fotos-dlorgia/huancayo-fachada.webp',
   '/assets/fotos-v49.css',
   '/assets/institucional-v49.css',
   '/assets/acceso-v48.css',

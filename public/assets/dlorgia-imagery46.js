@@ -1,31 +1,25 @@
-// Referencias a fotografías publicadas en el sitio oficial de DLorgia.
-// El respaldo local evita tarjetas vacías si el sitio cambia su estructura.
-const officialImages = {
-  acne:'https://www.dlorgia.com/media/fotos/colormax-acne.jpg',
-  laser:'https://www.dlorgia.com/_astro/foto-depilacion-laser-piernas.Xf3VGFbS_1Ae6Ra.webp',
-  face:'https://www.dlorgia.com/media/fotos/alta-frecuencia-facial-2.jpg',
-  pigment:'https://www.dlorgia.com/media/fotos/colormax-manchas.jpg',
-  botox:'https://www.dlorgia.com/media/fotos/botox.jpg',
-  hair:'https://www.dlorgia.com/media/capilar/prp.jpg',
-  tattoo:'https://www.dlorgia.com/media/fotos/eliminacion-tatuajes-colormax.jpg',
-  body:'https://www.dlorgia.com/media/cuerpo/reduccion/criolipolisis.jpg',
-  rosacea:'https://www.dlorgia.com/media/fotos/ipl-rosacea.jpg'
-};
+// Biblioteca visual v5.1: fotografías aportadas por el equipo, referenciales.
+// No equiparar fotografías genéricas con personal de la empresa ni con resultados clínicos.
+const photos = Object.freeze({
+  facial:'/assets/fotos-dlorgia/facial-cosmetologia.webp',
+  corporal:'/assets/fotos-dlorgia/equipo-tecnologia-corporal.webp',
+  capilar:'/assets/fotos-dlorgia/consulta-capilar.webp',
+  cabello:'/assets/fotos-dlorgia/caida-cabello.webp',
+  laser:'/assets/fotos-dlorgia/depilacion-pierna.webp',
+  tatuajes:'/assets/fotos-dlorgia/eliminacion-tatuaje.webp',
+  equipo:'/assets/fotos-dlorgia/huancayo-consultorio-01.webp'
+});
 export function officialTreatmentImage(item){
-  const key=((item?.name||'')+' '+(item?.category||'')).toLowerCase();
-  if(/acné|acne|secuela|cicatriz/.test(key))return officialImages.acne;
-  if(/mancha|pigment|melasma/.test(key))return officialImages.pigment;
-  if(/rosácea|rosacea|rojec/.test(key))return officialImages.rosacea;
-  if(/depil/.test(key))return officialImages.laser;
-  if(/capilar|cabello|alopecia/.test(key))return officialImages.hair;
-  if(/tatuaje/.test(key))return officialImages.tattoo;
-  if(/corporal|reducci|celulitis|glúteo|flacidez|abdomen/.test(key))return officialImages.body;
-  if(/botox|bótox|arrugas|rejuven|hialur/.test(key))return officialImages.botox;
-  return officialImages.face;
+ const key=((item?.name||'')+' '+(item?.category||'')).toLowerCase();
+ if(/tatuaje/.test(key)) return photos.tatuajes;
+ if(/depil/.test(key)) return photos.laser;
+ if(/capilar|cabello|alopecia|pelo/.test(key)) return photos.capilar;
+ if(/corporal|abdomen|celulitis|reduc|flacidez|grasa|lipo/.test(key)) return photos.corporal;
+ return photos.facial;
 }
 export function handleOfficialImageError(img){
-  if(!img)return;
-  img.removeAttribute('src');
-  img.style.display='none';
-  img.parentElement?.classList.add('official-image-unavailable');
+ if(!img)return;
+ img.removeAttribute('src');
+ img.style.display='none';
+ img.parentElement?.classList.add('official-image-unavailable');
 }

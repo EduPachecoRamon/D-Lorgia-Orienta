@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="/assets/acceso-v49.css" />
   <link rel="stylesheet" href="/assets/foco-v50.css" />
   <link rel="stylesheet" href="/assets/fotos-v49.css" />
-<link rel="stylesheet" href="/assets/institucional-v49.css"></head>
+<link rel="stylesheet" href="/assets/institucional-v49.css"><link rel="stylesheet" href="/assets/foco-v51.css" /></head>
 <body>
   <svg class="svg-sprite" aria-hidden="true" focusable="false">
     <defs>
@@ -273,11 +273,15 @@
             </div>
             <p class="v50-clinical-note"><svg class="ui-icon"><use href="#i-shield"/></svg> Información orientativa, no diagnóstico médico.</p>
           </div>
-          <div class="v50-home-photo" role="img" aria-label="Imagen fotográfica del equipo y tecnología de D’Lorgia, enlazada al sitio oficial">
-            <div class="v50-photo-copy"><span>01 / ESCUCHA Y ORIENTACIÓN</span><b>Tu interés es el punto de partida.</b></div>
+          <div class="v50-home-photo" role="img" aria-label="Fotografía de los productos de D’Lorgia en su sede de Huancayo">
+            <div class="v50-photo-copy"><span>HUANCAYO · D’LORGIA</span><b>Un espacio real para continuar tu orientación.</b></div>
             <div class="v50-photo-seal" aria-hidden="true">DL<small>ORIENTA</small></div>
           </div>
         </div>
+        <section class="v51-branch-strip" aria-label="Conoce nuestra sede de Huancayo">
+          <div class="v51-branch-title"><p class="eyebrow">CONOCE A D’LORGIA</p><h2>De la orientación digital a un lugar real.</h2><p>Conoce algunos espacios de nuestra sede de Huancayo. La orientación digital no reemplaza la evaluación profesional.</p><a href="/sedes" class="v51-branch-link">Ver información de sedes <span aria-hidden="true">↗</span></a></div>
+          <div class="v51-branch-gallery"><figure><img src="/assets/fotos-dlorgia/huancayo-consultorio-02.webp" alt="Interior de consultorio en la sede Huancayo" loading="lazy"><figcaption>Espacios de atención</figcaption></figure><figure><img src="/assets/fotos-dlorgia/huancayo-fachada.webp" alt="Fachada de la sede D’Lorgia Huancayo" loading="lazy"><figcaption>Encuéntranos en Huancayo</figcaption></figure></div>
+        </section>
         <div id="home-guide-resume" class="guide-resume hidden"></div>
         <div class="v50-home-next hidden" id="v50-home-next">
           <div class="v50-next-intro"><p class="eyebrow">CUANDO YA TIENES TU ORIENTACIÓN</p><h2>Ahora sí, elige cómo continuar.</h2><p>No necesitas recorrer todas las herramientas. Escoge la que te sirva ahora.</p></div>
@@ -298,8 +302,9 @@
         </div>
         <div class="guide-safety-banner">
           <span><svg class="ui-icon"><use href="#i-shield"/></svg></span>
-          <p><b>Orientación, no diagnóstico.</b> Este recorrido organiza tus preferencias y compara información general del catálogo. La decisión clínica siempre queda para la evaluación profesional.</p>
+          <p><b>Orientación, no diagnóstico.</b> Comparamos tus preferencias con información general. La decisión médica corresponde a un profesional.</p>
         </div>
+        <div class="v51-guide-photo" id="v51-guide-photo"><img src="/assets/fotos-dlorgia/huancayo-consultorio-01.webp" alt="Espacio de orientación en la sede D’Lorgia Huancayo" loading="lazy"><div><span>01 · TU RECORRIDO</span><strong>Primero entendemos lo que te interesa.</strong><small>Responde a tu ritmo. Puedes cambiar tus respuestas después.</small></div></div>
         <div class="guide-progress" id="guide-progress" aria-label="Progreso del Orientador Personal"></div>
         <div id="guide-content"></div>
       </section>
@@ -562,6 +567,7 @@
       <div class="v50-tour-scene" id="v50-tour-scene" data-step="0">
         <div class="v50-tour-copy"><p class="eyebrow" id="v50-tour-eyebrow">BIENVENIDO A TU ESPACIO</p><h2 id="v50-tour-heading">Hola, esto es D’Lorgia Orienta.</h2><p id="v50-tour-text">Aquí empieza un recorrido para entender lo que te interesa, descubrir información útil y preparar tus preguntas.</p></div>
         <div class="v50-tour-preview" aria-hidden="true">
+          <img class="v51-tour-photo" id="v51-tour-photo" src="/assets/fotos-dlorgia/huancayo-fachada.webp" alt="" loading="lazy" />
           <div class="v50-preview-window v50-preview-one"><span class="v50-preview-header"><i></i><i></i><i></i><small>D’Lorgia · Orienta</small></span><div class="v50-preview-icon"><svg class="ui-icon"><use href="#i-compass"/></svg></div><strong id="v50-preview-title">Tu punto de partida</strong><span class="v50-preview-meter"><i></i></span><span class="v50-preview-tags"><b>Escuchar</b><b>Orientar</b><b>Decidir</b></span></div>
           <div class="v50-preview-window v50-preview-two"><svg class="ui-icon"><use href="#i-scan"/></svg><span id="v50-preview-caption">Un paso a la vez</span></div>
           <div class="v50-cube-experience" id="v50-cube-experience" aria-label="Explora las tres funciones de D’Lorgia Orienta">
@@ -585,9 +591,17 @@
       <button class="v50-setting-row" id="v50-settings-accessibility" type="button"><svg class="ui-icon"><use href="#i-eye"/></svg><span><b>Accesibilidad</b><small>Texto, contraste y reducción de movimiento.</small></span><strong>↗</strong></button>
       <label class="v50-setting-row v50-setting-toggle"><svg class="ui-icon"><use href="#i-scan"/></svg><span><b>Marco de teléfono en escritorio</b><small>Activa la vista compacta cuando prefieras usarla.</small></span><input id="v50-phone-frame" type="checkbox" /></label>
       <a class="v50-setting-row" href="/ayuda"><svg class="ui-icon"><use href="#i-info"/></svg><span><b>Centro de ayuda</b><small>Respuestas a dudas frecuentes.</small></span><strong>↗</strong></a>
+      <div class="v51-settings-danger"><p class="eyebrow">GESTIÓN DE TU RECORRIDO</p><button type="button" class="v51-reset-start" id="v51-reset-start"><svg class="ui-icon"><use href="#i-compass"/></svg><span><b>Reiniciar mi progreso</b><small>Borra mis orientaciones, borradores, guardados y recordatorios locales; no elimina mi cuenta ni solicitudes registradas por D’Lorgia.</small></span><strong>↗</strong></button></div>
       <p class="v50-settings-footnote">D’Lorgia Orienta ofrece información general y no sustituye una evaluación profesional.</p>
     </div>
   </dialog>
+  <dialog id="v51-reset-dialog" class="v50-dialog v51-reset-dialog" aria-labelledby="v51-reset-title" aria-describedby="v51-reset-description">
+    <div class="v51-reset-shell"><div class="v51-reset-head"><div><p class="eyebrow">ACCIÓN DELICADA</p><h2 id="v51-reset-title">¿Reiniciar tu recorrido?</h2></div><button id="v51-reset-close" class="v50-dialog-x" aria-label="Cerrar" type="button">×</button></div>
+    <p id="v51-reset-description">Este reinicio elimina del navegador tus orientaciones, borradores, preferencias del Orientador, guardados, conversaciones de apoyo y recordatorios. <b>La acción no se puede deshacer.</b></p>
+    <div class="v51-reset-retain"><b>Se conservarán:</b> la cuenta de Google/correo, los datos básicos del perfil, las solicitudes o citas gestionadas por D’Lorgia y los registros guardados en sus sistemas. Para borrarlos, habla con la empresa.</div>
+    <label class="v51-reset-label" for="v51-reset-phrase">Escribe <strong>REINICIAR</strong> para confirmar.</label><input id="v51-reset-phrase" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe REINICIAR" />
+    <div class="v51-reset-actions"><button type="button" class="v50-soft-action" id="v51-reset-cancel">Conservar mis datos</button><button type="button" class="v51-reset-confirm" id="v51-reset-confirm" disabled>Reiniciar recorrido</button></div>
+  </div></dialog>
   <dialog id="v50-progress-dialog" class="v50-dialog v50-progress-dialog" aria-labelledby="v50-progress-title">
     <div class="v50-progress-shell"><div class="v50-progress-head"><div><p class="eyebrow">TU RECORRIDO DIGITAL</p><h2 id="v50-progress-title">Así va tu camino.</h2><p>Este porcentaje representa tareas de la aplicación, no un avance médico.</p></div><button class="v50-dialog-x" id="v50-progress-close" type="button" aria-label="Cerrar mi progreso">×</button></div>
       <div id="home-plan" class="plan-card"></div>

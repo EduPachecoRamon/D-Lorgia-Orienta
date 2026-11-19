@@ -54,7 +54,7 @@ test('v5.0 las páginas indexables son informativas, no el inicio privado',()=>{
  assert.doesNotMatch(seo,/\s'\/':\s*\{/);
  assert.match(seo,/\/guia/);
  const sw=read('public/service-worker.js');
- assert.match(sw,/dlorgia-orienta-v500-enfoque/);
+ assert.match(sw,/dlorgia-orienta-v510-fotos/);
  assert.match(sw,/\/assets\/foco-v50.css/);
 });
 

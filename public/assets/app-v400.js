@@ -1,7 +1,7 @@
 import { officialTreatmentImage, handleOfficialImageError } from './dlorgia-imagery46.js';
 import {humanMessage} from './dlorgia-feedback.js';
 import {initAmbient} from './dlorgia-ambient.js';
-const DLORGIA_BUILD = '5.0.0-focus';
+const DLORGIA_BUILD = '5.1.0-biblioteca';
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => [...document.querySelectorAll(sel)];
 
@@ -588,7 +588,9 @@ function updateTourScene() {
   $('#v50-tour-counter').textContent = `${String(tourIndex + 1).padStart(2,'0')} / 03`;
   [...$('#v50-tour-dots').children].forEach((dot, index) => dot.classList.toggle('active', index === tourIndex));
   $('#v50-tour-prev').hidden = tourIndex === 0;
-  $('#v50-tour-next').textContent = tourIndex === tourScenes.length - 1 ? 'Empezar mi orientación →' : 'Siguiente →';
+  $('#v50-tour-next').textContent = tourIndex === tourScenes.length - 1 ? (getPersonalGuide() ? 'Volver a mi inicio →' : 'Empezar mi orientación →') : 'Siguiente →';
+  const tourPhoto = $('#v51-tour-photo');
+  if (tourPhoto) tourPhoto.src = tourIndex === 2 ? '/assets/fotos-dlorgia/huancayo-consultorio-02.webp' : '/assets/fotos-dlorgia/huancayo-fachada.webp';
 }
 function startTour(replay = false) {
   if (!hasEntryAccess()) return;
@@ -605,7 +607,7 @@ function maybeShowFirstTour() {
 function finishTour(goToGuide = false) {
   store.set('dlorgia:tourSeen:v50', true);
   closeAppDialog('#v50-tour-dialog');
-  if (goToGuide) { guideStep = getPersonalGuide() ? 'result' : 0; show('guide'); }
+  if (goToGuide) { if (getPersonalGuide()) show('home'); else { guideStep = 0; show('guide'); } }
 }
 function renderFramePreference() {
   const enabled = Boolean(rawStore.get('dlorgia:frame:v50', false));
@@ -618,6 +620,41 @@ function showProgressDialog() {
   renderPlan();
   openAppDialog('#v50-progress-dialog');
 }
+// v5.1: deliberate local-only reset. NEVER delete remote appointments, profile, auth, or account.
+const V51_LOCAL_PROGRESS = [
+  'dlorgia:lastOrientation','dlorgia:history','dlorgia:reminders:v3','dlorgia:savedTreatments',
+  'dlorgia:advisorMemory:v1','dlorgia:preferences:v1','dlorgia:onboardingComplete',
+  'dlorgia:personalGuide:v1','dlorgia:guideDraft:v1','dlorgia:chatDraft:v1',
+  'dlorgia:lastScreen:v1','dlorgia:welcomeSeen:v1','dlorgia:tourSeen:v50'
+];
+const v51ResetInput = $('#v51-reset-phrase');
+const v51ResetConfirm = $('#v51-reset-confirm');
+$('#v51-reset-start')?.addEventListener('click',()=>{
+  closeAppDialog('#v50-settings-dialog');
+  if (v51ResetInput) v51ResetInput.value='';
+  if (v51ResetConfirm) v51ResetConfirm.disabled=true;
+  openAppDialog('#v51-reset-dialog');
+  v51ResetInput?.focus();
+});
+v51ResetInput?.addEventListener('input',()=>{
+  if (v51ResetConfirm) v51ResetConfirm.disabled=v51ResetInput.value.trim()!=='REINICIAR';
+});
+for(const id of ['v51-reset-close','v51-reset-cancel']) $("#"+id)?.addEventListener('click',()=>closeAppDialog('#v51-reset-dialog'));
+v51ResetConfirm?.addEventListener('click',()=>{
+  if (!hasEntryAccess() || v51ResetInput?.value.trim()!=='REINICIAR') return;
+  for (const key of V51_LOCAL_PROGRESS) store.remove(key);
+  currentOrientation=null; selectedTreatment=null; guideDraft={}; guideStep=0; advisorFocus='orientacion';
+  navStack=['home'];
+  closeAppDialog('#v51-reset-dialog');
+  $('#orientation-result')?.classList.add('hidden');
+  $('#guide-content')?.replaceChildren();
+  $('#chat-log')?.replaceChildren();
+  renderHome();
+  show('home',false);
+  toast('Tu progreso local se reinició. Tu cuenta y solicitudes de evaluación siguen intactas.','ok');
+});
+$('#v51-reset-dialog')?.addEventListener('click', e => {if(e.target===e.currentTarget) closeAppDialog('#v51-reset-dialog');});
+
 $('#v50-settings-open')?.addEventListener('click', () => openAppDialog('#v50-settings-dialog'));
 $('#v50-settings-close')?.addEventListener('click', () => closeAppDialog('#v50-settings-dialog'));
 $('#v50-settings-replay')?.addEventListener('click', () => startTour(true));
@@ -856,6 +893,7 @@ function guideBack() {
 function guideNext(step) { guideStep = step; saveGuideDraft(); renderGuide(); }
 
 function renderGuide() {
+  $('#v51-guide-photo')?.classList.toggle('hidden', Boolean(getPersonalGuide() && guideStep === 'result'));
   const box = $('#guide-content');
   if (!box) return;
   if (guideStep === null) {
@@ -963,11 +1001,11 @@ function renderGuideResult(result) {
   const profile = result.profile || {};
   const priorityChips = (profile.priorityLabels || []).map((x) => `<span>${escapeHtml(x)}</span>`).join('');
   box.innerHTML = `<div class="guide-result">\
-    <div class="guide-result-hero"><span class="guide-avatar guide-${escapeHtml(result.guide?.id || 'alma')}">${icon(guide.icon)}</span><div><p class="eyebrow">TU PERFIL DE ORIENTACIÓN</p><h3>${escapeHtml(guide.name)} organizó tu ruta</h3><p>${escapeHtml(result.guide?.intro || guide.text)}</p></div><span class="guide-result-check">✓</span></div>\
+    <div class="guide-result-hero v51-result-head"><span class="guide-avatar guide-${escapeHtml(result.guide?.id || 'alma')}">${icon(guide.icon)}</span><div><p class="eyebrow">TU ORIENTACIÓN ESTÁ LISTA</p><h3>Ya tienes un punto de partida.</h3><p>Elegimos información para explorar según tus respuestas. Tú decides el siguiente paso.</p><button id="v51-result-home" class="v51-result-home" type="button">Volver a mi inicio →</button></div><img src="/assets/fotos-dlorgia/huancayo-productos-01.webp" alt="Marca D’Lorgia en la sede Huancayo" loading="lazy"></div>\
     <div class="guide-profile-grid"><div><small>Área</small><b>${escapeHtml(profile.areaLabel || 'Exploratoria')}</b></div><div><small>Objetivo</small><b>${escapeHtml(profile.goalLabel || 'Cuidado general')}</b></div><div class="wide"><small>Prioridades</small><span class="guide-profile-chips">${priorityChips || '<span>Explorar con calma</span>'}</span></div></div>\
     <div class="guide-caution">${icon('shield')}<p>${escapeHtml(result.caution || '')}</p></div>\
     <div class="section-minihead"><div><p class="eyebrow">CAMINOS PARA EXPLORAR</p><h3>Ordenados por afinidad con tus preferencias</h3></div></div>\
-    <div class="guide-matches">${(result.matches || []).map((m) => `<article class="guide-match-card ${m.rank===1?'top':''}"><div class="guide-match-head"><span class="match-rank">${m.rank}</span><span><small>${escapeHtml(m.category)}</small><b>${escapeHtml(m.name)}</b></span><em>${escapeHtml(m.affinity)}</em></div><p>${escapeHtml(m.short)}</p><div class="affinity-track"><span style="width:${Math.max(18,Math.min(100,m.score))}%"></span></div><div class="guide-why"><b>Por qué aparece</b>${list(m.reasons)}</div><div class="guide-consider"><b>A considerar</b>${list(m.considerations)}</div><div class="guide-card-actions"><button class="primary" data-guide-open="${escapeHtml(m.id)}">Explorar tratamiento</button><button class="secondary" data-guide-ask="${escapeHtml(m.id)}">Preguntar al Asesor</button></div></article>`).join('')}</div>\
+    <div class="guide-matches">${(result.matches || []).map((m) => `<article class="guide-match-card ${m.rank===1?'top':''}"><div class="guide-match-head"><span class="match-rank">${m.rank}</span><span><small>${escapeHtml(m.category)}</small><b>${escapeHtml(m.name)}</b></span><em>${escapeHtml(m.affinity)}</em></div><p>${escapeHtml(m.short)}</p><div class="affinity-track"><span style="width:${Math.max(18,Math.min(100,m.score))}%"></span></div><details class="v51-match-more"><summary>¿Por qué aparece esta opción?</summary><div class="guide-why"><b>Coincidencias con tus preferencias</b>${list(m.reasons)}</div><div class="guide-consider"><b>A considerar</b>${list(m.considerations)}</div></details><div class="guide-card-actions"><button class="primary" data-guide-open="${escapeHtml(m.id)}">Explorar tratamiento</button><button class="secondary" data-guide-ask="${escapeHtml(m.id)}">Preguntar al Asesor</button></div></article>`).join('')}</div>\
     <div class="guide-route"><p class="eyebrow">TU RUTA EN D’LORGIA</p><h3>El Orientador conecta lo que ya existe</h3><div class="guide-route-grid"><button data-nav="catalog">${icon('scan')}<b>Tratamientos</b><span>Compara tus coincidencias y revisa fichas.</span></button><button id="guide-route-advisor">${icon('sparkles')}<b>Asesor</b><span>Pregunta usando este perfil como contexto.</span></button><button id="guide-route-evaluation">${icon('stethoscope')}<b>Evaluación</b><span>Confirma profesionalmente el camino.</span></button><button data-nav="followup">${icon('bell')}<b>Seguimiento</b><span>Organiza recordatorios y continuidad.</span></button></div></div>\
     <div class="notice">${escapeHtml(result.disclaimer || '')}</div>\
     <div class="guide-actions"><button class="secondary" id="guide-adjust">Ajustar respuestas</button><button class="ghost" id="guide-restart">Empezar de nuevo</button></div></div>`;
@@ -975,6 +1013,7 @@ function renderGuideResult(result) {
   $$('[data-guide-open]').forEach((btn) => btn.onclick = () => openDetail(btn.dataset.guideOpen));
   $$('[data-guide-ask]').forEach((btn) => btn.onclick = () => { selectedTreatment = btn.dataset.guideAsk; advisorFocus = 'orientacion'; show('assistant'); });
   $$('#guide-content [data-nav]').forEach((btn) => btn.onclick = () => show(btn.dataset.nav));
+  $('#v51-result-home')?.addEventListener('click',()=>show('home'));
   $('#guide-route-advisor').onclick = () => { if (top?.id) selectedTreatment = top.id; advisorFocus = 'orientacion'; show('assistant'); };
   $('#guide-route-evaluation').onclick = () => openGuideEvaluation(top?.id);
   $('#guide-adjust').onclick = () => { resetGuideDraft(true); guideStep = 1; renderGuide(); };
@@ -1053,7 +1092,7 @@ function openDetail(id, push = true) {
   const guideMatch = guideMatchFor(id);
   $('#detail-name').textContent = treatment.name;
   $('#detail-content').innerHTML = `
-    <div class="official-detail-cover"><img class="official-detail-img" src="${officialTreatmentImage(treatment)}" alt="Fotografía ilustrativa de ${escapeHtml(treatment.name)}" loading="lazy" decoding="async"><span>Imágenes de referencia · DLorgia</span></div>
+    <div class="official-detail-cover"><img class="official-detail-img" src="${officialTreatmentImage(treatment)}" alt="Fotografía ilustrativa de ${escapeHtml(treatment.name)}" loading="lazy" decoding="async"><span>Fotografía orientativa · No indica resultados clínicos</span></div>
     <div class="detail-hero">
       <p class="eyebrow">${escapeHtml(treatment.category)}</p>
       <h3>${escapeHtml(treatment.name)}</h3>
