@@ -1,7 +1,7 @@
 import { officialTreatmentImage, treatmentPhotoInfo, handleOfficialImageError } from './dlorgia-imagery46.js';
 import {humanMessage} from './dlorgia-feedback.js';
 import {initAmbient} from './dlorgia-ambient.js';
-const DLORGIA_BUILD = '5.2.0-foco-visual';
+const DLORGIA_BUILD = '5.3.0-configuracion';
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => [...document.querySelectorAll(sel)];
 
@@ -89,6 +89,7 @@ function bindAccessibilityPanel() {
       const next = { ...getA11yPrefs(), [key]: input.checked };
       saveA11yPrefs(next);
       applyA11yPrefs(next);
+      applyV53Appearance();
       toast(key === 'reduceMotion' ? (input.checked ? 'Movimiento reducido activado.' : 'Movimiento completo restaurado.') : 'Preferencias de accesibilidad actualizadas.', 'ok');
     });
   });
@@ -593,8 +594,7 @@ function updateTourScene() {
   [...$('#v50-tour-dots').children].forEach((dot, index) => dot.classList.toggle('active', index === tourIndex));
   $('#v50-tour-prev').hidden = tourIndex === 0;
   $('#v50-tour-next').textContent = tourIndex === tourScenes.length - 1 ? (getPersonalGuide() ? 'Volver a mi inicio →' : 'Empezar mi orientación →') : 'Siguiente →';
-  const tourPhoto = $('#v51-tour-photo');
-  if (tourPhoto) tourPhoto.src = tourIndex === 2 ? '/assets/fotos-dlorgia/huancayo-consultorio-02.webp' : '/assets/fotos-dlorgia/huancayo-fachada.webp';
+  // La escena ya asigna su foto correcta mediante scene.photo; no sobrescribirla.
 }
 function startTour(replay = false) {
   if (!hasEntryAccess()) return;
@@ -629,7 +629,8 @@ const V51_LOCAL_PROGRESS = [
   'dlorgia:lastOrientation','dlorgia:history','dlorgia:reminders:v3','dlorgia:savedTreatments',
   'dlorgia:advisorMemory:v1','dlorgia:preferences:v1','dlorgia:onboardingComplete',
   'dlorgia:personalGuide:v1','dlorgia:guideDraft:v1','dlorgia:chatDraft:v1',
-  'dlorgia:lastScreen:v1','dlorgia:welcomeSeen:v1','dlorgia:tourSeen:v50'
+  'dlorgia:lastScreen:v1','dlorgia:welcomeSeen:v1','dlorgia:tourSeen:v50',
+  'dlorgia:lastEvaluation'
 ];
 const v51ResetInput = $('#v51-reset-phrase');
 const v51ResetConfirm = $('#v51-reset-confirm');
@@ -647,19 +648,77 @@ for(const id of ['v51-reset-close','v51-reset-cancel']) $("#"+id)?.addEventListe
 v51ResetConfirm?.addEventListener('click',()=>{
   if (!hasEntryAccess() || v51ResetInput?.value.trim()!=='REINICIAR') return;
   for (const key of V51_LOCAL_PROGRESS) store.remove(key);
+  // Evitar reimportar datos del mismo recorrido en memoria; no tocar identidad, cuentas ni tokens.
   currentOrientation=null; selectedTreatment=null; guideDraft={}; guideStep=0; advisorFocus='orientacion';
   navStack=['home'];
   closeAppDialog('#v51-reset-dialog');
   $('#orientation-result')?.classList.add('hidden');
   $('#guide-content')?.replaceChildren();
   $('#chat-log')?.replaceChildren();
+  if ($('#eval-interest')) $('#eval-interest').value = '';
+  if ($('#catalog-search')) $('#catalog-search').value = '';
   renderHome();
   show('home',false);
   toast('Tu progreso local se reinició. Tu cuenta y solicitudes de evaluación siguen intactas.','ok');
 });
 $('#v51-reset-dialog')?.addEventListener('click', e => {if(e.target===e.currentTarget) closeAppDialog('#v51-reset-dialog');});
 
-$('#v50-settings-open')?.addEventListener('click', () => openAppDialog('#v50-settings-dialog'));
+// v5.3: pestañas de configuración, controles persistentes y fondo de nubes.
+const V53_APPEARANCE_KEY = 'dlorgia:settings:appearance:v53';
+function getV53Appearance() {
+  return { animated:true, clouds:true, ...(rawStore.get(V53_APPEARANCE_KEY, {}) || {}) };
+}
+function applyV53Appearance() {
+  const prefs = getV53Appearance();
+  const reduced = getA11yPrefs().reduceMotion || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.body.classList.toggle('v53-settings-static', !prefs.animated || reduced);
+  document.body.classList.toggle('v53-settings-no-clouds', !prefs.clouds);
+  if ($('#v53-animated-bg')) $('#v53-animated-bg').checked = prefs.animated;
+  if ($('#v53-soft-clouds')) $('#v53-soft-clouds').checked = prefs.clouds;
+  if ($('#v53-reduce-motion')) $('#v53-reduce-motion').checked = Boolean(getA11yPrefs().reduceMotion);
+  if ($('#v53-large-text')) $('#v53-large-text').checked = Boolean(getA11yPrefs().largeText);
+  if ($('#v53-high-contrast')) $('#v53-high-contrast').checked = Boolean(getA11yPrefs().highContrast);
+}
+function selectV53SettingsTab(tab, focus = false) {
+  const tabs = $('[data-v53-tab]');
+  const target = tabs.find(x => x.dataset.v53Tab === tab) || tabs[0];
+  if (!target) return;
+  tabs.forEach(button => {
+    const selected = button === target;
+    button.setAttribute('aria-selected', String(selected));
+    button.tabIndex = selected ? 0 : -1;
+  });
+  $('.v53-panel').forEach(panel => { panel.hidden = panel.id !== 'v53-panel-' + target.dataset.v53Tab; });
+  if (focus) target.focus();
+}
+$('[data-v53-tab]').forEach(button => {
+  button.addEventListener('click', () => selectV53SettingsTab(button.dataset.v53Tab));
+  button.addEventListener('keydown', event => {
+    if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+    event.preventDefault();
+    const tabs = $('[data-v53-tab]');
+    const current = tabs.indexOf(button);
+    const index = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (current + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+    selectV53SettingsTab(tabs[index].dataset.v53Tab, true);
+  });
+});
+$('#v53-go-reset')?.addEventListener('click', () => selectV53SettingsTab('experience', true));
+$('#v50-settings-open')?.addEventListener('click', () => { applyV53Appearance(); selectV53SettingsTab('experience'); openAppDialog('#v50-settings-dialog'); });
+$('#v53-settings-minimize')?.addEventListener('click', () => closeAppDialog('#v50-settings-dialog'));
+for (const [inputId, name] of [['v53-animated-bg','animated'],['v53-soft-clouds','clouds']]) {
+  $('#'+inputId)?.addEventListener('change', event => {
+    rawStore.set(V53_APPEARANCE_KEY, { ...getV53Appearance(), [name]:event.target.checked });
+    applyV53Appearance();
+  });
+}
+for (const [inputId, name] of [['v53-reduce-motion','reduceMotion'],['v53-large-text','largeText'],['v53-high-contrast','highContrast']]) {
+  $('#'+inputId)?.addEventListener('change', event => {
+    const next = { ...getA11yPrefs(), [name]:event.target.checked };
+    saveA11yPrefs(next); applyA11yPrefs(next); applyV53Appearance();
+  });
+}
+window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change', applyV53Appearance);
+applyV53Appearance();
 $('#v50-settings-close')?.addEventListener('click', () => closeAppDialog('#v50-settings-dialog'));
 $('#v50-settings-replay')?.addEventListener('click', () => startTour(true));
 $('#v50-profile-tour')?.addEventListener('click', () => startTour(true));
@@ -1651,7 +1710,7 @@ async function installPWA() {
 
 async function registerServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
-  try { const reg = await navigator.serviceWorker.register('/service-worker.js?v=520', { updateViaCache: 'none' }); await reg.update(); }
+  try { const reg = await navigator.serviceWorker.register('/service-worker.js?v=530', { updateViaCache: 'none' }); await reg.update(); }
   catch (error) { console.warn('Service worker no disponible', error); }
 }
 
