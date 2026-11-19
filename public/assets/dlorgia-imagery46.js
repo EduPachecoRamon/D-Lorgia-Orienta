@@ -5,7 +5,7 @@ const visualById = Object.freeze({
   cleansing: { file:'facial-cosmetologia.webp', label:'Fotografía de referencia · cuidado facial' },
   rejuvenation: { file:'huancayo-consultorio-02.webp', label:'Ambiente de atención en D’Lorgia Huancayo' },
   acne: { file:'piel-marcas-acne.webp', label:'Imagen educativa · textura de la piel' },
-  spots: { file:'ficha-melasma.webp', label:'Contenido informativo · manchas' },
+  spots: { file:'facial-cosmetologia.webp', label:'Cuidado facial · imagen de referencia; no representa un resultado' },
   body: { file:'equipo-tecnologia-corporal.webp', label:'Equipo estético · imagen de referencia' },
   hair: { file:'consulta-capilar.webp', label:'Exploración capilar · imagen de referencia' },
   laser: { file:'depilacion-pierna.webp', label:'Depilación · imagen de referencia' },
@@ -21,6 +21,11 @@ const otherByCategory = Object.freeze({
 export function treatmentPhotoInfo(item) {
   const photo=visualById[item?.id] || otherByCategory[item?.category] || null;
   return photo ? { src:root+photo.file, caption:photo.label } : null;
+}
+// Solo en el catálogo: comparación educativa de manchas. No usar en Inicio ni en el Orientador.
+export function catalogTreatmentPhotoInfo(item) {
+  if (item?.id === 'spots') return { src:root+'piel-manchas-comparativa.webp', caption:'Comparación ilustrativa · resultados individuales variables, no garantizados' };
+  return treatmentPhotoInfo(item);
 }
 export function officialTreatmentImage(item) { return treatmentPhotoInfo(item)?.src || ''; }
 export function handleOfficialImageError(img) {
