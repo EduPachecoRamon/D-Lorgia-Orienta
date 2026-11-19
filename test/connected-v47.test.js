@@ -73,7 +73,11 @@ test('HTTP OAuth PKCE: callback exige state correcto y crea una sesión paciente
     res.writeHead(404);res.end('{}');
   });
   await new Promise(r=>mock.listen(upstreamPort,'127.0.0.1',r));
-  const server=spawn(process.execPath,['src/server.js'],{cwd:base,env:{...process.env,PORT:String(port),SUPABASE_URL:`http://127.0.0.1:${upstreamPort}`,SUPABASE_PUBLISHABLE_KEY:'pub-test',SUPABASE_SECRET_KEY:'secret-test',APP_PUBLIC_URL:`http://127.0.0.1:${port}`,GOOGLE_OAUTH_ENABLED:'true',DLORGIA_ADMIN_EMAILS:'admin@example.com'},stdio:'ignore'});
+  // Aislar el servidor simulado: Render añade RENDER y RENDER_EXTERNAL_URL,
+  // que activarían el modo hospedado y enviarían el callback al dominio real.
+  // Solo las pruebas necesitan localhost; la protección de producción no cambia.
+  const { RENDER, RENDER_EXTERNAL_URL, ...testParentEnv } = process.env;
+  const server=spawn(process.execPath,['src/server.js'],{cwd:base,env:{...testParentEnv,NODE_ENV:'test',PORT:String(port),SUPABASE_URL:`http://127.0.0.1:${upstreamPort}`,SUPABASE_PUBLISHABLE_KEY:'pub-test',SUPABASE_SECRET_KEY:'secret-test',APP_PUBLIC_URL:`http://127.0.0.1:${port}`,GOOGLE_OAUTH_ENABLED:'true',DLORGIA_ADMIN_EMAILS:'admin@example.com'},stdio:'ignore'});
   try {
     const origin=`http://127.0.0.1:${port}`;
     await eventually(origin+'/health');

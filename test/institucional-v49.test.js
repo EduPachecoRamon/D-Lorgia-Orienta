@@ -44,7 +44,7 @@ test('v4.9: guía accesible, sitemap, cache y fotografías integrables',()=>{
   assert.match(js,/aria-current/);
   assert.match(js,/render\(active\+1\)/);
   assert.match(seo,/\/guia/);
-  assert.match(sw,/dlorgia-orienta-v530-nubes/);
+  assert.match(sw,/dlorgia-orienta-v540-recorrido/);
   for(const asset of ['portada-v49.js','portada-v49.css','guia-v49.js','guia-v49.css','acceso-v49.css']){
     assert.ok(existsSync(join(root,'public/assets',asset)),asset);
     assert.ok(sw.includes(`/assets/${asset}`));
@@ -56,7 +56,10 @@ test('v4.9: guía accesible, sitemap, cache y fotografías integrables',()=>{
 test('HTTP: portada, guía y acceso independientes', {timeout:18000}, async()=>{
   const s=http.createServer();await new Promise(ok=>s.listen(0,'127.0.0.1',ok));const port=s.address().port;await new Promise(ok=>s.close(ok));
   const host=`http://127.0.0.1:${port}`;
-  const child=spawn(process.execPath,['src/server.js'],{cwd:root,stdio:'ignore',env:{...process.env,PORT:String(port),APP_PUBLIC_URL:host,SUPABASE_URL:'',SUPABASE_PUBLISHABLE_KEY:'',SUPABASE_SECRET_KEY:''}});
+  // El servidor HTTP de la prueba debe operar en el origen local, incluso
+  // cuando la suite se ejecuta dentro de Render con variables de producción.
+  const { RENDER, RENDER_EXTERNAL_URL, ...testParentEnv } = process.env;
+  const child=spawn(process.execPath,['src/server.js'],{cwd:root,stdio:'ignore',env:{...testParentEnv,NODE_ENV:'test',PORT:String(port),APP_PUBLIC_URL:host,SUPABASE_URL:'',SUPABASE_PUBLISHABLE_KEY:'',SUPABASE_SECRET_KEY:''}});
   try {
     let ready=false;for(let i=0;i<120;i++){try{ready=(await fetch(host+'/health')).ok;if(ready)break}catch{}await new Promise(ok=>setTimeout(ok,50))}assert.ok(ready,'servidor no inició');
     const [landing,guide,app,sitemap]=await Promise.all(['/','/guia','/app','/sitemap.xml'].map(async p=>{const r=await fetch(host+p);assert.equal(r.status,200,p);return r.text()}));
