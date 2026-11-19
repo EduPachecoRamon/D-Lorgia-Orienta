@@ -7,20 +7,22 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const read = (p) => readFileSync(join(root, p), 'utf8');
 const photo = (p) => join(root, 'public/assets/fotos-dlorgia', p);
 
-test('v5.1: clasifica 29 archivos y mantiene material clínico pendiente fuera de public', () => {
+test('v5.1.1: 29 archivos autorizados presentes y material clínico separado de Inicio', () => {
   const data = JSON.parse(read('public/assets/fotos-dlorgia/biblioteca.json'));
   assert.equal(data.total, 29);
   assert.equal(data.photos.length, 29);
   assert.equal(data.public_ready + data.needs_review, 29);
   assert.equal(data.photos.filter(x=>x.group==='huancayo').length, 10);
   const publicPhotos = data.photos.filter(x=>x.privacy==='public');
-  assert.ok(publicPhotos.length >= 16);
+  assert.equal(publicPhotos.length, 29);
   for (const item of publicPhotos) {
     assert.ok(existsSync(photo(`${item.name}.webp`)), item.name);
     assert.ok(readFileSync(photo(`${item.name}.webp`)).subarray(0,4).toString() === 'RIFF', item.name);
   }
-  assert.ok(!existsSync(photo('resultado-manchas-comparativa.webp')));
-  assert.ok(!existsSync(photo('testimonio-acne.webp')));
+  assert.ok(existsSync(photo('resultado-manchas-comparativa.webp')));
+  assert.ok(existsSync(photo('testimonio-acne.webp')));
+  assert.equal(data.displayed_immediately, data.photos.filter(x => x.show_in_ui === true).length);
+  for (const item of data.photos.filter(x => x.use_category === 'clinical_education' || x.use_category === 'testimonials')) assert.equal(item.show_in_ui, false);
 });
 
 test('v5.1: inicio y sede Huancayo ofrecen fotos locales contextualizadas', () => {

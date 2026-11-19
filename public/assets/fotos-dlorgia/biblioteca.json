@@ -1,52 +1,68 @@
 {
-  "version": "5.1.0",
+  "version": "5.1.1",
   "total": 29,
-  "public_ready": 17,
-  "needs_review": 12,
+  "public_ready": 29,
+  "needs_review": 0,
   "photos": [
     {
       "origin": "image(20261119-001821).png",
       "name": "referencia-visual-chat",
       "group": "chat",
-      "privacy": "referencia",
-      "usage": "Captura de referencias fotográficas; no publicar como imagen de clínica",
-      "path": "material_por_validar/referencia-visual-chat.webp",
+      "privacy": "public",
+      "usage": "Captura de referencia del chat. Archivo autorizado para el repositorio; NO es foto de D’Lorgia ni se muestra como imagen institucional.",
+      "path": "/assets/fotos-dlorgia/referencia-visual-chat.webp",
       "width": 957,
       "height": 742,
-      "bytes": 46816
+      "bytes": 46816,
+      "authorized_for_use": true,
+      "file_size_bytes": 46816,
+      "use_category": "internal_reference",
+      "show_in_ui": false
     },
     {
       "origin": "image(20261119-002100).png",
       "name": "equipo-redes-sociales",
       "group": "chat",
-      "privacy": "revision",
-      "usage": "Fotografía social con personas identificables",
-      "path": "material_por_validar/equipo-redes-sociales.webp",
+      "privacy": "public",
+      "usage": "Pieza autorizada para biblioteca editorial. Reservar para contenido social o informativo pertinente, sin atribuir servicios no verificados.",
+      "path": "/assets/fotos-dlorgia/equipo-redes-sociales.webp",
       "width": 272,
       "height": 232,
-      "bytes": 10620
+      "bytes": 10620,
+      "authorized_for_use": true,
+      "file_size_bytes": 10620,
+      "use_category": "brand_campaigns",
+      "show_in_ui": false
     },
     {
       "origin": "image(20261119-002119).png",
       "name": "campana-cuidado-maquillaje",
       "group": "chat",
-      "privacy": "revision",
-      "usage": "Material editorial con una persona reconocible; confirmar licencia",
-      "path": "material_por_validar/campana-cuidado-maquillaje.webp",
+      "privacy": "public",
+      "usage": "Pieza autorizada para biblioteca editorial. Reservar para contenido social o informativo pertinente, sin atribuir servicios no verificados.",
+      "path": "/assets/fotos-dlorgia/campana-cuidado-maquillaje.webp",
       "width": 372,
       "height": 392,
-      "bytes": 13628
+      "bytes": 13628,
+      "authorized_for_use": true,
+      "file_size_bytes": 13628,
+      "use_category": "brand_campaigns",
+      "show_in_ui": false
     },
     {
       "origin": "image(20261119-002136).png",
       "name": "campana-comunidad",
       "group": "chat",
-      "privacy": "revision",
-      "usage": "Material social con personas identificables; requiere permiso",
-      "path": "material_por_validar/campana-comunidad.webp",
+      "privacy": "public",
+      "usage": "Pieza autorizada para biblioteca editorial. Reservar para contenido social o informativo pertinente, sin atribuir servicios no verificados.",
+      "path": "/assets/fotos-dlorgia/campana-comunidad.webp",
       "width": 462,
       "height": 376,
-      "bytes": 13248
+      "bytes": 13248,
+      "authorized_for_use": true,
+      "file_size_bytes": 13248,
+      "use_category": "brand_campaigns",
+      "show_in_ui": false
     },
     {
       "origin": "image(20261119-002147).png",
@@ -57,62 +73,86 @@
       "path": "/assets/fotos-dlorgia/equipo-lipolaser-cuerpo.webp",
       "width": 651,
       "height": 430,
-      "bytes": 13964
+      "bytes": 13964,
+      "authorized_for_use": true,
+      "file_size_bytes": 13964,
+      "use_category": "chat",
+      "show_in_ui": true
     },
     {
       "origin": "image(20261119-002210).png",
       "name": "campana-pareja-cuidado",
       "group": "chat",
-      "privacy": "revision",
-      "usage": "Fotografía de personas; procedencia por confirmar",
-      "path": "material_por_validar/campana-pareja-cuidado.webp",
+      "privacy": "public",
+      "usage": "Pieza autorizada para biblioteca editorial. Reservar para contenido social o informativo pertinente, sin atribuir servicios no verificados.",
+      "path": "/assets/fotos-dlorgia/campana-pareja-cuidado.webp",
       "width": 298,
       "height": 292,
-      "bytes": 5060
+      "bytes": 5060,
+      "authorized_for_use": true,
+      "file_size_bytes": 5060,
+      "use_category": "brand_campaigns",
+      "show_in_ui": false
     },
     {
       "origin": "image(20261119-002335).png",
       "name": "testimonio-acne",
       "group": "chat",
-      "privacy": "revision",
-      "usage": "Testimonio de una persona identificable; autorización específica requerida",
-      "path": "material_por_validar/testimonio-acne.webp",
+      "privacy": "public",
+      "usage": "Testimonio autorizado. Uso editorial opcional con contexto y sin promesas de resultados.",
+      "path": "/assets/fotos-dlorgia/testimonio-acne.webp",
       "width": 447,
       "height": 417,
-      "bytes": 26488
+      "bytes": 26488,
+      "authorized_for_use": true,
+      "file_size_bytes": 26488,
+      "use_category": "testimonials",
+      "show_in_ui": false
     },
     {
       "origin": "image(20261119-002348).png",
       "name": "campana-cuidado-hombres",
       "group": "chat",
-      "privacy": "revision",
-      "usage": "Material publicitario con modelo reconocible",
-      "path": "material_por_validar/campana-cuidado-hombres.webp",
+      "privacy": "public",
+      "usage": "Pieza autorizada para biblioteca editorial. Reservar para contenido social o informativo pertinente, sin atribuir servicios no verificados.",
+      "path": "/assets/fotos-dlorgia/campana-cuidado-hombres.webp",
       "width": 472,
       "height": 432,
-      "bytes": 12546
+      "bytes": 12546,
+      "authorized_for_use": true,
+      "file_size_bytes": 12546,
+      "use_category": "brand_campaigns",
+      "show_in_ui": false
     },
     {
       "origin": "image(20261119-002451).png",
       "name": "ficha-lipolax",
       "group": "chat",
-      "privacy": "revision",
-      "usage": "Imagen promocional; afirmaciones de resultados requieren revisión",
-      "path": "material_por_validar/ficha-lipolax.webp",
+      "privacy": "public",
+      "usage": "Recurso educativo autorizado; revisar exactitud de las afirmaciones antes de asociarlo a consejo médico.",
+      "path": "/assets/fotos-dlorgia/ficha-lipolax.webp",
       "width": 387,
       "height": 236,
-      "bytes": 8714
+      "bytes": 8714,
+      "authorized_for_use": true,
+      "file_size_bytes": 8714,
+      "use_category": "education",
+      "show_in_ui": false
     },
     {
       "origin": "image(20261119-002525).png",
       "name": "ficha-melasma",
       "group": "chat",
-      "privacy": "revision",
-      "usage": "Gráfico educativo de melasma; validación de contenido requerida",
-      "path": "material_por_validar/ficha-melasma.webp",
+      "privacy": "public",
+      "usage": "Recurso educativo autorizado; revisar exactitud de las afirmaciones antes de asociarlo a consejo médico.",
+      "path": "/assets/fotos-dlorgia/ficha-melasma.webp",
       "width": 316,
       "height": 363,
-      "bytes": 11384
+      "bytes": 11384,
+      "authorized_for_use": true,
+      "file_size_bytes": 11384,
+      "use_category": "education",
+      "show_in_ui": false
     },
     {
       "origin": "image(20261119-002642).png",
@@ -123,40 +163,56 @@
       "path": "/assets/fotos-dlorgia/facial-cosmetologia.webp",
       "width": 474,
       "height": 317,
-      "bytes": 10324
+      "bytes": 10324,
+      "authorized_for_use": true,
+      "file_size_bytes": 10324,
+      "use_category": "chat",
+      "show_in_ui": true
     },
     {
       "origin": "image(20261119-002716).png",
       "name": "resultado-manchas-comparativa",
       "group": "chat",
-      "privacy": "revision",
-      "usage": "Antes y después clínico con persona identificable; no publicar sin consentimiento",
-      "path": "material_por_validar/resultado-manchas-comparativa.webp",
+      "privacy": "public",
+      "usage": "Comparativa de carácter ilustrativo: resultados individuales variables. Mantener fuera de Inicio, registro y el Orientador; usar solo con contexto clínico adecuado.",
+      "path": "/assets/fotos-dlorgia/resultado-manchas-comparativa.webp",
       "width": 1000,
       "height": 562,
-      "bytes": 31786
+      "bytes": 31786,
+      "authorized_for_use": true,
+      "file_size_bytes": 31786,
+      "use_category": "clinical_education",
+      "show_in_ui": false
     },
     {
       "origin": "image(20261119-002739).png",
       "name": "piel-marcas-acne",
       "group": "chat",
-      "privacy": "revision",
-      "usage": "Primer plano de piel; imagen clínica sensible",
-      "path": "material_por_validar/piel-marcas-acne.webp",
+      "privacy": "public",
+      "usage": "Recurso educativo autorizado; revisar exactitud de las afirmaciones antes de asociarlo a consejo médico.",
+      "path": "/assets/fotos-dlorgia/piel-marcas-acne.webp",
       "width": 1000,
       "height": 667,
-      "bytes": 46876
+      "bytes": 46876,
+      "authorized_for_use": true,
+      "file_size_bytes": 46876,
+      "use_category": "education",
+      "show_in_ui": false
     },
     {
       "origin": "image(20261119-002821).png",
       "name": "piel-manchas-comparativa",
       "group": "chat",
-      "privacy": "revision",
-      "usage": "Comparativa clínica de piel; requiere consentimiento y contexto",
-      "path": "material_por_validar/piel-manchas-comparativa.webp",
+      "privacy": "public",
+      "usage": "Comparativa de carácter ilustrativo: resultados individuales variables. Mantener fuera de Inicio, registro y el Orientador; usar solo con contexto clínico adecuado.",
+      "path": "/assets/fotos-dlorgia/piel-manchas-comparativa.webp",
       "width": 1000,
       "height": 562,
-      "bytes": 15804
+      "bytes": 15804,
+      "authorized_for_use": true,
+      "file_size_bytes": 15804,
+      "use_category": "clinical_education",
+      "show_in_ui": false
     },
     {
       "origin": "image(20261119-002838).png",
@@ -167,7 +223,11 @@
       "path": "/assets/fotos-dlorgia/equipo-tecnologia-corporal.webp",
       "width": 1000,
       "height": 605,
-      "bytes": 22154
+      "bytes": 22154,
+      "authorized_for_use": true,
+      "file_size_bytes": 22154,
+      "use_category": "chat",
+      "show_in_ui": true
     },
     {
       "origin": "image(20261119-002902).png",
@@ -178,7 +238,11 @@
       "path": "/assets/fotos-dlorgia/consulta-capilar.webp",
       "width": 1250,
       "height": 833,
-      "bytes": 41476
+      "bytes": 41476,
+      "authorized_for_use": true,
+      "file_size_bytes": 41476,
+      "use_category": "chat",
+      "show_in_ui": true
     },
     {
       "origin": "image(20261119-002920).png",
@@ -189,7 +253,11 @@
       "path": "/assets/fotos-dlorgia/caida-cabello.webp",
       "width": 474,
       "height": 296,
-      "bytes": 10168
+      "bytes": 10168,
+      "authorized_for_use": true,
+      "file_size_bytes": 10168,
+      "use_category": "chat",
+      "show_in_ui": true
     },
     {
       "origin": "image(20261119-002942).png",
@@ -200,7 +268,11 @@
       "path": "/assets/fotos-dlorgia/depilacion-pierna.webp",
       "width": 990,
       "height": 555,
-      "bytes": 20496
+      "bytes": 20496,
+      "authorized_for_use": true,
+      "file_size_bytes": 20496,
+      "use_category": "chat",
+      "show_in_ui": true
     },
     {
       "origin": "image(20261119-002955).png",
@@ -211,7 +283,11 @@
       "path": "/assets/fotos-dlorgia/eliminacion-tatuaje.webp",
       "width": 1000,
       "height": 666,
-      "bytes": 22360
+      "bytes": 22360,
+      "authorized_for_use": true,
+      "file_size_bytes": 22360,
+      "use_category": "chat",
+      "show_in_ui": true
     },
     {
       "origin": "WhatsApp Image 2026-11-18 at 19.38.15 (1).jpeg",
@@ -222,7 +298,11 @@
       "path": "/assets/fotos-dlorgia/huancayo-productos-01.webp",
       "width": 1200,
       "height": 1600,
-      "bytes": 67650
+      "bytes": 67650,
+      "authorized_for_use": true,
+      "file_size_bytes": 67650,
+      "use_category": "huancayo",
+      "show_in_ui": true
     },
     {
       "origin": "WhatsApp Image 2026-11-18 at 19.38.15 (2).jpeg",
@@ -233,7 +313,11 @@
       "path": "/assets/fotos-dlorgia/huancayo-productos-02.webp",
       "width": 1200,
       "height": 1600,
-      "bytes": 69090
+      "bytes": 69090,
+      "authorized_for_use": true,
+      "file_size_bytes": 69090,
+      "use_category": "huancayo",
+      "show_in_ui": true
     },
     {
       "origin": "WhatsApp Image 2026-11-18 at 19.38.15.jpeg",
@@ -244,7 +328,11 @@
       "path": "/assets/fotos-dlorgia/huancayo-productos-03.webp",
       "width": 1200,
       "height": 1600,
-      "bytes": 65288
+      "bytes": 65288,
+      "authorized_for_use": true,
+      "file_size_bytes": 65288,
+      "use_category": "huancayo",
+      "show_in_ui": true
     },
     {
       "origin": "WhatsApp Image 2026-11-18 at 19.38.16 (1).jpeg",
@@ -255,7 +343,11 @@
       "path": "/assets/fotos-dlorgia/huancayo-consultorio-01.webp",
       "width": 900,
       "height": 1600,
-      "bytes": 69148
+      "bytes": 69148,
+      "authorized_for_use": true,
+      "file_size_bytes": 69148,
+      "use_category": "huancayo",
+      "show_in_ui": true
     },
     {
       "origin": "WhatsApp Image 2026-11-18 at 19.38.16 (2).jpeg",
@@ -266,7 +358,11 @@
       "path": "/assets/fotos-dlorgia/huancayo-productos-04.webp",
       "width": 1200,
       "height": 1600,
-      "bytes": 68702
+      "bytes": 68702,
+      "authorized_for_use": true,
+      "file_size_bytes": 68702,
+      "use_category": "huancayo",
+      "show_in_ui": true
     },
     {
       "origin": "WhatsApp Image 2026-11-18 at 19.38.16 (3).jpeg",
@@ -277,7 +373,11 @@
       "path": "/assets/fotos-dlorgia/huancayo-repisa.webp",
       "width": 1200,
       "height": 1600,
-      "bytes": 77992
+      "bytes": 77992,
+      "authorized_for_use": true,
+      "file_size_bytes": 77992,
+      "use_category": "huancayo",
+      "show_in_ui": true
     },
     {
       "origin": "WhatsApp Image 2026-11-18 at 19.38.16 (4).jpeg",
@@ -288,7 +388,11 @@
       "path": "/assets/fotos-dlorgia/huancayo-sala-01.webp",
       "width": 1200,
       "height": 1600,
-      "bytes": 82898
+      "bytes": 82898,
+      "authorized_for_use": true,
+      "file_size_bytes": 82898,
+      "use_category": "huancayo",
+      "show_in_ui": true
     },
     {
       "origin": "WhatsApp Image 2026-11-18 at 19.38.16 (5).jpeg",
@@ -299,7 +403,11 @@
       "path": "/assets/fotos-dlorgia/huancayo-consultorio-02.webp",
       "width": 900,
       "height": 1600,
-      "bytes": 63048
+      "bytes": 63048,
+      "authorized_for_use": true,
+      "file_size_bytes": 63048,
+      "use_category": "huancayo",
+      "show_in_ui": true
     },
     {
       "origin": "WhatsApp Image 2026-11-18 at 19.38.16.jpeg",
@@ -310,7 +418,11 @@
       "path": "/assets/fotos-dlorgia/huancayo-productos-05.webp",
       "width": 1200,
       "height": 1600,
-      "bytes": 69298
+      "bytes": 69298,
+      "authorized_for_use": true,
+      "file_size_bytes": 69298,
+      "use_category": "huancayo",
+      "show_in_ui": true
     },
     {
       "origin": "WhatsApp Image 2026-11-18 at 19.38.17.jpeg",
@@ -321,7 +433,13 @@
       "path": "/assets/fotos-dlorgia/huancayo-fachada.webp",
       "width": 1200,
       "height": 1600,
-      "bytes": 178902
+      "bytes": 178902,
+      "authorized_for_use": true,
+      "file_size_bytes": 178902,
+      "use_category": "huancayo",
+      "show_in_ui": true
     }
-  ]
+  ],
+  "displayed_immediately": 17,
+  "note": "Las 29 imágenes fueron aportadas por el usuario con confirmación explícita de permisos para el proyecto. Su inclusión en el repositorio no significa que todas deban aparecer en la pantalla Inicio."
 }
