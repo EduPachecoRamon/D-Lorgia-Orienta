@@ -66,5 +66,5 @@ test('v5.1: resultados muestran acciones compactas y detalles opcionales', () =>
   assert.match(js, /v51-result-head/);
   assert.match(js, /<details class="v51-match-more">/);
   assert.match(js, /v51-result-home/);
-  assert.match(read('public/service-worker.js'), /dlorgia-orienta-v540-recorrido/);
+  assert.match(read('public/service-worker.js'), /dlorgia-orienta-v550-recorrido-claro/);
 });

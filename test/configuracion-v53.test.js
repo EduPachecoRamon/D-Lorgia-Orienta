@@ -25,5 +25,5 @@ test('v5.3 presenta nubes opcionales, accesibilidad y confirmación del reinicio
   for (const id of ['v53-background-motion','v53-clouds','v53-large-text','v53-high-contrast','v53-reduce-motion','v51-reset-start','v51-reset-phrase'])
     assert.match(html, new RegExp('id="' + id + '"'));
   assert.match(css, /prefers-reduced-motion/);
-  assert.match(sw, /dlorgia-orienta-v540-recorrido/);
+  assert.match(sw, /dlorgia-orienta-v550-recorrido-claro/);
 });

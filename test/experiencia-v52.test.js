@@ -57,7 +57,7 @@ test('v5.2 catálogo usa fotos locales distintas y etiquetas honestas',()=>{
 
 test('v5.2 actualiza la PWA con imágenes y hojas que realmente existen',()=>{
  const sw=read('public/service-worker.js');
- assert.match(sw,/dlorgia-orienta-v540-recorrido/);
+ assert.match(sw,/dlorgia-orienta-v550-recorrido-claro/);
  assert.match(sw,/\/assets\/experiencia-v52\.css/);
  const core=sw.match(/const CORE = \[([\s\S]*?)\];/);
  assert.ok(core);

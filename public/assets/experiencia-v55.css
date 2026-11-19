@@ -1,0 +1,158 @@
+/* D'Lorgia v5.5 · lectura sin recortes, ventajas claras, animaciones funcionales.
+   Complemento al sistema compartido: sin alterar Admin ni el área Mi espacio. */
+
+/* Ventana de bienvenida: ninguna columna puede exceder el ancho disponible. */
+.v50-dialog.v50-tour-dialog{
+  box-sizing:border-box!important;width:min(930px,calc(100dvw - 24px))!important;
+  max-width:calc(100dvw - 24px)!important;min-width:0!important;
+  max-height:calc(100dvh - 20px)!important;inset:0!important;
+  margin:auto!important;overflow-x:hidden!important;overflow-y:auto!important;
+  overscroll-behavior:contain;
+}
+.v50-tour-dialog .v50-tour-shell{box-sizing:border-box;min-width:0;width:100%;padding:clamp(16px,3vw,31px)!important}
+.v50-tour-dialog .v50-tour-scene{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)!important;gap:clamp(16px,2.9vw,32px);min-width:0;min-height:0;align-items:center}
+.v50-tour-dialog .v50-tour-scene>*{min-width:0;max-width:100%}
+.v50-tour-dialog .v50-tour-copy{min-width:0;padding:8px 0!important}
+.v50-tour-dialog .v50-tour-copy h2{font-size:clamp(32px,4.2vw,54px)!important;line-height:1.08!important;max-width:100%;text-wrap:balance;overflow-wrap:break-word}
+.v50-tour-dialog .v50-tour-preview{min-width:0;width:100%;min-height:326px!important;max-width:100%;overflow:hidden!important}
+.v50-tour-dialog .v50-dialog-header,.v50-tour-dialog .v50-dialog-footer{min-width:0}
+.v50-tour-dialog .v50-tour-actions button{min-height:43px}
+
+/* Segunda escena: tres ventajas, dos tarjetas cortas a la izquierda y una a la derecha. */
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v50-tour-preview{min-height:335px!important;padding:14px!important;background:linear-gradient(150deg,#ebf4e9,#d7e9dd)!important;border:1px solid #c7dccd!important}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v51-tour-photo,
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v52-tour-photo-label{display:none!important}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v50-tour-preview::after{display:none!important}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v50-cube-experience{
+  display:flex!important;flex-direction:column;align-items:stretch!important;
+  justify-content:center!important;gap:10px!important;min-height:0!important;
+  height:100%;margin:0!important;padding:0!important;position:relative;z-index:2;
+}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-grid{
+  box-sizing:border-box;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1.07fr)!important;
+  grid-template-rows:repeat(2,minmax(111px,auto));gap:10px;
+  margin:0!important;padding:0!important;width:100%!important;height:auto!important;
+  max-width:none!important;min-width:0!important;perspective:none!important;transform:none!important;
+}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-card{
+  position:relative!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;
+  width:100%!important;height:auto!important;min-width:0!important;min-height:111px;
+  writing-mode:horizontal-tb!important;display:flex!important;flex-direction:column!important;
+  align-items:flex-start!important;justify-content:center!important;gap:6px!important;
+  border:1.5px solid #c8dbce!important;border-radius:14px!important;
+  clip-path:none!important;transform:none!important;perspective:none!important;
+  padding:11px 13px!important;text-align:left!important;
+  background:#fffefa!important;color:#173f32!important;
+  box-shadow:0 5px 12px #153d3011!important;opacity:1!important;
+  font:inherit!important;transition:border-color .2s,transform .2s,background .2s!important;
+}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-card:first-child{grid-column:1;grid-row:1}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-card:nth-child(2){grid-column:1;grid-row:2}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-card:nth-child(3){grid-column:2;grid-row:1 / 3;background:#f9f0db!important}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-card:hover,
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-card:focus-visible{transform:translateY(-2px)!important;border-color:#548e71!important}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-card.is-active{
+  border-color:#b28a4b!important;background:#e6f1e8!important;box-shadow:inset 0 0 0 1px #b28a4b,0 9px 22px #133e3017!important;
+}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-top{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;font-size:10px;line-height:1.2;color:#7d653e;letter-spacing:.05em}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-top small{font:800 9px/1.3 Manrope,system-ui,sans-serif;letter-spacing:.06em;text-wrap:balance}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-top svg{width:22px;height:22px;flex:none;color:#1c5c42}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-card strong{font:560 clamp(19px,2.25vw,26px)/1.15 Fraunces,Georgia,serif;color:#174b37}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-description{font:500 11px/1.55 Manrope,system-ui,sans-serif;color:#547065;max-width:29ch}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-arrow{position:absolute;right:10px;bottom:7px;font:800 16px/1 Manrope,sans-serif;color:#41745b}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v50-cube-explain{margin:0!important;max-width:none!important;min-height:0!important;text-align:left!important;font-size:11px!important;line-height:1.5!important;padding:9px 12px!important;background:#ffffffed!important;border-radius:10px!important}
+.v50-tour-dialog [data-v50-cube]:focus-visible{outline:3px solid #ac8342!important;outline-offset:2px!important}
+
+/* Despertador: silueta clásica con dos campanas, carátula, números y segundero. */
+.v55-alarm-art{width:min(235px,100%);min-height:230px!important;justify-self:center;display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:0!important;background:radial-gradient(circle at 50% 43%,#fff7e6,#dcebe2 75%)!important;border-radius:25px!important}
+.v55-alarm-art .v55-alarm-svg{width:min(202px,100%)!important;height:207px!important;overflow:visible;filter:drop-shadow(0 9px 11px #1b433025)}
+.v55-clock-handle{fill:none;stroke:#1e5643;stroke-width:10;stroke-linecap:round}
+.v55-alarm-bell{fill:#d4ab60;stroke:#19523e;stroke-width:5;stroke-linejoin:round;transform-box:fill-box;transform-origin:center bottom}
+.v55-alarm-bell path+path{fill:none;stroke:#fbe0a0;stroke-width:3}
+.v55-clock-foot{fill:none;stroke:#184c3a;stroke-width:10;stroke-linecap:round}
+.v55-clock-shell{fill:url(#v55-clock-case);stroke:#174637;stroke-width:6}
+.v55-clock-inner-ring{fill:#225d47;stroke:#fff0c3;stroke-width:2}
+.v55-clock-dial{fill:url(#v55-clock-face);stroke:#b5d1b5;stroke-width:2}
+.v55-clock-ticks{stroke:#426a58;stroke-width:1.3;stroke-linecap:round}
+.v55-clock-digits{fill:#203b32;font:800 20px/1 Manrope,system-ui,sans-serif;text-anchor:middle;dominant-baseline:middle}
+.v55-clock-hour,.v55-clock-minute,.v55-clock-second{transform-origin:120px 125px;transform-box:view-box;stroke-linecap:round;fill:none}
+.v55-clock-hour{stroke:#143f33;stroke-width:7;transform:rotate(-50deg);animation:v55Hour 43200s linear infinite}
+.v55-clock-minute{stroke:#275f4a;stroke-width:5;transform:rotate(48deg);animation:v55Minute 3600s linear infinite}
+.v55-clock-second{stroke:#ae7540;stroke-width:2.6;animation:v55Seconds 60s steps(60,end) infinite}
+.v55-clock-center{fill:#b27f46;stroke:#fffae7;stroke-width:1}
+.v55-clock-caption{font:850 10px/1.3 Manrope,system-ui,sans-serif;color:#56755e;letter-spacing:.13em;text-align:center}
+.v55-alarm-bell-left{animation:v55BellLeft 9s ease-in-out infinite}.v55-alarm-bell-right{animation:v55BellRight 9s ease-in-out infinite}
+@keyframes v55Seconds{to{transform:rotate(360deg)}}
+@keyframes v55Minute{to{transform:rotate(408deg)}}
+@keyframes v55Hour{to{transform:rotate(310deg)}}
+@keyframes v55BellLeft{0%,86%,100%{transform:rotate(0)}88%,94%{transform:rotate(-8deg)}91%,97%{transform:rotate(5deg)}}
+@keyframes v55BellRight{0%,86%,100%{transform:rotate(0)}88%,94%{transform:rotate(8deg)}91%,97%{transform:rotate(-5deg)}}
+
+/* La ruta visual avanza sin desplazar botones ni alterar las acciones. */
+.v54-journey-path .v55-journey-track{stroke:#acc2af;stroke-width:5;stroke-dasharray:8 13;animation:none!important}
+.v54-journey-path .v55-journey-flow{stroke:#c38f50;stroke-width:6;stroke-linecap:round;stroke-dasharray:2 32;animation:v55JourneyFlow 14s linear infinite!important;opacity:.9}
+@keyframes v55JourneyFlow{to{stroke-dashoffset:-272}}
+.v54-journey-step.is-progress .v54-step-number{position:relative;box-shadow:0 0 0 5px #ead7b350,0 7px 19px #15402c1d;animation:v55NextStep 4s ease-in-out infinite}
+@keyframes v55NextStep{0%,100%{box-shadow:0 0 0 4px #ead7b340,0 7px 19px #15402c1d}50%{box-shadow:0 0 0 9px #ead7b325,0 7px 19px #15402c1d}}
+
+/* El canal humano es una conclusión del recorrido, no un bloque que interrumpe el inicio. */
+.v55-consult-card{scroll-margin-top:24px;border:1px solid #c7d9c9;border-radius:24px;background:linear-gradient(135deg,#f5faf1,#fff7e9);padding:clamp(18px,2.9vw,28px);margin-top:26px;box-shadow:0 10px 28px #1439220d}
+.v55-consult-heading h3{font:550 clamp(25px,3vw,35px)/1.15 Fraunces,Georgia,serif;color:#1a4b38;margin:9px 0}
+.v55-consult-heading p{font:500 13px/1.65 Manrope,system-ui,sans-serif;color:#587161;margin:0;max-width:70ch}
+.v55-consult-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:20px 0 16px}
+.v55-recap-item{border:1px solid #d8e4d8;background:#fffefa;border-radius:14px;padding:13px 15px;min-width:0}
+.v55-recap-item small{display:block;color:#906a3c;font:850 10px/1.4 Manrope,sans-serif;letter-spacing:.07em;text-transform:uppercase}
+.v55-recap-item p{font:600 13px/1.55 Manrope,system-ui,sans-serif;color:#244a39;margin:6px 0 0;overflow-wrap:anywhere}
+.v55-consult-ready{display:flex;gap:11px;align-items:flex-start;padding:14px;border-radius:15px;background:#e1ede2;color:#1b4937}
+.v55-consult-ready>span{font-size:28px;color:#99733f;line-height:1}
+.v55-consult-ready b{font:750 13px Manrope,sans-serif}
+.v55-consult-ready p,.v55-consult-pending p{margin:5px 0 0;color:#557164;font:500 12px/1.6 Manrope,sans-serif}
+.v55-consult-details{border:1px solid #c9d9cc;background:#fffdf6;border-radius:15px;margin-top:13px;overflow:hidden}
+.v55-consult-details>summary{padding:14px 17px;cursor:pointer;font:800 13px Manrope,sans-serif;color:#184c3b;list-style-position:inside}
+.v55-consult-compose{display:grid;gap:12px;padding:0 17px 17px}
+.v55-consult-compose label{display:grid;gap:7px;font:750 12px Manrope,sans-serif;color:#234b3a}
+.v55-consult-compose :is(textarea,select){width:100%;border:1px solid #b8d0be;border-radius:10px;background:#fff;color:#244b3a;font:500 13px/1.55 Manrope,sans-serif;padding:11px;resize:vertical}
+.v55-consult-add-question{border:1px solid #b8ceb9;background:#e8f0e7;color:#1d503c;min-height:39px;border-radius:8px;padding:9px 13px;font:750 12px Manrope,sans-serif;cursor:pointer;text-align:left}
+.v55-consult-add-question:disabled{opacity:.65;cursor:default}
+.v55-consult-pending{background:#edf3e9;border:1px dashed #b9ccba;padding:15px;border-radius:14px}
+.v55-consult-actions{display:flex;gap:13px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.v55-consult-actions button{background:#1c5944;color:#fff;border:0;border-radius:9px;padding:11px 17px;min-height:43px;cursor:pointer;font:800 12px Manrope,sans-serif}
+.v55-consult-actions a{color:#1b503c;font:750 12px Manrope,sans-serif}
+.v55-consult-card :is(button,a,textarea,select,summary):focus-visible{outline:3px solid #b38b53;outline-offset:3px}
+.v55-consult-card .v54-contact-whatsapp[aria-disabled="true"]{pointer-events:none;opacity:.5}
+
+@media(max-width:760px){
+ .v50-dialog.v50-tour-dialog{width:calc(100dvw - 18px)!important;max-width:calc(100dvw - 18px)!important;max-height:calc(100dvh - 12px)!important}
+ .v50-tour-dialog .v50-tour-shell{padding:16px!important}
+ .v50-tour-dialog .v50-tour-scene{grid-template-columns:minmax(0,1fr)!important;gap:11px!important;min-height:0!important}
+ .v50-tour-dialog .v50-tour-copy{padding:4px 0 0!important}
+ .v50-tour-dialog .v50-tour-copy h2{font-size:clamp(30px,7vw,40px)!important;margin:4px 0 11px!important}
+ .v50-tour-dialog .v50-tour-copy>p:not(.eyebrow){font-size:13px!important;line-height:1.5!important;margin:0!important}
+ .v50-tour-dialog .v50-tour-preview{min-height:215px!important;max-height:290px}
+ .v50-tour-dialog .v50-tour-scene[data-step="1"] .v50-tour-preview{min-height:275px!important;max-height:none}
+ .v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-grid{grid-template-rows:repeat(2,minmax(91px,auto))}
+ .v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-card{min-height:90px;padding:10px!important}
+ .v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-card strong{font-size:20px}
+ .v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-description{font-size:10px}
+ .v50-tour-dialog .v50-dialog-footer{padding-top:10px;margin-top:10px;gap:9px}
+ .v50-tour-dialog .v50-tour-actions{gap:6px}
+ .v50-tour-dialog .v50-tour-actions button{padding:10px 11px;font-size:12px!important}
+ .v55-consult-grid{grid-template-columns:1fr}
+ .v55-alarm-art{width:min(210px,100%);min-height:190px!important}
+ .v55-alarm-art .v55-alarm-svg{height:180px!important}
+}
+@media(max-width:425px){
+ .v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-grid{gap:7px}
+ .v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-top small{font-size:8px}
+ .v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-card strong{font-size:18px}
+ .v50-tour-dialog .v50-tour-scene[data-step="1"] .v55-feature-description{font-size:9px}
+ .v54-reminder-heading{grid-template-columns:minmax(0,1fr) 140px!important;gap:10px!important}
+ .v55-alarm-art{min-height:148px!important;padding:2px!important}
+ .v55-alarm-art .v55-alarm-svg{height:134px!important}
+ .v55-clock-caption{font-size:8px}
+}
+@media(max-height:660px){.v50-tour-dialog .v50-tour-scene[data-step="1"] .v50-tour-preview{min-height:255px!important}.v50-dialog.v50-tour-dialog{overflow-y:auto!important}}
+@media(prefers-reduced-motion:reduce){.v54-journey-path .v55-journey-flow,.v54-journey-step.is-progress .v54-step-number,.v55-alarm-bell,.v55-clock-hour,.v55-clock-minute,.v55-clock-second{animation:none!important;transition:none!important}}
+body.dlorgia-motion-paused .v54-journey-path .v55-journey-flow,body.dlorgia-motion-paused .v54-journey-step.is-progress .v54-step-number,body.dlorgia-motion-paused .v55-alarm-bell,body.dlorgia-motion-paused .v55-clock-hour,body.dlorgia-motion-paused .v55-clock-minute,body.dlorgia-motion-paused .v55-clock-second{animation:none!important}
+/* Mantener el título del resumen visible bajo la cabecera cuando se elige la parada final. */
+#v54-followup-contact,#v55-consult-card{scroll-margin-top:105px}

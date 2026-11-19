@@ -1,4 +1,4 @@
-const CACHE = 'dlorgia-orienta-v540-recorrido';
+const CACHE = 'dlorgia-orienta-v550-recorrido-claro';
 const CORE = [
   '/app', '/', '/guia',
   '/assets/portada-v49.css',
@@ -11,6 +11,7 @@ const CORE = [
   '/assets/experiencia-v52.css',
   '/assets/config-retro-v53.css',
   '/assets/recorrido-v54.css',
+  '/assets/experiencia-v55.css',
   '/assets/fotos-dlorgia/manchas-piel-referencia.webp',
   '/assets/fotos-dlorgia/ficha-melasma.webp',
   '/assets/fotos-dlorgia/consulta-capilar.webp',

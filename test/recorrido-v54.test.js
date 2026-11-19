@@ -11,7 +11,7 @@ const read=p=>readFileSync(join(root,p),'utf8');
 test('v5.4 crea mapa accesible de cinco paradas navegables',()=>{
   const js=read('public/assets/app-v400.js'),css=read('public/assets/recorrido-v54.css');
   assert.match(js,/function renderFollowUp\(\)/);
-  for(const stage of ['Orientador Personal','Tratamiento y expectativas','Conectar con D’Lorgia','Organizar recordatorios','Resolver dudas y continuar']) assert.ok(js.includes(stage),stage);
+  for(const stage of ['Orientador Personal','Tratamiento y expectativas','Resolver dudas con el Asesor','Organizar recordatorios','Preparar contacto con D’Lorgia']) assert.ok(js.includes(stage),stage);
   assert.match(js,/data-v54-step=/);
   assert.match(js,/aria-label="Paso \$\{index\+1\}/);
   assert.match(js,/v54-journey-path/);
@@ -24,7 +24,7 @@ test('v5.4 crea mapa accesible de cinco paradas navegables',()=>{
 test('v5.4 recordatorios validan futuro y tienen alarma SVG accesible',()=>{
   const html=read('public/index.html'),js=read('public/assets/app-v400.js'),css=read('public/assets/recorrido-v54.css');
   assert.match(html,/id="v54-reminder-builder"/);
-  assert.match(html,/class="v54-alarm-art" aria-hidden="true"/);
+  assert.match(html,/class="v54-alarm-art v55-alarm-art" aria-hidden="true"/);
   assert.match(css,/v54ClockTick/);
   assert.match(js,/reminderDate\.getTime\(\) <= Date\.now\(\)/);
   assert.match(js,/getFullYear\(\)/);
@@ -56,9 +56,9 @@ test('v5.4 tratamientos tienen objetivos, expectativas, guardados y acceso al eq
 test('v5.4 PWA versiona sus recursos sin alterar las rutas de la app',()=>{
  const html=read('public/index.html'),sw=read('public/service-worker.js'),js=read('public/assets/app-v400.js');
  assert.match(html,/href="\/assets\/recorrido-v54\.css"/);
- assert.match(sw,/dlorgia-orienta-v540-recorrido/);
+ assert.match(sw,/dlorgia-orienta-v550-recorrido-claro/);
  assert.match(sw,/\/assets\/recorrido-v54\.css/);
- assert.match(js,/service-worker\.js\?v=540/);
+ assert.match(js,/service-worker\.js\?v=550/);
  assert.ok(existsSync(join(root,'public/assets/recorrido-v54.css')));
 });
 

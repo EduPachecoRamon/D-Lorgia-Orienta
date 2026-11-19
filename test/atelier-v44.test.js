@@ -33,7 +33,7 @@ test('accesibilidad disponible en paciente y admin',()=>{
   assert.match(adminCSS,/prefers-reduced-motion/);
 });
 test('caché v4.4 incluye recursos nuevos',()=>{
-  assert.match(sw,/dlorgia-orienta-v540-recorrido/);
+  assert.match(sw,/dlorgia-orienta-v550-recorrido-claro/);
   for(const p of ['dlorgia-ateliers-v44.css','dlorgia-admin-v44.css','dlorgia-atmosphere.webp','dlorgia-admin-a11y.js']) assert.ok(sw.includes(p),p);
 });
 

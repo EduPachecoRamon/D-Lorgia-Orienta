@@ -1,9 +1,9 @@
 {
   "name": "dlorgia-whatsapp-bot",
-  "version": "5.4.1",
+  "version": "5.5.0",
   "private": true,
   "type": "module",
-  "description": "D’Lorgia Orienta v5.4.1: protección contra redirecciones localhost en producción y confirmación de cuentas por correo.",
+  "description": "D’Lorgia Orienta v5.5: bienvenida responsive, despertador animado, mapa vivo y resumen de consulta voluntario.",
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
