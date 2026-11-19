@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="/assets/foco-v50.css" />
   <link rel="stylesheet" href="/assets/fotos-v49.css" />
 <link rel="stylesheet" href="/assets/institucional-v49.css"><link rel="stylesheet" href="/assets/foco-v51.css" />
-<link rel="stylesheet" href="/assets/experiencia-v52.css" /></head>
+<link rel="stylesheet" href="/assets/experiencia-v52.css" /><link rel="stylesheet" href="/assets/configuracion-v53.css" /></head>
 <body>
   <svg class="svg-sprite" aria-hidden="true" focusable="false">
     <defs>
@@ -598,15 +598,62 @@
       <div class="v50-dialog-footer"><div class="v50-tour-dots" id="v50-tour-dots" aria-label="Progreso de la bienvenida"><span class="active"></span><span></span><span></span></div><div class="v50-tour-actions"><button id="v50-tour-skip" type="button" class="v50-soft-action">Ahora no</button><button id="v50-tour-prev" type="button" class="v50-soft-action" hidden>← Atrás</button><button id="v50-tour-next" type="button" class="v50-primary-action">Siguiente →</button></div></div>
     </div>
   </dialog>
-  <dialog id="v50-settings-dialog" class="v50-dialog v50-settings-dialog" aria-labelledby="v50-settings-title">
-    <div class="v50-settings-shell"><div class="v50-settings-head"><div><p class="eyebrow">TU EXPERIENCIA</p><h2 id="v50-settings-title">Configuración</h2></div><button class="v50-dialog-x" id="v50-settings-close" aria-label="Cerrar configuración" type="button">×</button></div>
-      <p class="v50-settings-intro">Ajusta la forma de usar D’Lorgia sin perder tu orientación.</p>
-      <button class="v50-setting-row" id="v50-settings-replay" type="button"><svg class="ui-icon"><use href="#i-sparkles"/></svg><span><b>Volver a ver la bienvenida</b><small>Repite el recorrido de tres pasos cuando quieras.</small></span><strong>↗</strong></button>
-      <button class="v50-setting-row" id="v50-settings-accessibility" type="button"><svg class="ui-icon"><use href="#i-eye"/></svg><span><b>Accesibilidad</b><small>Texto, contraste y reducción de movimiento.</small></span><strong>↗</strong></button>
-      <label class="v50-setting-row v50-setting-toggle"><svg class="ui-icon"><use href="#i-scan"/></svg><span><b>Marco de teléfono en escritorio</b><small>Activa la vista compacta cuando prefieras usarla.</small></span><input id="v50-phone-frame" type="checkbox" /></label>
-      <a class="v50-setting-row" href="/ayuda"><svg class="ui-icon"><use href="#i-info"/></svg><span><b>Centro de ayuda</b><small>Respuestas a dudas frecuentes.</small></span><strong>↗</strong></a>
-      <div class="v51-settings-danger"><p class="eyebrow">GESTIÓN DE TU RECORRIDO</p><button type="button" class="v51-reset-start" id="v51-reset-start"><svg class="ui-icon"><use href="#i-compass"/></svg><span><b>Reiniciar mi progreso</b><small>Borra mis orientaciones, borradores, guardados y recordatorios locales; no elimina mi cuenta ni solicitudes registradas por D’Lorgia.</small></span><strong>↗</strong></button></div>
-      <p class="v50-settings-footnote">D’Lorgia Orienta ofrece información general y no sustituye una evaluación profesional.</p>
+  <dialog id="v50-settings-dialog" class="v50-dialog v50-settings-dialog v53-settings-dialog" aria-labelledby="v50-settings-title">
+    <div class="v53-settings-shell">
+      <header class="v53-settings-titlebar">
+        <div class="v53-window-brand"><span class="v53-star" aria-hidden="true">✦</span><div><b id="v50-settings-title">Configuración</b><small>D’LORGIA ORIENTA · TU ESPACIO</small></div></div>
+        <div class="v53-window-buttons"><button type="button" id="v53-settings-minimize" aria-label="Minimizar configuración">−</button><button type="button" id="v50-settings-close" aria-label="Cerrar configuración">×</button></div>
+      </header>
+      <div class="v53-settings-body">
+        <div class="v53-cloudfield" aria-hidden="true"><span class="v53-cloud v53-cloud--one"></span><span class="v53-cloud v53-cloud--two"></span><span class="v53-cloud v53-cloud--three"></span></div>
+        <nav class="v53-settings-sidebar" role="tablist" aria-label="Secciones de configuración">
+          <p class="v53-sidebar-caption">PREFERENCIAS</p>
+          <button type="button" role="tab" id="v53-tab-experience" data-v53-tab="experience" aria-controls="v53-panel-experience" aria-selected="true"><svg class="ui-icon"><use href="#i-sparkles"/></svg> Experiencia</button>
+          <button type="button" role="tab" id="v53-tab-appearance" data-v53-tab="appearance" aria-controls="v53-panel-appearance" aria-selected="false" tabindex="-1"><svg class="ui-icon"><use href="#i-eye"/></svg> Apariencia</button>
+          <button type="button" role="tab" id="v53-tab-accessibility" data-v53-tab="accessibility" aria-controls="v53-panel-accessibility" aria-selected="false" tabindex="-1"><svg class="ui-icon"><use href="#i-scan"/></svg> Accesibilidad</button>
+          <button type="button" role="tab" id="v53-tab-help" data-v53-tab="help" aria-controls="v53-panel-help" aria-selected="false" tabindex="-1"><svg class="ui-icon"><use href="#i-info"/></svg> Ayuda</button>
+          <button type="button" role="tab" id="v53-tab-privacy" data-v53-tab="privacy" aria-controls="v53-panel-privacy" aria-selected="false" tabindex="-1"><svg class="ui-icon"><use href="#i-user"/></svg> Privacidad</button>
+          <div class="v53-side-art" aria-hidden="true">✧<br>Un espacio a tu manera</div>
+        </nav>
+        <main class="v53-settings-main">
+          <section id="v53-panel-experience" class="v53-panel" role="tabpanel" aria-labelledby="v53-tab-experience">
+            <header class="v53-panel-head"><p class="v53-overline">TU RECORRIDO</p><h3>Experiencia</h3><p>Retoma lo importante, revisa la bienvenida o empieza de nuevo cuando quieras.</p></header>
+            <div class="v53-settings-section"><h4>Bienvenida</h4><div class="v53-settings-row"><span><b>Volver a ver la bienvenida</b><small>Reproduce los tres pasos sin borrar tus respuestas.</small></span><button class="v53-settings-action" id="v50-settings-replay" type="button">Ver bienvenida ↗</button></div></div>
+            <div class="v53-reset-zone">
+              <div class="v53-glitch-symbol" aria-hidden="true">⌛</div>
+              <div><h4>Zona de reinicio</h4><p>Borra el recorrido guardado en este dispositivo: orientación, respuestas, guardados, borradores, recordatorios, seguimiento y preferencias del recorrido.</p><span class="v53-retain">Tu cuenta y tus credenciales se conservan. Los registros remotos de D’Lorgia requieren gestión aparte.</span><button type="button" class="v53-reset-button" id="v51-reset-start">Reiniciar mi recorrido</button></div>
+            </div>
+            <p class="v53-small-note">No se eliminarán citas ni solicitudes registradas por D’Lorgia. Para gestionar datos remotos, contacta a la empresa.</p>
+          </section>
+          <section id="v53-panel-appearance" class="v53-panel" role="tabpanel" aria-labelledby="v53-tab-appearance" hidden>
+            <header class="v53-panel-head"><p class="v53-overline">TU AMBIENTE</p><h3>Apariencia</h3><p>Un fondo con movimiento suave, siempre opcional y respetuoso con tu dispositivo.</p></header>
+            <div class="v53-settings-section"><div class="v53-preview-card">
+              <div class="v53-cloud-preview" aria-label="Vista previa decorativa de nubes"><span class="v53-preview-star" aria-hidden="true">✧</span></div>
+              <div class="v53-preview-text"><h4>Fondos animados</h4><p>Una atmósfera con nubes que flotan lentamente detrás del contenido. Nunca tapa botones ni textos.</p>
+                <label class="v53-settings-row"><span><b>Animar el fondo</b><small>Puedes desactivar la animación cuando quieras.</small></span><input id="v53-animated-bg" type="checkbox" checked></label>
+                <label class="v53-settings-row"><span><b>Nubes suaves</b><small>Mostrar u ocultar las nubes decorativas.</small></span><input id="v53-soft-clouds" type="checkbox" checked></label>
+              </div></div></div>
+            <div class="v53-settings-section"><h4>Presentación</h4><label class="v53-settings-row"><span><b>Marco de teléfono en escritorio</b><small>Vista compacta opcional. No afecta a la versión móvil.</small></span><input id="v50-phone-frame" type="checkbox"></label></div>
+          </section>
+          <section id="v53-panel-accessibility" class="v53-panel" role="tabpanel" aria-labelledby="v53-tab-accessibility" hidden>
+            <header class="v53-panel-head"><p class="v53-overline">COMODIDAD DE LECTURA</p><h3>Accesibilidad</h3><p>Ajusta la presentación de la aplicación a tus necesidades.</p></header>
+            <div class="v53-settings-section">
+              <label class="v53-settings-row"><span><b>Reducir movimiento</b><small>Pausa los efectos decorativos, incluidas las nubes.</small></span><input id="v53-reduce-motion" type="checkbox"></label>
+              <label class="v53-settings-row"><span><b>Texto más grande</b><small>Mejora la lectura de textos de interfaz.</small></span><input id="v53-large-text" type="checkbox"></label>
+              <label class="v53-settings-row"><span><b>Mayor contraste</b><small>Refuerza los colores de lectura.</small></span><input id="v53-high-contrast" type="checkbox"></label>
+            </div>
+          </section>
+          <section id="v53-panel-help" class="v53-panel" role="tabpanel" aria-labelledby="v53-tab-help" hidden>
+            <header class="v53-panel-head"><p class="v53-overline">TE ACOMPAÑAMOS</p><h3>Ayuda</h3><p>Información para utilizar el Orientador y resolver dudas sobre la aplicación.</p></header>
+            <div class="v53-settings-section"><h4>Centro de ayuda</h4><p class="v53-small-note">Consulta las preguntas frecuentes y las opciones de contacto disponibles.</p><a class="v53-settings-link" href="/ayuda">Abrir centro de ayuda ↗</a></div>
+          </section>
+          <section id="v53-panel-privacy" class="v53-panel" role="tabpanel" aria-labelledby="v53-tab-privacy" hidden>
+            <header class="v53-panel-head"><p class="v53-overline">TUS DATOS</p><h3>Privacidad</h3><p>Diferenciamos el recorrido guardado en este dispositivo de los datos que D’Lorgia gestiona en sus sistemas.</p></header>
+            <div class="v53-settings-section"><h4>Datos de la cuenta</h4><p class="v53-small-note">Reiniciar el recorrido no elimina tu cuenta, tus credenciales ni los registros remotos de evaluaciones. Consulta el centro de ayuda para solicitar la gestión de esos datos.</p><a class="v53-settings-link v53-settings-secondary" href="/ayuda">Consultar ayuda y contacto ↗</a></div>
+            <div class="v53-settings-section"><h4>Mi recorrido local</h4><p class="v53-small-note">Puedes borrar el recorrido local desde Experiencia, sin perder el acceso a tu cuenta.</p><button type="button" class="v53-settings-action v53-settings-secondary" id="v53-go-reset">Ir a reinicio ↗</button></div>
+          </section>
+        </main>
+      </div>
     </div>
   </dialog>
   <dialog id="v51-reset-dialog" class="v50-dialog v51-reset-dialog" aria-labelledby="v51-reset-title" aria-describedby="v51-reset-description">
