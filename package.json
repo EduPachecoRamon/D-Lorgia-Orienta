@@ -1,9 +1,9 @@
 {
   "name": "dlorgia-whatsapp-bot",
-  "version": "5.3.0",
+  "version": "5.4.1",
   "private": true,
   "type": "module",
-  "description": "D’Lorgia Orienta v5.3: Configuración retro adaptable con nubes animadas, fotos sin flyers, reinicio protegido del progreso local y sincronizado.",
+  "description": "D’Lorgia Orienta v5.4.1: protección contra redirecciones localhost en producción y confirmación de cuentas por correo.",
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",

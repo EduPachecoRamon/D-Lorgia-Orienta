@@ -7,6 +7,7 @@ import crypto from 'node:crypto';
 import { config } from '../config.js';
 import { getSupabaseState, authExchangeCode, authUser } from './supabase.js';
 import { ensureProfile } from './accounts.js';
+import { authPublicOrigin } from './auth-redirect.js';
 
 const COOKIE = 'dlorgia_google_pkce';
 const TEN_MINUTES = 600;
@@ -16,13 +17,7 @@ const base64url = (buffer) => Buffer.from(buffer).toString('base64url');
 const random = () => base64url(crypto.randomBytes(32));
 
 export function oauthPublicOrigin() {
-  try {
-    const url = new URL(config.publicUrl || '');
-    const localhost = ['localhost', '127.0.0.1'].includes(url.hostname);
-    if (url.username || url.password || url.search || url.hash || url.pathname !== '/') return null;
-    if (url.protocol !== 'https:' && !(localhost && url.protocol === 'http:')) return null;
-    return url.origin;
-  } catch { return null; }
+  return authPublicOrigin();
 }
 
 export function googleOAuthEnabled() {

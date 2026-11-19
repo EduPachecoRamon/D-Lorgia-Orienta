@@ -1,4 +1,5 @@
 import { config } from '../config.js';
+import { confirmationRedirectUrl } from './auth-redirect.js';
 
 function baseUrl(path = '') {
   return `${String(config.supabaseUrl || '').replace(/\/$/, '')}${path}`;
@@ -48,7 +49,11 @@ async function request(path, { method = 'GET', body, token, service = false, hea
 }
 
 export async function authSignup({ email, password, name, username }) {
-  const { data } = await request('/auth/v1/signup', {
+  // Supabase usa Site URL (a menudo localhost:3000) si no enviamos redirect_to.
+  // El retorno debe estar agregado a Authentication → URL Configuration.
+  const redirect = confirmationRedirectUrl();
+  const qs = redirect ? `?redirect_to=${encodeURIComponent(redirect)}` : '';
+  const { data } = await request(`/auth/v1/signup${qs}`, {
     method: 'POST',
     body: { email, password, data: { name, username } }
   });

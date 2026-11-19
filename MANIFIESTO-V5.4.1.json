@@ -1,0 +1,47 @@
+{
+  "base": "v5.4.0",
+  "version": "v5.4.1",
+  "tests": "113/113 pass",
+  "files": [
+    {
+      "path": "src/services/auth-redirect.js",
+      "bytes": 1638,
+      "sha256": "9d38d6c8e37f9387135acdc1a1811332c3ebd047ea4f978e3fe6503d0ed99f27"
+    },
+    {
+      "path": "src/services/google-oauth.js",
+      "bytes": 8034,
+      "sha256": "034d37071e03e525c2a82b035a0f03928a4b7cc02ee2ac3f3065f713e46747d7"
+    },
+    {
+      "path": "src/services/supabase.js",
+      "bytes": 5339,
+      "sha256": "485f14ea1c89adc6985c7a341440ad3412fce7ac2c44127e983d0b4b8f36bf29"
+    },
+    {
+      "path": "CONFIGURACION_GUIADA_GOOGLE.md",
+      "bytes": 5672,
+      "sha256": "38f66a7d7c7452c58fa66ed784135da968e3fffcbdf4b77ac320b6a0cb5fb864"
+    },
+    {
+      "path": "LEEME_V5_4_1_OAUTH_LOCALHOST.md",
+      "bytes": 4471,
+      "sha256": "0be13dd90d1f973329374a4c615445a258842d3c8de2cc35c27565542038aed9"
+    },
+    {
+      "path": "package.json",
+      "bytes": 565,
+      "sha256": "3fc33b00c6c350d603fb8afe7285fbde054abaa18073856d73b03a376cc98f5e"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 254,
+      "sha256": "1ebef67f8f6f63b8bcfd5201ba5ffaf6ff95d2a23371c9715ae329743dee4bc9"
+    },
+    {
+      "path": "test/auth-redirect-v541.test.js",
+      "bytes": 4055,
+      "sha256": "82239ad33295feb177f4d5ca5e9bdffd0a9f6c2e9e20fe2de821ac47670246ad"
+    }
+  ]
+}
