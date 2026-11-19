@@ -34,7 +34,8 @@
   <link rel="stylesheet" href="/assets/acceso-v49.css" />
   <link rel="stylesheet" href="/assets/foco-v50.css" />
   <link rel="stylesheet" href="/assets/fotos-v49.css" />
-<link rel="stylesheet" href="/assets/institucional-v49.css"><link rel="stylesheet" href="/assets/foco-v51.css" /></head>
+<link rel="stylesheet" href="/assets/institucional-v49.css"><link rel="stylesheet" href="/assets/foco-v51.css" />
+<link rel="stylesheet" href="/assets/experiencia-v52.css" /></head>
 <body>
   <svg class="svg-sprite" aria-hidden="true" focusable="false">
     <defs>
@@ -265,8 +266,17 @@
             <p class="eyebrow"><span class="v50-gold-dash"></span> TU PRIMER PASO EN D’LORGIA</p>
             <p id="home-personal-greeting" class="v50-greeting hidden"></p>
             <span class="v50-home-kicker" id="home-status-pill"><svg class="ui-icon"><use href="#i-sparkles"/></svg><span>Comienza a entender tus opciones</span></span>
-            <h1 id="v50-home-headline">¿Qué te gustaría entender sobre tu cuidado?</h1>
-            <p id="v50-home-intro">No necesitas saber qué tratamiento elegir. Cuéntanos tus preferencias y te ayudaremos a organizar preguntas y posibilidades para conversar con un profesional.</p>
+            <h1 id="v50-home-headline">¿Qué te interesa comprender hoy?</h1>
+            <p id="v50-home-intro">Elige un tema y te acompañamos a explorar opciones y preparar preguntas para D’Lorgia.</p>
+            <div class="v52-topic-pick" id="v52-topic-pick" aria-label="Selecciona un tema para comenzar">
+              <span class="v52-topic-label">QUIERO ENTENDER SOBRE…</span>
+              <div class="v52-topic-options" role="group" aria-label="Tema de orientación">
+                <button type="button" data-v52-topic="Piel" aria-pressed="false">Piel y rostro</button>
+                <button type="button" data-v52-topic="Corporal" aria-pressed="false">Cuidado corporal</button>
+                <button type="button" data-v52-topic="Capilar" aria-pressed="false">Cabello</button>
+                <button type="button" data-v52-topic="Todas" aria-pressed="true" class="is-selected">Aún no lo sé</button>
+              </div>
+            </div>
             <div class="v50-home-main-actions">
               <button class="primary v50-main-cta" data-nav="guide" id="v50-home-primary"><svg class="ui-icon"><use href="#i-compass"/></svg><span id="v50-home-primary-text">Empezar mi orientación</span><span aria-hidden="true">→</span></button>
               <button class="v50-understated-link" data-nav="catalog" type="button">Prefiero ver los tratamientos ↗</button>
@@ -274,14 +284,15 @@
             <p class="v50-clinical-note"><svg class="ui-icon"><use href="#i-shield"/></svg> Información orientativa, no diagnóstico médico.</p>
           </div>
           <div class="v50-home-photo" role="img" aria-label="Fotografía de los productos de D’Lorgia en su sede de Huancayo">
-            <div class="v50-photo-copy"><span>HUANCAYO · D’LORGIA</span><b>Un espacio real para continuar tu orientación.</b></div>
+            <div class="v50-photo-copy"><span>HUANCAYO · D’LORGIA</span><b>Tu curiosidad empieza aquí. Tu decisión, con profesionales.</b></div>
             <div class="v50-photo-seal" aria-hidden="true">DL<small>ORIENTA</small></div>
           </div>
         </div>
-        <section class="v51-branch-strip" aria-label="Conoce nuestra sede de Huancayo">
-          <div class="v51-branch-title"><p class="eyebrow">CONOCE A D’LORGIA</p><h2>De la orientación digital a un lugar real.</h2><p>Conoce algunos espacios de nuestra sede de Huancayo. La orientación digital no reemplaza la evaluación profesional.</p><a href="/sedes" class="v51-branch-link">Ver información de sedes <span aria-hidden="true">↗</span></a></div>
-          <div class="v51-branch-gallery"><figure><img src="/assets/fotos-dlorgia/huancayo-consultorio-02.webp" alt="Interior de consultorio en la sede Huancayo" loading="lazy"><figcaption>Espacios de atención</figcaption></figure><figure><img src="/assets/fotos-dlorgia/huancayo-fachada.webp" alt="Fachada de la sede D’Lorgia Huancayo" loading="lazy"><figcaption>Encuéntranos en Huancayo</figcaption></figure></div>
-        </section>
+        <aside class="v52-branch-postcard" aria-label="Conoce nuestra sede de Huancayo">
+          <img src="/assets/fotos-dlorgia/huancayo-fachada.webp" alt="Fachada de D’Lorgia Huancayo" loading="lazy" decoding="async" width="128" height="104" />
+          <div><span>DEL MÓVIL A LA SEDE</span><strong>D’Lorgia también está en Huancayo.</strong><p>Explora su espacio y conoce dónde solicitar atención.</p></div>
+          <a href="/sedes">Conocer sede <span aria-hidden="true">↗</span></a>
+        </aside>
         <div id="home-guide-resume" class="guide-resume hidden"></div>
         <div class="v50-home-next hidden" id="v50-home-next">
           <div class="v50-next-intro"><p class="eyebrow">CUANDO YA TIENES TU ORIENTACIÓN</p><h2>Ahora sí, elige cómo continuar.</h2><p>No necesitas recorrer todas las herramientas. Escoge la que te sirva ahora.</p></div>
@@ -297,14 +308,14 @@
       <section class="screen" id="guide" data-icon="◇" data-icon2="✦">
         <div class="section-heading">
           <button class="back" data-back aria-label="Volver"><svg class="ui-icon"><use href="#i-chevron-left"/></svg></button>
-          <div><p class="eyebrow">ORIENTADOR PERSONAL</p><h2>Encuentra un camino para explorar</h2></div>
+          <div><p class="eyebrow">ORIENTADOR PERSONAL</p><h2>Hablemos de lo que te interesa</h2></div>
           <span class="section-icon"><svg class="ui-icon"><use href="#i-compass"/></svg></span>
         </div>
         <div class="guide-safety-banner">
           <span><svg class="ui-icon"><use href="#i-shield"/></svg></span>
           <p><b>Orientación, no diagnóstico.</b> Comparamos tus preferencias con información general. La decisión médica corresponde a un profesional.</p>
         </div>
-        <div class="v51-guide-photo" id="v51-guide-photo"><img src="/assets/fotos-dlorgia/huancayo-consultorio-01.webp" alt="Espacio de orientación en la sede D’Lorgia Huancayo" loading="lazy"><div><span>01 · TU RECORRIDO</span><strong>Primero entendemos lo que te interesa.</strong><small>Responde a tu ritmo. Puedes cambiar tus respuestas después.</small></div></div>
+        <div class="v51-guide-photo" id="v51-guide-photo"><img src="/assets/fotos-dlorgia/huancayo-consultorio-01.webp" alt="Espacio de orientación en la sede D’Lorgia Huancayo" loading="lazy"><div><span>01 · TU RECORRIDO</span><strong>Tus respuestas marcan el camino.</strong><small>Responde a tu ritmo. Puedes cambiar tus respuestas después.</small></div></div>
         <div class="guide-progress" id="guide-progress" aria-label="Progreso del Orientador Personal"></div>
         <div id="guide-content"></div>
       </section>
@@ -315,8 +326,10 @@
           <div><p class="eyebrow">TRATAMIENTOS</p><h2>Explora tus opciones</h2></div>
           <span class="section-icon"><svg class="ui-icon"><use href="#i-scan"/></svg></span>
         </div>
-        <p class="muted">Explora por categoría y abre cada tratamiento con una ficha más clara antes de decidir tu siguiente paso.</p>
-        <a class="official-gallery-link" href="/experiencias" target="_blank" rel="noopener noreferrer">Ver galería de DLorgia ↗</a>
+        <div class="v52-catalog-intro">
+          <div><span class="v52-overline">UN CATÁLOGO PARA ENTENDER</span><p>Conoce objetivos, cuidados y preguntas útiles. Las imágenes orientan; <b>la elección se confirma con el equipo profesional.</b></p><a href="/experiencias">Conocer servicios de D’Lorgia ↗</a></div>
+          <img src="/assets/fotos-dlorgia/huancayo-repisa.webp" alt="Productos exhibidos en la sede D’Lorgia Huancayo" loading="lazy" width="340" height="225" />
+        </div>
         <label class="catalog-search-field" for="catalog-search"><svg class="ui-icon"><use href="#i-scan"/></svg><input type="search" id="catalog-search" autocomplete="off" placeholder="Buscar acné, manchas, láser…" aria-describedby="catalog-results-count" /><span class="catalog-search-shortcut">Buscar</span></label>
         <p id="catalog-results-count" class="catalog-results-count" role="status" aria-live="polite">Explora el catálogo</p>
         <div class="chips filter-chips" id="category-filters"></div>
@@ -567,7 +580,8 @@
       <div class="v50-tour-scene" id="v50-tour-scene" data-step="0">
         <div class="v50-tour-copy"><p class="eyebrow" id="v50-tour-eyebrow">BIENVENIDO A TU ESPACIO</p><h2 id="v50-tour-heading">Hola, esto es D’Lorgia Orienta.</h2><p id="v50-tour-text">Aquí empieza un recorrido para entender lo que te interesa, descubrir información útil y preparar tus preguntas.</p></div>
         <div class="v50-tour-preview" aria-hidden="true">
-          <img class="v51-tour-photo" id="v51-tour-photo" src="/assets/fotos-dlorgia/huancayo-fachada.webp" alt="" loading="lazy" />
+          <img class="v51-tour-photo" id="v51-tour-photo" src="/assets/fotos-dlorgia/huancayo-sala-01.webp" alt="" loading="eager" width="520" height="410" />
+          <span class="v52-tour-photo-label" id="v52-tour-photo-label">D’LORGIA · HUANCAYO</span>
           <div class="v50-preview-window v50-preview-one"><span class="v50-preview-header"><i></i><i></i><i></i><small>D’Lorgia · Orienta</small></span><div class="v50-preview-icon"><svg class="ui-icon"><use href="#i-compass"/></svg></div><strong id="v50-preview-title">Tu punto de partida</strong><span class="v50-preview-meter"><i></i></span><span class="v50-preview-tags"><b>Escuchar</b><b>Orientar</b><b>Decidir</b></span></div>
           <div class="v50-preview-window v50-preview-two"><svg class="ui-icon"><use href="#i-scan"/></svg><span id="v50-preview-caption">Un paso a la vez</span></div>
           <div class="v50-cube-experience" id="v50-cube-experience" aria-label="Explora las tres funciones de D’Lorgia Orienta">

@@ -1,0 +1,122 @@
+/* D’Lorgia Orienta v5.2 — focus before decoration. Existing approved local photography only. */
+:root{--v52-forest:#173f34;--v52-cream:#faf7f0;--v52-sage:#e2ece3;--v52-sienna:#996a3d;--v52-ink:#203b31}
+.app-shell #home{background:linear-gradient(130deg,#f8f5ed 0%,#eef5ed 100%)!important}
+.app-shell #home .v50-home-hero{grid-template-columns:minmax(0,1.13fr) minmax(0,.87fr)!important;gap:clamp(20px,3.3vw,60px)!important;min-height:min(650px,70dvh)}
+.app-shell #home .v50-home-copy{padding:26px 0!important;justify-content:center}
+.app-shell #home h1{max-width:14ch!important;font-size:clamp(44px,5.5vw,78px)!important;margin:12px 0 17px!important;line-height:1.08!important}
+.app-shell #home #v50-home-intro{margin-bottom:23px!important;max-width:51ch!important}
+.app-shell #home .v50-home-photo{background-image:linear-gradient(0deg,rgba(7,43,34,.78),transparent 48%),url('/assets/fotos-dlorgia/huancayo-consultorio-02.webp')!important;background-size:cover!important;background-position:50% 38%!important;min-height:430px;max-height:610px;border-radius:35px 115px 32px 32px}
+.app-shell #home .v50-photo-copy{right:80px!important;left:26px!important}
+.app-shell #home .v50-photo-copy b{font-size:clamp(23px,2.7vw,35px)!important}
+.app-shell #home .v52-topic-pick{display:grid;gap:9px;margin:0 0 19px;max-width:640px;width:100%}
+.app-shell #home .v52-topic-pick.hidden{display:none!important}
+.app-shell #home .v52-topic-label{font:800 12px/1.3 Manrope,system-ui,sans-serif;color:#685235;letter-spacing:.07em}
+.app-shell #home .v52-topic-options{display:flex;flex-wrap:wrap;gap:9px}
+.app-shell #home .v52-topic-options button{font:750 13px/1.4 Manrope,system-ui,sans-serif;color:#214b3a;border:1.5px solid #bed2c5;background:#fffdfa;padding:11px 14px;border-radius:100px;min-height:46px;cursor:pointer;transition:background .18s,transform .18s,border .18s}
+.app-shell #home .v52-topic-options button:hover{background:#e6f1e7;transform:translateY(-1px)}
+.app-shell #home .v52-topic-options button.is-selected{background:#1d5543;border-color:#1d5543;color:white}
+.app-shell #home .v52-topic-options button:focus-visible{outline:3px solid #b78d52;outline-offset:3px}
+.app-shell #home .v50-main-cta{min-height:56px}
+.app-shell #home .v52-branch-postcard{max-width:1340px;margin:18px auto 16px;display:grid;grid-template-columns:112px minmax(0,1fr) auto;gap:20px;align-items:center;padding:15px 21px 15px 15px;border:1px solid #cfded2;background:#fffefa;border-radius:20px;box-shadow:0 8px 24px #143a2810}
+.app-shell #home .v52-branch-postcard>img{width:112px;height:90px;object-fit:cover;object-position:center 70%;border-radius:13px}
+.app-shell #home .v52-branch-postcard>div{display:grid;gap:4px;min-width:0}
+.app-shell #home .v52-branch-postcard span{font:800 10px Manrope,system-ui,sans-serif;letter-spacing:.09em;color:#926c44}
+.app-shell #home .v52-branch-postcard strong{font:500 clamp(21px,2.2vw,28px)/1.18 Fraunces,Georgia,serif;color:#173f34}
+.app-shell #home .v52-branch-postcard p{font:500 13px/1.5 Manrope,system-ui,sans-serif;color:#577065;margin:0}
+.app-shell #home .v52-branch-postcard>a{color:#1b533d;text-decoration:none;font-weight:800;font-size:13px;white-space:nowrap;border-bottom:1px solid #62947b;padding:9px 0}
+.app-shell #home .v52-branch-postcard>a:hover{color:#417157}
+/* Welcome: three distinct real scenes, small motion to give direction rather than distraction. */
+.v50-tour-dialog .v50-tour-shell{background:#fbf7ef;overflow:hidden}
+.v50-tour-dialog .v50-tour-scene{gap:clamp(16px,3.5vw,38px)}
+.v50-tour-dialog .v50-tour-copy h2{font-size:clamp(37px,4.8vw,61px)!important;line-height:1.04!important}
+.v50-tour-dialog .v50-tour-copy>p:not(.eyebrow){font-size:clamp(15px,1.4vw,17px);line-height:1.65;color:#496356}
+.v50-tour-dialog .v50-tour-preview{background:#e7efe9;border-radius:24px;min-height:335px;isolation:isolate;overflow:hidden}
+.v50-tour-dialog .v51-tour-photo{position:absolute;inset:0!important;width:100%!important;height:100%!important;max-height:none!important;opacity:1!important;object-fit:cover;border-radius:0!important;filter:saturate(.93);z-index:-1;box-shadow:none;animation:v52-photo-in .45s ease both}
+.v50-tour-dialog .v50-tour-preview::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(8,42,34,.66),transparent 62%);z-index:-1;pointer-events:none}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v51-tour-photo{display:block!important;opacity:.24!important;filter:grayscale(.35)}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v50-tour-preview::after{background:#d7e8d438}
+.v50-tour-dialog .v52-tour-photo-label{position:absolute;bottom:17px;left:18px;z-index:5;background:#173f34e8;color:#fff9f0;padding:9px 12px;border-radius:9px;font:800 11px Manrope,system-ui,sans-serif;letter-spacing:.06em}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v52-tour-photo-label{background:#fffdf9e8;color:#1e4e3b;bottom:8px}
+.v50-tour-dialog .v50-cube-experience{z-index:3}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v50-cube-experience{margin-top:-18px}
+.v50-tour-dialog .v50-preview-deco{display:none!important}
+.v50-tour-dialog .v50-tour-scene[data-step="1"] .v50-cube-explain{background:#ffffffeb;border:1px solid #d5e1d3;border-radius:12px;padding:9px;font-size:12px;color:#214d3d}
+.v50-tour-dialog .v50-tour-number{font-variant-numeric:tabular-nums}
+@keyframes v52-photo-in{from{transform:scale(1.025);opacity:.2}to{transform:scale(1);opacity:1}}
+/* Guide: a concise top result, related options in a reading hierarchy. */
+.app-shell #guide .v52-guide-result{max-width:1040px;margin:0 auto;color:#24463a}
+.app-shell #guide .v52-result-head{grid-template-columns:auto minmax(0,1.2fr) minmax(155px,.72fr)!important;background:#e8f0e7!important;padding:18px!important}
+.app-shell #guide .v52-result-head h3{max-width:20ch}
+.app-shell #guide .v52-result-cover{position:relative;align-self:stretch;margin:0;min-height:165px;border-radius:15px;overflow:hidden}
+.app-shell #guide .v52-result-cover img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover}
+.app-shell #guide .v52-result-cover figcaption{position:absolute;inset:auto 0 0;background:linear-gradient(transparent,#132f27cc);padding:25px 12px 12px;color:white;font-size:11px;line-height:1.45}
+.app-shell #guide .v52-profile-recap{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:8px;margin:13px 0 22px}
+.app-shell #guide .v52-profile-recap>div{display:grid;gap:4px;background:#fffefa;border:1px solid #d7e2d8;border-radius:15px;padding:15px 16px;min-width:0}
+.app-shell #guide .v52-profile-recap small{font-size:12px;color:#61776b}
+.app-shell #guide .v52-profile-recap b{font-size:15px;color:#214939;overflow-wrap:anywhere}
+.app-shell #guide .v52-result-section-title{margin:28px 0 16px}
+.app-shell #guide .v52-result-section-title span{font-size:11px;letter-spacing:.1em;color:#81572e;font-weight:850}
+.app-shell #guide .v52-result-section-title h3{font:500 clamp(26px,3vw,39px)/1.12 Fraunces,Georgia,serif;color:#194438;margin:7px 0 5px}
+.app-shell #guide .v52-result-section-title p{font-size:13px;color:#527062;line-height:1.6}
+.app-shell #guide .v52-result-matches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.app-shell #guide .v52-result-matches .guide-match-card{display:grid;grid-template-columns:1fr;gap:0;padding:0!important;background:#fffefa!important;overflow:hidden;border-radius:19px!important}
+.app-shell #guide .v52-result-matches .guide-match-card.v52-featured-match{grid-column:1 / -1;grid-template-columns:minmax(175px,.72fr) minmax(0,1.5fr);border-color:#9ebbac!important;background:#fffdf8!important;min-height:248px}
+.app-shell #guide .v52-result-matches .v52-match-visual{position:relative;min-height:120px;overflow:hidden;background:#e7ece6}
+.app-shell #guide .v52-result-matches .v52-featured-match .v52-match-visual{min-height:248px}
+.app-shell #guide .v52-result-matches .v52-match-visual>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.app-shell #guide .v52-match-body{display:grid;align-content:start;gap:9px;min-width:0;padding:20px}
+.app-shell #guide .v52-match-body .guide-match-head{margin:0!important}
+.app-shell #guide .v52-match-body .guide-match-head b{font-size:clamp(17px,1.8vw,22px);overflow-wrap:anywhere}
+.app-shell #guide .v52-match-body>.guide-match-head em{font-size:12px}
+.app-shell #guide .v52-match-body>p{font-size:14px;color:#597166;line-height:1.5;margin:0}
+.app-shell #guide .v52-match-body .guide-card-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:2px}
+.app-shell #guide .v52-match-body .guide-card-actions button{font-size:13px;min-height:43px}
+.app-shell #guide .v52-result-next{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:24px 0;padding:23px;border-radius:20px;background:#194a3e;color:white}
+.app-shell #guide .v52-result-next span{font-size:11px;letter-spacing:.11em;color:#eac997;font-weight:800}
+.app-shell #guide .v52-result-next strong{display:block;font:500 27px/1.2 Fraunces,Georgia,serif;margin:5px 0}
+.app-shell #guide .v52-result-next p{font-size:13px;color:#d5e7da;margin:0;line-height:1.5}
+.app-shell #guide .v52-result-next button{flex-shrink:0;background:#ffedd0;color:#183f33;box-shadow:none;min-height:50px}
+.app-shell #guide .v52-result-tools{border-radius:16px;border:1px solid #d0dcd1;background:#fffefa;padding:12px 15px}
+.app-shell #guide .v52-result-tools>summary{font-weight:800;cursor:pointer;font-size:14px;padding:8px 0;color:#255a43}
+.app-shell #guide .v52-result-tools .guide-route-grid{margin:11px 0 0;grid-template-columns:repeat(3,1fr)}
+.app-shell #guide .v52-result-disclaimer{font-size:12px;line-height:1.7;color:#60786d;margin:16px 0}
+/* Catalog: image-led grid without repeating photos across unrelated treatments. */
+.app-shell #catalog .v52-catalog-intro{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(180px,.55fr);gap:20px;align-items:stretch;margin:20px 0 22px;border:1px solid #d5e1d6;border-radius:20px;background:#f5f0e6;overflow:hidden}
+.app-shell #catalog .v52-catalog-intro>div{padding:25px 28px;display:grid;gap:8px;align-content:center}
+.app-shell #catalog .v52-overline{font:850 11px Manrope,sans-serif;letter-spacing:.11em;color:#8f6039}
+.app-shell #catalog .v52-catalog-intro p{font:500 clamp(16px,1.9vw,22px)/1.5 Fraunces,Georgia,serif;color:#234b3f;margin:0;max-width:52ch}
+.app-shell #catalog .v52-catalog-intro p b{font-weight:650}
+.app-shell #catalog .v52-catalog-intro a{font-size:13px;font-weight:800;color:#24644b;text-underline-offset:4px;width:max-content;margin-top:4px}
+.app-shell #catalog .v52-catalog-intro img{width:100%;height:100%;max-height:250px;min-height:170px;object-fit:cover}
+.app-shell #catalog #catalog-list.catalog-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px;margin-top:20px}
+.app-shell #catalog .v52-treatment-card{display:grid!important;grid-template-columns:1fr!important;grid-template-rows:auto 1fr;align-items:stretch;gap:0!important;padding:0!important;border:1px solid #d5e0d5;background:#fffefa;border-radius:20px!important;overflow:hidden;box-shadow:0 9px 21px #143b2e0c;min-width:0;min-height:390px;text-align:left}
+.app-shell #catalog .v52-treatment-card .treatment-photo{position:relative;display:block!important;width:100%!important;height:clamp(175px,18vw,245px)!important;min-height:175px!important;min-width:0!important;max-width:none!important;border:0!important;border-radius:0!important;margin:0!important;overflow:hidden;background:#e8efe6}
+.app-shell #catalog .v52-treatment-card .official-treatment-img{display:block;width:100%!important;height:100%!important;object-fit:cover;transition:transform .28s ease}
+.app-shell #catalog .v52-treatment-card:hover .official-treatment-img{transform:scale(1.035)}
+.app-shell #catalog .v52-treatment-card .v52-photo-caption{display:block;position:absolute;inset:auto 0 0;color:#fff!important;background:linear-gradient(transparent,#0a2f24c9);padding:28px 14px 10px;font:750 11px Manrope,sans-serif;line-height:1.35}
+.app-shell #catalog .v52-treatment-info{display:flex;flex-direction:column;align-items:flex-start;padding:19px 19px 17px;min-width:0}
+.app-shell #catalog .v52-category{font:850 11px Manrope,sans-serif!important;letter-spacing:.09em;color:#91663e!important;text-transform:uppercase}
+.app-shell #catalog .v52-treatment-info>b{font:500 clamp(24px,2.1vw,31px)/1.12 Fraunces,Georgia,serif!important;color:#1d4a3a;margin:10px 0}
+.app-shell #catalog .v52-description{display:block!important;color:#587164;font-size:14px!important;line-height:1.5;min-height:40px;margin-bottom:12px}
+.app-shell #catalog .v52-card-cta{display:block;color:#1e6046;font:800 13px Manrope,sans-serif;margin-top:auto;padding-top:7px;text-decoration:underline;text-underline-offset:4px}
+.app-shell #catalog .v52-treatment-card .guide-match-badge{font-size:11px!important;padding:6px 8px;margin:0 0 10px}
+.app-shell #catalog .v52-no-photo{display:grid!important;place-items:center;color:#35624e;font-family:Fraunces,serif;font-size:28px}
+.app-shell #catalog .v52-treatment-card:focus-visible,.app-shell #home .v52-branch-postcard>a:focus-visible,.app-shell #guide .v52-result-next button:focus-visible{outline:3px solid #a9824a;outline-offset:4px}
+/* Moderate variation without mobile overflow. */
+@media(max-width:900px){.app-shell #home .v50-home-hero{min-height:0;gap:18px!important}.app-shell #home .v50-home-photo{min-height:350px}}
+@media(max-width:780px){.app-shell #home .v50-home-hero{grid-template-columns:1fr!important}.app-shell #home .v50-home-copy{padding:5px 0!important}.app-shell #home .v50-home-photo{min-height:285px;max-height:360px}.app-shell #home .v52-branch-postcard{grid-template-columns:84px 1fr;gap:12px;padding:12px}.app-shell #home .v52-branch-postcard>img{width:84px;height:90px}.app-shell #home .v52-branch-postcard>a{grid-column:2;justify-self:start;padding:3px 0}.app-shell #guide .v52-profile-recap{grid-template-columns:1fr 1fr}.app-shell #guide .v52-profile-recap>div:last-child{grid-column:1 / -1}.app-shell #guide .v52-result-head{grid-template-columns:1fr 1fr!important}.app-shell #guide .v52-result-head>.guide-avatar{display:none}.app-shell #guide .v52-result-matches{grid-template-columns:1fr}.app-shell #guide .v52-result-matches .guide-match-card.v52-featured-match{grid-template-columns:minmax(120px,.7fr) 1.5fr}}
+@media(max-width:590px){.app-shell #home h1{font-size:clamp(38px,9.4vw,54px)!important;max-width:14ch!important}.app-shell #home .v52-topic-options{gap:7px}.app-shell #home .v52-topic-options button{font-size:12px;padding:9px 12px;min-height:43px}.app-shell #home .v50-home-photo{min-height:245px;max-height:290px}.app-shell #home .v50-photo-copy b{font-size:23px!important}.app-shell #home .v52-branch-postcard strong{font-size:20px}.v50-tour-dialog .v50-tour-preview{min-height:210px}.v50-tour-dialog .v50-tour-copy h2{font-size:clamp(32px,8vw,43px)!important}.v50-tour-dialog .v52-tour-photo-label{font-size:10px;bottom:9px;left:10px}.v50-tour-dialog .v50-tour-scene[data-step="1"] .v50-cube-experience{margin-top:0}.app-shell #guide .v52-result-head{grid-template-columns:1fr!important}.app-shell #guide .v52-result-cover{min-height:156px}.app-shell #guide .v52-profile-recap{grid-template-columns:1fr}.app-shell #guide .v52-profile-recap>div:last-child{grid-column:auto}.app-shell #guide .v52-result-matches .guide-match-card.v52-featured-match{grid-template-columns:1fr}.app-shell #guide .v52-result-matches .guide-match-card.v52-featured-match .v52-match-visual{min-height:165px}.app-shell #guide .v52-result-next{flex-direction:column;align-items:flex-start;padding:19px}.app-shell #guide .v52-result-next button{width:100%}.app-shell #guide .v52-result-tools .guide-route-grid{grid-template-columns:1fr}.app-shell #catalog .v52-catalog-intro{grid-template-columns:1fr}.app-shell #catalog .v52-catalog-intro>div{padding:19px}.app-shell #catalog .v52-catalog-intro img{min-height:135px;max-height:165px}.app-shell #catalog #catalog-list.catalog-list{grid-template-columns:1fr;gap:14px}.app-shell #catalog .v52-treatment-card{min-height:0}.app-shell #catalog .v52-treatment-card .treatment-photo{height:195px!important}}
+@media(prefers-reduced-motion:reduce){.v50-tour-dialog .v51-tour-photo{animation:none!important}.app-shell #home .v52-topic-options button,.app-shell #catalog .v52-treatment-card .official-treatment-img{transition:none!important}.app-shell #catalog .v52-treatment-card:hover .official-treatment-img{transform:none!important}}
+/* App shell navigation should not clip important controls on narrow phones. The dock already offers Inicio and Mi espacio. */
+@media(max-width:540px){
+  .app-shell .topbar{padding:9px 12px!important;gap:8px!important;min-width:0}
+  .app-shell .topbar>button[data-nav="home"]{display:none!important}
+  .app-shell .topbar .brand-lockup{min-width:0;gap:7px}
+  .app-shell .topbar .brand-mark{width:38px;height:38px;font-size:18px;flex:0 0 38px}
+  .app-shell .topbar .brand-lockup .eyebrow{font-size:9px!important}
+  .app-shell .topbar .brand-lockup strong{font-size:17px!important}
+  .app-shell .topbar-actions{display:flex;gap:5px!important;min-width:42px;flex:0 0 auto}
+  .app-shell .topbar-actions .a11y-trigger,.app-shell .topbar-actions .header-help,.app-shell .topbar-actions [data-nav="portal"]{display:none!important}
+  .app-shell .topbar-actions .v50-settings-button{height:42px;width:42px;min-width:42px;padding:7px!important;display:grid;place-items:center}
+  .app-shell .topbar-actions .v50-settings-button span{display:none!important}
+}

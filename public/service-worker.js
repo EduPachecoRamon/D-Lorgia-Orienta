@@ -1,4 +1,4 @@
-const CACHE = 'dlorgia-orienta-v510-fotos';
+const CACHE = 'dlorgia-orienta-v520-experiencia';
 const CORE = [
   '/app', '/', '/guia',
   '/assets/portada-v49.css',
@@ -8,6 +8,11 @@ const CORE = [
   '/assets/acceso-v49.css',
   '/assets/foco-v50.css',
   '/assets/foco-v51.css',
+  '/assets/experiencia-v52.css',
+  '/assets/fotos-dlorgia/ficha-melasma.webp',
+  '/assets/fotos-dlorgia/consulta-capilar.webp',
+  '/assets/fotos-dlorgia/depilacion-pierna.webp',
+  '/assets/fotos-dlorgia/huancayo-sala-01.webp',
   '/assets/fotos-dlorgia/huancayo-productos-01.webp',
   '/assets/fotos-dlorgia/huancayo-consultorio-01.webp',
   '/assets/fotos-dlorgia/huancayo-fachada.webp',

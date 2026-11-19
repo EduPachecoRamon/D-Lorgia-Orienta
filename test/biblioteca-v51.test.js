@@ -27,12 +27,12 @@ test('v5.1.1: 29 archivos autorizados presentes y material clínico separado de 
 
 test('v5.1: inicio y sede Huancayo ofrecen fotos locales contextualizadas', () => {
   const home = read('public/index.html');
-  const css = read('public/assets/foco-v51.css');
+  const css = read('public/assets/experiencia-v52.css');
   const sede = read('public/sedes.html');
-  assert.match(home, /v51-branch-strip/);
-  assert.match(home, /huancayo-consultorio-02\.webp/);
+  assert.match(home, /v52-branch-postcard/);
+  assert.match(css, /huancayo-consultorio-02\.webp/);
   assert.match(home, /huancayo-fachada\.webp/);
-  assert.match(css, /huancayo-productos-01\.webp/);
+  assert.match(css, /huancayo-consultorio-02\.webp/);
   assert.match(sede, /v51-sede-gallery/);
   assert.match(sede, /huancayo-fachada\.webp/);
   assert.match(sede, /huancayo-consultorio-01\.webp/);
@@ -62,5 +62,5 @@ test('v5.1: resultados muestran acciones compactas y detalles opcionales', () =>
   assert.match(js, /v51-result-head/);
   assert.match(js, /<details class="v51-match-more">/);
   assert.match(js, /v51-result-home/);
-  assert.match(read('public/service-worker.js'), /dlorgia-orienta-v510-fotos/);
+  assert.match(read('public/service-worker.js'), /dlorgia-orienta-v520-experiencia/);
 });

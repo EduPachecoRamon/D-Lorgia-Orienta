@@ -1,7 +1,7 @@
-import { officialTreatmentImage, handleOfficialImageError } from './dlorgia-imagery46.js';
+import { officialTreatmentImage, treatmentPhotoInfo, handleOfficialImageError } from './dlorgia-imagery46.js';
 import {humanMessage} from './dlorgia-feedback.js';
 import {initAmbient} from './dlorgia-ambient.js';
-const DLORGIA_BUILD = '5.1.0-biblioteca';
+const DLORGIA_BUILD = '5.2.0-foco-visual';
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => [...document.querySelectorAll(sel)];
 
@@ -541,9 +541,9 @@ function enterExperience() {
 
 // v5.0: bienvenida de una sola vez por cuenta, accesible y repetible desde Configuración.
 const tourScenes = [
-  { eyebrow:'BIENVENIDO A TU ESPACIO',title:'Hola, esto es D’Lorgia Orienta.',text:'Aquí puedes organizar lo que te interesa conocer, sin tener que elegir un tratamiento desde el primer minuto.',preview:'Tu punto de partida',caption:'Empieza por lo que te interesa' },
-  { eyebrow:'01 · CONOCE TUS OPCIONES',title:'Primero, descubre por dónde empezar.',text:'El Orientador te pregunta por tus preferencias y reúne opciones informativas para explorar. No intenta diagnosticarte ni sustituir a un profesional.',preview:'Orientación personal',caption:'Tu ruta, a tu manera' },
-  { eyebrow:'02 · TÚ DECIDES EL SIGUIENTE PASO',title:'Después, continúa con calma.',text:'Puedes revisar tratamientos, preguntar al Asesor o enviar una solicitud de evaluación. D’Lorgia confirmará la disponibilidad antes de considerar una cita acordada.',preview:'Tu siguiente paso',caption:'Tú tienes el control' }
+  { eyebrow:'01 · BIENVENIDA',title:'Hola. Aquí comienza tu recorrido.',text:'D’Lorgia Orienta te ayuda a entender las opciones disponibles antes de decidir con su equipo. Todo comienza con una pregunta sencilla.',preview:'Tu punto de partida',caption:'Explorar con claridad',photo:'huancayo-sala-01.webp',photoLabel:'UN ESPACIO REAL · HUANCAYO' },
+  { eyebrow:'02 · TU ORIENTACIÓN',title:'No necesitas saber por dónde empezar.',text:'Elige qué te interesa, responde a tu ritmo y recibe información general organizada según tus preferencias. No es un diagnóstico.',preview:'Orientación personal',caption:'Tu ruta, a tu manera',photo:'facial-cosmetologia.webp',photoLabel:'PRIMERO, TUS PREGUNTAS' },
+  { eyebrow:'03 · TU SIGUIENTE PASO',title:'Tú decides cuándo continuar.',text:'Puedes conocer tratamientos, aclarar dudas con el Asesor y solicitar una evaluación. La sede confirmará si hay disponibilidad.',preview:'Tu siguiente paso',caption:'Decide con información',photo:'huancayo-consultorio-01.webp',photoLabel:'DEL ORIENTADOR AL EQUIPO' }
 ];
 const cubeDescriptions = {
   guide:'El Orientador reúne información a partir de tus preferencias; no realiza diagnósticos.',
@@ -585,6 +585,10 @@ function updateTourScene() {
   $('#v50-tour-text').textContent = scene.text;
   $('#v50-preview-title').textContent = scene.preview;
   $('#v50-preview-caption').textContent = scene.caption;
+  const scenePhoto = $('#v51-tour-photo');
+  if (scenePhoto && scenePhoto.getAttribute('src') !== `/assets/fotos-dlorgia/${scene.photo}`) scenePhoto.src = `/assets/fotos-dlorgia/${scene.photo}`;
+  const sceneLabel = $('#v52-tour-photo-label');
+  if (sceneLabel) sceneLabel.textContent = scene.photoLabel;
   $('#v50-tour-counter').textContent = `${String(tourIndex + 1).padStart(2,'0')} / 03`;
   [...$('#v50-tour-dots').children].forEach((dot, index) => dot.classList.toggle('active', index === tourIndex));
   $('#v50-tour-prev').hidden = tourIndex === 0;
@@ -771,6 +775,25 @@ function categoryIcon(category) {
   return icon(name);
 }
 
+// v5.2: a selected interest starts orientation at the relevant question.
+let selectedHomeArea = 'Todas';
+function setHomeArea(area) {
+  selectedHomeArea = ['Piel','Corporal','Capilar','Todas'].includes(area) ? area : 'Todas';
+  $$('[data-v52-topic]').forEach(btn => {
+    const selected = btn.dataset.v52Topic === selectedHomeArea;
+    btn.classList.toggle('is-selected', selected);
+    btn.setAttribute('aria-pressed', String(selected));
+  });
+}
+$$('[data-v52-topic]').forEach(btn => btn.addEventListener('click', () => setHomeArea(btn.dataset.v52Topic)));
+$('#v50-home-primary')?.addEventListener('click', () => {
+  if (getPersonalGuide()) { guideStep = 'result'; return; }
+  resetGuideDraft(true);
+  guideDraft.area = selectedHomeArea;
+  guideStep = 1;
+  saveGuideDraft();
+});
+
 function renderHome() {
   const box = $('#home-continuity');
   if (!box) return;
@@ -806,13 +829,14 @@ function renderHome() {
 
   const started = Boolean(guide);
   const headline = $('#v50-home-headline');
-  if (headline) headline.textContent = started ? 'Ya tienes una orientación. ¿Qué sigue?' : '¿Qué te gustaría entender sobre tu cuidado?';
+  if (headline) headline.textContent = started ? 'Tu orientación está lista. ¿Cómo seguimos?' : '¿Qué te interesa comprender hoy?';
   const intro = $('#v50-home-intro');
   if (intro) intro.textContent = started
-    ? 'Tu perfil orientativo ya está preparado. Revisa sus opciones o elige una herramienta para continuar, sin prisas.'
-    : 'No necesitas saber qué tratamiento elegir. Cuéntanos tus preferencias y te ayudaremos a organizar preguntas y posibilidades para conversar con un profesional.';
+    ? 'Tu recorrido ya guarda tus preferencias. Puedes revisar tus opciones o continuar con D’Lorgia cuando lo decidas.'
+    : 'Elige un tema y te acompañamos a explorar opciones y preparar preguntas para D’Lorgia.';
   const mainAction = $('#v50-home-primary-text');
   if (mainAction) mainAction.textContent = started ? 'Revisar mi orientación' : 'Empezar mi orientación';
+  $('#v52-topic-pick')?.classList.toggle('hidden', started);
   $('#v50-home-next')?.classList.toggle('hidden', !started);
   renderPlan();
   if (!currentOrientation) {
@@ -1000,24 +1024,40 @@ function renderGuideResult(result) {
   const top = result.matches?.[0];
   const profile = result.profile || {};
   const priorityChips = (profile.priorityLabels || []).map((x) => `<span>${escapeHtml(x)}</span>`).join('');
-  box.innerHTML = `<div class="guide-result">\
-    <div class="guide-result-hero v51-result-head"><span class="guide-avatar guide-${escapeHtml(result.guide?.id || 'alma')}">${icon(guide.icon)}</span><div><p class="eyebrow">TU ORIENTACIÓN ESTÁ LISTA</p><h3>Ya tienes un punto de partida.</h3><p>Elegimos información para explorar según tus respuestas. Tú decides el siguiente paso.</p><button id="v51-result-home" class="v51-result-home" type="button">Volver a mi inicio →</button></div><img src="/assets/fotos-dlorgia/huancayo-productos-01.webp" alt="Marca D’Lorgia en la sede Huancayo" loading="lazy"></div>\
-    <div class="guide-profile-grid"><div><small>Área</small><b>${escapeHtml(profile.areaLabel || 'Exploratoria')}</b></div><div><small>Objetivo</small><b>${escapeHtml(profile.goalLabel || 'Cuidado general')}</b></div><div class="wide"><small>Prioridades</small><span class="guide-profile-chips">${priorityChips || '<span>Explorar con calma</span>'}</span></div></div>\
-    <div class="guide-caution">${icon('shield')}<p>${escapeHtml(result.caution || '')}</p></div>\
-    <div class="section-minihead"><div><p class="eyebrow">CAMINOS PARA EXPLORAR</p><h3>Ordenados por afinidad con tus preferencias</h3></div></div>\
-    <div class="guide-matches">${(result.matches || []).map((m) => `<article class="guide-match-card ${m.rank===1?'top':''}"><div class="guide-match-head"><span class="match-rank">${m.rank}</span><span><small>${escapeHtml(m.category)}</small><b>${escapeHtml(m.name)}</b></span><em>${escapeHtml(m.affinity)}</em></div><p>${escapeHtml(m.short)}</p><div class="affinity-track"><span style="width:${Math.max(18,Math.min(100,m.score))}%"></span></div><details class="v51-match-more"><summary>¿Por qué aparece esta opción?</summary><div class="guide-why"><b>Coincidencias con tus preferencias</b>${list(m.reasons)}</div><div class="guide-consider"><b>A considerar</b>${list(m.considerations)}</div></details><div class="guide-card-actions"><button class="primary" data-guide-open="${escapeHtml(m.id)}">Explorar tratamiento</button><button class="secondary" data-guide-ask="${escapeHtml(m.id)}">Preguntar al Asesor</button></div></article>`).join('')}</div>\
-    <div class="guide-route"><p class="eyebrow">TU RUTA EN D’LORGIA</p><h3>El Orientador conecta lo que ya existe</h3><div class="guide-route-grid"><button data-nav="catalog">${icon('scan')}<b>Tratamientos</b><span>Compara tus coincidencias y revisa fichas.</span></button><button id="guide-route-advisor">${icon('sparkles')}<b>Asesor</b><span>Pregunta usando este perfil como contexto.</span></button><button id="guide-route-evaluation">${icon('stethoscope')}<b>Evaluación</b><span>Confirma profesionalmente el camino.</span></button><button data-nav="followup">${icon('bell')}<b>Seguimiento</b><span>Organiza recordatorios y continuidad.</span></button></div></div>\
-    <div class="notice">${escapeHtml(result.disclaimer || '')}</div>\
-    <div class="guide-actions"><button class="secondary" id="guide-adjust">Ajustar respuestas</button><button class="ghost" id="guide-restart">Empezar de nuevo</button></div></div>`;
-
+  const guidePhoto = treatmentPhotoInfo(top);
+  const topVisual = guidePhoto ? `<figure class="v52-result-cover"><img src="${guidePhoto.src}" alt="" loading="lazy" decoding="async"><figcaption>${escapeHtml(guidePhoto.caption)}</figcaption></figure>` : '';
+  const matchCards = (result.matches || []).map((m, index) => {
+    const photo = treatmentPhotoInfo(m);
+    const visual = photo ? `<img src="${photo.src}" alt="" loading="lazy" decoding="async">` : '';
+    return `<article class="guide-match-card ${index===0?'top v52-featured-match':'v52-secondary-match'}">
+      ${visual ? `<div class="v52-match-visual">${visual}</div>` : ''}
+      <div class="v52-match-body">
+        <div class="guide-match-head"><span class="match-rank">${index + 1}</span><span><small>${escapeHtml(m.category)}</small><b>${escapeHtml(m.name)}</b></span><em>${escapeHtml(m.affinity)} afinidad</em></div>
+        <p>${escapeHtml(m.short)}</p>
+        <details class="v51-match-more"><summary>¿Por qué aparece esta opción?</summary><div class="guide-why"><b>Coincidencias con tus preferencias</b>${list(m.reasons)}</div><div class="guide-consider"><b>A considerar</b>${list(m.considerations)}</div></details>
+        <div class="guide-card-actions"><button class="primary" data-guide-open="${escapeHtml(m.id)}">Conocer esta opción →</button><button class="secondary" data-guide-ask="${escapeHtml(m.id)}">Preguntar al Asesor</button></div>
+      </div>
+    </article>`;
+  }).join('');
+  box.innerHTML = `<div class="guide-result v52-guide-result">
+    <div class="guide-result-hero v51-result-head v52-result-head"><span class="guide-avatar guide-${escapeHtml(result.guide?.id || 'alma')}">${icon(guide.icon)}</span><div><p class="eyebrow">TU ORIENTACIÓN ESTÁ LISTA</p><h3>Ya tienes por dónde empezar.</h3><p>Estas son opciones informativas relacionadas con tus preferencias, no recomendaciones clínicas.</p><button id="v51-result-home" class="v51-result-home" type="button">Volver a Inicio →</button></div>${topVisual}</div>
+    <div class="v52-profile-recap"><div><small>Te interesa</small><b>${escapeHtml(profile.areaLabel || 'Explorar opciones')}</b></div><div><small>Buscas comprender</small><b>${escapeHtml(profile.goalLabel || 'Cuidado general')}</b></div><div><small>Prioridades</small><span class="guide-profile-chips">${priorityChips || '<span>Explorar con calma</span>'}</span></div></div>
+    <div class="v52-result-section-title"><span>OPCIONES PARA EXPLORAR</span><h3>Empieza por una. Las demás siguen aquí.</h3><p>El orden solo refleja afinidad con tus respuestas; la evaluación profesional determina qué corresponde.</p></div>
+    <div class="guide-matches v52-result-matches">${matchCards || '<div class="empty">Todavía no hay opciones. Puedes ajustar tus respuestas.</div>'}</div>
+    <div class="v52-result-next"><div><span>¿QUIERES CONTINUAR?</span><strong>Habla con D’Lorgia cuando estés listo.</strong><p>La solicitud de evaluación no equivale a una cita confirmada.</p></div><button type="button" id="guide-route-evaluation" class="primary">Solicitar evaluación →</button></div>
+    <details class="v52-result-tools"><summary>Otras herramientas para continuar</summary><div class="guide-route-grid"><button data-nav="catalog">${icon('scan')}<b>Tratamientos</b><span>Revisa todas las fichas.</span></button><button id="guide-route-advisor">${icon('sparkles')}<b>Asesor</b><span>Aclara tus dudas generales.</span></button><button data-nav="followup">${icon('bell')}<b>Seguimiento</b><span>Recordatorios y continuidad.</span></button></div></details>
+    <p class="v52-result-disclaimer">${escapeHtml(result.disclaimer || result.caution || 'Esta orientación no sustituye una evaluación profesional.')}</p>
+    <div class="guide-actions"><button class="secondary" id="guide-adjust">Ajustar respuestas</button><button class="ghost" id="guide-restart">Empezar de nuevo</button></div>
+  </div>`;
   $$('[data-guide-open]').forEach((btn) => btn.onclick = () => openDetail(btn.dataset.guideOpen));
   $$('[data-guide-ask]').forEach((btn) => btn.onclick = () => { selectedTreatment = btn.dataset.guideAsk; advisorFocus = 'orientacion'; show('assistant'); });
   $$('#guide-content [data-nav]').forEach((btn) => btn.onclick = () => show(btn.dataset.nav));
-  $('#v51-result-home')?.addEventListener('click',()=>show('home'));
-  $('#guide-route-advisor').onclick = () => { if (top?.id) selectedTreatment = top.id; advisorFocus = 'orientacion'; show('assistant'); };
-  $('#guide-route-evaluation').onclick = () => openGuideEvaluation(top?.id);
-  $('#guide-adjust').onclick = () => { resetGuideDraft(true); guideStep = 1; renderGuide(); };
-  $('#guide-restart').onclick = () => { clearGuideDraft(); resetGuideDraft(false); guideStep = 0; renderGuide(); };
+  $$('#guide-content img').forEach((img) => img.addEventListener('error', () => handleOfficialImageError(img), { once:true }));
+  $('#v51-result-home')?.addEventListener('click', () => show('home'));
+  $('#guide-route-advisor')?.addEventListener('click', () => { if (top?.id) selectedTreatment = top.id; advisorFocus = 'orientacion'; show('assistant'); });
+  $('#guide-route-evaluation')?.addEventListener('click', () => openGuideEvaluation(top?.id));
+  $('#guide-adjust')?.addEventListener('click', () => { resetGuideDraft(true); guideStep = 1; renderGuide(); });
+  $('#guide-restart')?.addEventListener('click', () => { clearGuideDraft(); resetGuideDraft(false); guideStep = 0; renderGuide(); });
 }
 
 function openGuideEvaluation(treatmentId = '') {
@@ -1054,20 +1094,15 @@ function renderCatalog() {
   if ($('#catalog-results-count')) $('#catalog-results-count').textContent = items.length + (items.length === 1 ? ' tratamiento encontrado' : ' tratamientos encontrados') + (term ? ' para tu búsqueda' : '');
   const guide = getPersonalGuide();
   const matchMap = new Map((guide?.matches || []).map((m) => [m.id, m]));
-  const usedCatalogPhotos = new Set();
   $('#catalog-list').innerHTML = items.length ? items.map((x) => {
     const match = matchMap.get(x.id);
-    const photoUrl = officialTreatmentImage(x);
-    const uniquePhoto = photoUrl && !usedCatalogPhotos.has(photoUrl);
-    if (uniquePhoto) usedCatalogPhotos.add(photoUrl);
-    const visual = uniquePhoto ? `<img class="official-treatment-img" src="${photoUrl}" alt="" loading="lazy" decoding="async">` : `<span class="treatment-photo-empty">${escapeHtml(x.category || 'D’Lorgia')}</span>`;
-    return `
-    <button class="treatment-card ${match ? 'guide-ranked' : ''}" data-treatment="${escapeHtml(x.id)}">
-      <span class="treatment-photo">${visual}</span>
-      <span><b>${escapeHtml(x.name)}</b><small>${escapeHtml(x.short)}</small>${match ? `<em class="guide-match-badge">${icon('compass','ui-icon mini')} #${match.rank} · Afinidad ${escapeHtml(match.affinity.toLowerCase())}</em>` : ''}</span>
-      <span class="card-arrow">${icon('chevron-right')}</span>
+    const visual = treatmentPhotoInfo(x);
+    const photo = visual ? `<span class="treatment-photo"><img class="official-treatment-img" src="${visual.src}" alt="" loading="lazy" decoding="async"><small class="v52-photo-caption">${escapeHtml(visual.caption)}</small></span>` : `<span class="treatment-photo v52-no-photo"><span>${escapeHtml(x.category || 'D’Lorgia')}</span></span>`;
+    return `<button type="button" class="treatment-card v52-treatment-card ${match ? 'guide-ranked' : ''}" data-treatment="${escapeHtml(x.id)}" aria-label="Conocer ${escapeHtml(x.name)}">
+      ${photo}
+      <span class="v52-treatment-info"><small class="v52-category">${escapeHtml(x.category)}</small><b>${escapeHtml(x.name)}</b><span class="v52-description">${escapeHtml(x.short)}</span>${match ? `<em class="guide-match-badge">Según tus preferencias · opción ${match.rank}</em>` : ''}<span class="v52-card-cta">Conocer más <span aria-hidden="true">↗</span></span></span>
     </button>`;
-  }).join('') : '<div class="empty">No hay tratamientos en esta categoría.</div>';
+  }).join('') : '<div class="empty">No encontramos opciones con esos filtros. Prueba otra categoría o búsqueda.</div>';
   $$('[data-treatment]').forEach((btn) => btn.onclick = () => openDetail(btn.dataset.treatment));
   $$('.official-treatment-img').forEach(img => img.addEventListener('error', () => handleOfficialImageError(img), { once:true }));
 }
@@ -1092,7 +1127,7 @@ function openDetail(id, push = true) {
   const guideMatch = guideMatchFor(id);
   $('#detail-name').textContent = treatment.name;
   $('#detail-content').innerHTML = `
-    <div class="official-detail-cover"><img class="official-detail-img" src="${officialTreatmentImage(treatment)}" alt="Fotografía ilustrativa de ${escapeHtml(treatment.name)}" loading="lazy" decoding="async"><span>Fotografía orientativa · No indica resultados clínicos</span></div>
+    <div class="official-detail-cover"><img class="official-detail-img" src="${officialTreatmentImage(treatment)}" alt="" loading="lazy" decoding="async"><span>${escapeHtml(treatmentPhotoInfo(treatment)?.caption || 'Imagen de referencia')} · No representa un resultado garantizado</span></div>
     <div class="detail-hero">
       <p class="eyebrow">${escapeHtml(treatment.category)}</p>
       <h3>${escapeHtml(treatment.name)}</h3>
@@ -1616,7 +1651,7 @@ async function installPWA() {
 
 async function registerServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
-  try { const reg = await navigator.serviceWorker.register('/service-worker.js?v=500', { updateViaCache: 'none' }); await reg.update(); }
+  try { const reg = await navigator.serviceWorker.register('/service-worker.js?v=520', { updateViaCache: 'none' }); await reg.update(); }
   catch (error) { console.warn('Service worker no disponible', error); }
 }
 

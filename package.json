@@ -1,9 +1,9 @@
 {
   "name": "dlorgia-whatsapp-bot",
-  "version": "5.1.1",
+  "version": "5.2.0",
   "private": true,
   "type": "module",
-  "description": "D’Lorgia Orienta v5.1.1: 29 imágenes del chat, autorizadas y catalogadas, experiencia principal v5.1.",
+  "description": "D’Lorgia Orienta v5.2: Inicio enfocado, bienvenida editorial, resultados claros y catálogo visual con fotos reales.",
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",

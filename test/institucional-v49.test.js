@@ -44,7 +44,7 @@ test('v4.9: guía accesible, sitemap, cache y fotografías integrables',()=>{
   assert.match(js,/aria-current/);
   assert.match(js,/render\(active\+1\)/);
   assert.match(seo,/\/guia/);
-  assert.match(sw,/dlorgia-orienta-v510-fotos/);
+  assert.match(sw,/dlorgia-orienta-v520-experiencia/);
   for(const asset of ['portada-v49.js','portada-v49.css','guia-v49.js','guia-v49.css','acceso-v49.css']){
     assert.ok(existsSync(join(root,'public/assets',asset)),asset);
     assert.ok(sw.includes(`/assets/${asset}`));
