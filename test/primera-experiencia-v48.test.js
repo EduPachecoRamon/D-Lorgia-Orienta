@@ -13,7 +13,7 @@ test('v4.8 separa portada y acceso de forma verificable',()=>{
  const portada=read('public/portada.html');
  const app=read('public/index.html');
  const css=read('public/assets/acceso-v48.css');
- assert.match(server,/pathname === '\/' \? '\/portada.html'/);
+ assert.match(server,/pathname === '\/' \? '\/index.html'/);
  assert.match(server,/pathname === '\/app' \? '\/index.html'/);
  assert.match(portada,/id="feature-cube"/);
  assert.match(portada,/href="\/app\?mode=register"/);
@@ -51,7 +51,7 @@ test('rutas públicas y acceso sirven documentos distintos', {timeout:13000}, as
  try{
   let up=false;for(let i=0;i<75;i++){try{up=(await fetch(origin+'/health')).ok;if(up)break}catch{}await new Promise(res=>setTimeout(res,60))}assert.ok(up);
   const main=await (await fetch(origin+'/')).text(), app=await (await fetch(origin+'/app')).text();
-  assert.match(main,/id="feature-cube"/);assert.doesNotMatch(main,/id="login-form"/);
+  assert.match(main,/id="login-form"/);assert.doesNotMatch(main,/id="feature-cube"/);
   assert.match(app,/id="login-form"/);assert.doesNotMatch(app,/id="feature-cube"/);
   const c=await fetch(origin+'/assets/acceso-v48.css');assert.equal(c.status,200);
   const sitemap=await (await fetch(origin+'/sitemap.xml')).text();assert.match(sitemap,/<loc>[^<]+<\/loc>/);

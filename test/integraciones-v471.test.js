@@ -45,8 +45,8 @@ test('La etiqueta de Google llega al HTML raíz y público, sin habilitar OAuth 
     const homepage=await (await fetch(origin+'/')).text();
     const publicPage=await (await fetch(origin+'/conoce')).text();
     assert.match(homepage, /google-site-verification" content="AbCd_123456"/);
-    assert.match(homepage, /rel="canonical"/);
-    assert.match(homepage, /id="feature-cube"/);
+    assert.match(homepage, /name="robots" content="noindex, nofollow"/);
+    assert.match(homepage, /id="login-form"/);
     assert.match(publicPage, /google-site-verification" content="AbCd_123456"/);
     assert.match(publicPage, /rel="canonical"/);
     const sitemap=await fetch(origin+'/sitemap.xml');

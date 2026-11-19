@@ -1,6 +1,5 @@
 // SEO público centralizado: páginas de difusión, nunca perfiles ni Admin.
 const publicPages = Object.freeze({
-  '/': { title: 'D’Lorgia Orienta | Descubre qué puedes hacer', description: 'Una portada clara para conocer el Orientador, Asesor, tratamientos y solicitud de evaluación de D’Lorgia.' },
   '/conoce': { title: 'Conoce D’Lorgia Orienta', description: 'Descubre cómo explorar tratamientos, aclarar dudas y organizar una evaluación profesional con D’Lorgia.' },
   '/experiencias': { title: 'Servicios y experiencias | D’Lorgia Orienta', description: 'Explora servicios de cuidado facial, tecnología, cuerpo y cabello para preparar tu orientación.' },
   '/sedes': { title: 'Sedes y contacto | D’Lorgia Orienta', description: 'Encuentra información pública de las sedes de D’Lorgia y consulta directamente cómo solicitar una evaluación.' },
@@ -15,7 +14,7 @@ export function sitemapXml(origin) {
     publicPagesForSitemap().map(p => `  <url><loc>${escapeXml(origin + p)}</loc></url>`).join('\n') + '\n</urlset>\n';
 }
 export function robotsTxt(origin) {
-  return `User-agent: *\nAllow: /\nAllow: /conoce\nAllow: /experiencias\nAllow: /sedes\nAllow: /ayuda\nAllow: /guia\nDisallow: /admin\nDisallow: /app\nDisallow: /api/\nDisallow: /auth/\n${origin ? `Sitemap: ${origin}/sitemap.xml\n` : ''}`;
+  return `User-agent: *\nDisallow: /\nAllow: /conoce\nAllow: /experiencias\nAllow: /sedes\nAllow: /ayuda\nAllow: /guia\nDisallow: /admin\nDisallow: /app\nDisallow: /api/\nDisallow: /auth/\n${origin ? `Sitemap: ${origin}/sitemap.xml\n` : ''}`;
 }
 export function seoHeadFor(pathname, origin) {
   const data = publicPages[pathname];

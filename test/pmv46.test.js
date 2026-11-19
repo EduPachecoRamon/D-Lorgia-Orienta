@@ -50,7 +50,7 @@ test('galería oficial, sedes y catálogo con imágenes de respaldo',()=>{
 
 test('PWA incluye las pantallas sin agregar un servicio de pago',()=>{
   const sw=read('public/service-worker.js');
-  assert.match(sw,/dlorgia-orienta-v490-institucional/);
+  assert.match(sw,/dlorgia-orienta-v500-enfoque/);
   assert.match(sw,/'\/experiencias'/);
   assert.match(sw,/'\/sedes'/);
   assert.match(sw,/dlorgia-admin-pmv46\.css/);

@@ -37,7 +37,7 @@ test('asesor incluye estado visual de consulta y cache v4.0', () => {
   assert.match(js, /typing-dots/);
   assert.match(js, /is-thinking/);
   assert.match(css, /advisorBreath/);
-  assert.match(sw, /dlorgia-orienta-v490-institucional/);
+  assert.match(sw, /dlorgia-orienta-v500-enfoque/);
 });
 
 
@@ -65,7 +65,7 @@ test('Orientador conecta Tratamientos, Asesor, Evaluación, Seguimiento y Mi esp
   assert.match(js, /openGuideEvaluation/);
   assert.match(js, /portal-guide-summary/);
   assert.match(js, /Caminos del Orientador/);
-  assert.match(js, /Crear perfil guía|Crear perfil del Orientador/);
+  assert.match(js, /Orientación personal/);
 });
 
 

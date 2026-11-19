@@ -1,9 +1,9 @@
 {
   "name": "dlorgia-whatsapp-bot",
-  "version": "4.9.0",
+  "version": "5.0.0",
   "private": true,
   "type": "module",
-  "description": "D’Lorgia Orienta v4.9: portada fotográfica referenciada a la empresa, cubo de aristas, guía accesible y acceso simplificado.",
+  "description": "D’Lorgia Orienta v5.0: app como punto de entrada, bienvenida interactiva, orientación prioritaria y progreso digital contextual.",
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",

@@ -44,7 +44,7 @@ test('v4.9: guía accesible, sitemap, cache y fotografías integrables',()=>{
   assert.match(js,/aria-current/);
   assert.match(js,/render\(active\+1\)/);
   assert.match(seo,/\/guia/);
-  assert.match(sw,/dlorgia-orienta-v490-institucional/);
+  assert.match(sw,/dlorgia-orienta-v500-enfoque/);
   for(const asset of ['portada-v49.js','portada-v49.css','guia-v49.js','guia-v49.css','acceso-v49.css']){
     assert.ok(existsSync(join(root,'public/assets',asset)),asset);
     assert.ok(sw.includes(`/assets/${asset}`));
@@ -60,8 +60,8 @@ test('HTTP: portada, guía y acceso independientes', {timeout:18000}, async()=>{
   try {
     let ready=false;for(let i=0;i<120;i++){try{ready=(await fetch(host+'/health')).ok;if(ready)break}catch{}await new Promise(ok=>setTimeout(ok,50))}assert.ok(ready,'servidor no inició');
     const [landing,guide,app,sitemap]=await Promise.all(['/','/guia','/app','/sitemap.xml'].map(async p=>{const r=await fetch(host+p);assert.equal(r.status,200,p);return r.text()}));
-    assert.match(landing,/id="feature-cube"/);
-    assert.doesNotMatch(landing,/id="login-form"/);
+    assert.match(landing,/id="login-form"/);
+    assert.doesNotMatch(landing,/id="feature-cube"/);
     assert.match(guide,/id="guide-title"/);
     assert.doesNotMatch(guide,/id="feature-cube"/);
     assert.match(app,/id="login-form"/);
