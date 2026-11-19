@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="/assets/dlorgia-connected47.css" />
   <link rel="stylesheet" href="/assets/acceso-v48.css" />
   <link rel="stylesheet" href="/assets/acceso-v49.css" />
+  <link rel="stylesheet" href="/assets/foco-v50.css" />
   <link rel="stylesheet" href="/assets/fotos-v49.css" />
 <link rel="stylesheet" href="/assets/institucional-v49.css"></head>
 <body>
@@ -105,6 +106,7 @@
         <div><p class="eyebrow">D’LORGIA</p><strong>Orienta</strong></div>
       </div>
       <div class="topbar-actions">
+        <button class="v50-settings-button" type="button" id="v50-settings-open" aria-label="Abrir configuración y ayuda"><svg class="ui-icon"><use href="#i-target"/></svg><span>Configuración</span></button>
         <button class="icon-btn a11y-trigger" id="a11y-trigger" type="button" aria-expanded="false" aria-controls="a11y-panel" aria-label="Opciones de accesibilidad"><svg class="ui-icon"><use href="#i-accessibility"/></svg></button>
         <a class="ghost compact header-help" href="/ayuda" aria-label="Abrir centro de ayuda">Ayuda</a>
         <button class="ghost compact" data-nav="portal">Mi espacio</button>
@@ -134,7 +136,7 @@
           </div>
 
           <div class="login-card auth-card" id="auth-card">
-            <div class="auth-brand-v48"><a href="/" class="auth-back-v48" aria-label="Volver a la portada">← Conoce D’Lorgia</a><div class="auth-brand-v48-mark" aria-hidden="true">DL</div><p class="eyebrow">D’LORGIA ORIENTA</p><h1>Tu espacio para cuidarte.</h1><p>Ingresa o crea tu cuenta para comenzar tu orientación.</p></div>
+            <div class="auth-brand-v48"><a href="/guia" class="auth-back-v48" aria-label="Conocer cómo funciona la aplicación">← ¿Cómo funciona?</a><div class="auth-brand-v48-mark" aria-hidden="true">DL</div><p class="eyebrow">D’LORGIA ORIENTA</p><h1>Tu espacio para cuidarte.</h1><p>Ingresa o crea tu cuenta para comenzar tu orientación.</p></div>
             <div class="auth-mode-switch" role="tablist" aria-label="Acceso D’Lorgia">
               <button class="active" type="button" data-auth-mode="login" role="tab" aria-selected="true">Ingresar</button>
               <button type="button" data-auth-mode="register" role="tab" aria-selected="false">Crear cuenta</button>
@@ -258,56 +260,33 @@
       </section>
 
       <section class="screen" id="home" data-icon="✦" data-icon2="♡">
-        <div class="hero">
-          <div class="hero-copy">
-            <span class="status-pill" id="home-status-pill"><svg class="ui-icon"><use href="#i-sparkles"/></svg><span>Orientación + acompañamiento</span></span>
-            <p id="home-personal-greeting" class="personal-greeting hidden"></p>
-            <p class="eyebrow">BIENESTAR Y TRANSFORMACIÓN</p>
-            <h1>Entiende tu proceso.<br><span>Decide con calma.</span></h1>
-            <p>Reúne orientación, tratamientos, seguimiento y evaluación profesional en una experiencia clara, calmada y fácil de recorrer.</p>
-            <div class="hero-actions">
-              <button class="primary full" data-nav="guide"><svg class="ui-icon"><use href="#i-compass"/></svg> Crear mi ruta personal →</button>
-              <button class="secondary full" data-nav="catalog">Explorar tratamientos</button>
-              <button class="secondary full" data-nav="assistant">Hablar con mi asesor</button>
+        <div class="v50-home-hero">
+          <div class="v50-home-copy">
+            <p class="eyebrow"><span class="v50-gold-dash"></span> TU PRIMER PASO EN D’LORGIA</p>
+            <p id="home-personal-greeting" class="v50-greeting hidden"></p>
+            <span class="v50-home-kicker" id="home-status-pill"><svg class="ui-icon"><use href="#i-sparkles"/></svg><span>Comienza a entender tus opciones</span></span>
+            <h1 id="v50-home-headline">¿Qué te gustaría entender sobre tu cuidado?</h1>
+            <p id="v50-home-intro">No necesitas saber qué tratamiento elegir. Cuéntanos tus preferencias y te ayudaremos a organizar preguntas y posibilidades para conversar con un profesional.</p>
+            <div class="v50-home-main-actions">
+              <button class="primary v50-main-cta" data-nav="guide" id="v50-home-primary"><svg class="ui-icon"><use href="#i-compass"/></svg><span id="v50-home-primary-text">Empezar mi orientación</span><span aria-hidden="true">→</span></button>
+              <button class="v50-understated-link" data-nav="catalog" type="button">Prefiero ver los tratamientos ↗</button>
             </div>
+            <p class="v50-clinical-note"><svg class="ui-icon"><use href="#i-shield"/></svg> Información orientativa, no diagnóstico médico.</p>
           </div>
-          <div class="hero-visual visual-home">
-            <div class="visual-orbit orbit-a"><svg class="ui-icon"><use href="#i-sparkles"/></svg></div>
-            <div class="visual-orbit orbit-b"><svg class="ui-icon"><use href="#i-scan"/></svg></div>
-            <div class="visual-orbit orbit-c"><svg class="ui-icon"><use href="#i-heart"/></svg></div>
-            <div class="visual-center"><span>DL</span><small>ORIENTA</small></div>
+          <div class="v50-home-photo" role="img" aria-label="Imagen fotográfica del equipo y tecnología de D’Lorgia, enlazada al sitio oficial">
+            <div class="v50-photo-copy"><span>01 / ESCUCHA Y ORIENTACIÓN</span><b>Tu interés es el punto de partida.</b></div>
+            <div class="v50-photo-seal" aria-hidden="true">DL<small>ORIENTA</small></div>
           </div>
         </div>
-
-        <div id="home-continuity" class="continuity-card hidden"></div>
-        <div id="home-plan" class="plan-card hidden"></div>
-
-        <div class="section-minihead">
-          <div><p class="eyebrow">TU RECORRIDO</p><h2>Escoge tu siguiente movimiento</h2></div>
-        </div>
-        <button class="guide-entry-card" data-nav="guide">
-          <span class="guide-entry-icon"><svg class="ui-icon"><use href="#i-compass"/></svg></span>
-          <span><small>ORIENTADOR PERSONAL</small><b>Quiero una guía para decidir mejor</b><em>Define prioridades, recuperación y objetivos. El sistema organiza tus afinidades y te muestra el camino más coherente.</em></span>
-          <span class="guide-entry-arrow">→</span>
-        </button>
         <div id="home-guide-resume" class="guide-resume hidden"></div>
-        <div class="quick-grid">
-          <button class="quick-card quick-advisor" data-nav="assistant">
-            <span class="quick-icon"><svg class="ui-icon"><use href="#i-sparkles"/></svg></span><b>Asesor personalizado</b><span>Respuestas claras según tu contexto y tu etapa.</span>
-          </button>
-          <button class="quick-card quick-calc" data-nav="calculator">
-            <span class="quick-icon"><svg class="ui-icon"><use href="#i-target"/></svg></span><b>Expectativas reales</b><span>Comprende recuperación, tiempos y cuidados de forma referencial.</span>
-          </button>
-          <button class="quick-card quick-follow" data-nav="followup">
-            <span class="quick-icon"><svg class="ui-icon"><use href="#i-bell"/></svg></span><b>Seguimiento</b><span>Organiza recordatorios y próximos pasos sin perder el hilo.</span>
-          </button>
-          <button class="quick-card quick-space" data-nav="portal">
-            <span class="quick-icon"><svg class="ui-icon"><use href="#i-user"/></svg></span><b>Mi espacio</b><span>Perfil, historial, guardados y documentos en un solo lugar.</span>
-          </button>
-        </div>
-
-        <div class="trust-strip">
-          <span>✓ Orientación clara</span><span>✓ Sin diagnósticos automáticos</span><span>✓ Derivación profesional</span>
+        <div class="v50-home-next hidden" id="v50-home-next">
+          <div class="v50-next-intro"><p class="eyebrow">CUANDO YA TIENES TU ORIENTACIÓN</p><h2>Ahora sí, elige cómo continuar.</h2><p>No necesitas recorrer todas las herramientas. Escoge la que te sirva ahora.</p></div>
+          <div class="v50-next-links">
+            <button data-nav="catalog" class="v50-next-card" type="button"><span class="v50-card-index">01</span><svg class="ui-icon"><use href="#i-scan"/></svg><b>Explorar tratamientos</b><small>Conoce opciones y su información.</small><span class="v50-cta-arrow">↗</span></button>
+            <button data-nav="assistant" class="v50-next-card" type="button"><span class="v50-card-index">02</span><svg class="ui-icon"><use href="#i-message"/></svg><b>Resolver una duda</b><small>Pregunta al Asesor sin perder tu contexto.</small><span class="v50-cta-arrow">↗</span></button>
+            <button data-nav="evaluation" class="v50-next-card" type="button"><span class="v50-card-index">03</span><svg class="ui-icon"><use href="#i-calendar"/></svg><b>Solicitar evaluación</b><small>El equipo confirma la disponibilidad.</small><span class="v50-cta-arrow">↗</span></button>
+          </div>
+          <button class="v50-progress-link" id="v50-home-progress-open" type="button"><svg class="ui-icon"><use href="#i-circle-check"/></svg> Ver mi avance y próximos pasos →</button>
         </div>
       </section>
 
@@ -546,6 +525,7 @@
             <button class="primary" type="submit">Guardar perfil y personalización</button>
           </form>
           <div class="preferences-side">
+            <div class="v50-replay-panel"><p class="eyebrow">¿NECESITAS UNA GUÍA?</p><b>Vuelve a conocer D’Lorgia.</b><p>Repite la bienvenida cuando quieras. Tus preferencias y avances no se borrarán.</p><button type="button" id="v50-profile-tour">Repetir bienvenida →</button></div>
             <details class="portal-more" id="portal-more" open>
               <summary><span><svg class="ui-icon"><use href="#i-shield"/></svg></span><span><b>Documentos, instalación y privacidad</b><small>Accesos complementarios para tu espacio</small></span><span class="more-chevron">⌄</span></summary>
               <div class="portal-more-content">
@@ -575,6 +555,46 @@
       <button data-nav="portal" aria-label="Abrir Mi espacio"><b><svg class="ui-icon"><use href="#i-user"/></svg></b><span>Mi espacio</span></button>
     </nav>
   </div>
+
+  <dialog id="v50-tour-dialog" class="v50-dialog v50-tour-dialog" aria-labelledby="v50-tour-heading" aria-describedby="v50-tour-text">
+    <div class="v50-tour-shell">
+      <div class="v50-dialog-header"><span class="v50-brand-chip">DL · ORIENTA</span><span class="v50-tour-number" id="v50-tour-counter" aria-live="polite">01 / 03</span><button class="v50-dialog-x" id="v50-tour-close" aria-label="Cerrar bienvenida" type="button">×</button></div>
+      <div class="v50-tour-scene" id="v50-tour-scene" data-step="0">
+        <div class="v50-tour-copy"><p class="eyebrow" id="v50-tour-eyebrow">BIENVENIDO A TU ESPACIO</p><h2 id="v50-tour-heading">Hola, esto es D’Lorgia Orienta.</h2><p id="v50-tour-text">Aquí empieza un recorrido para entender lo que te interesa, descubrir información útil y preparar tus preguntas.</p></div>
+        <div class="v50-tour-preview" aria-hidden="true">
+          <div class="v50-preview-window v50-preview-one"><span class="v50-preview-header"><i></i><i></i><i></i><small>D’Lorgia · Orienta</small></span><div class="v50-preview-icon"><svg class="ui-icon"><use href="#i-compass"/></svg></div><strong id="v50-preview-title">Tu punto de partida</strong><span class="v50-preview-meter"><i></i></span><span class="v50-preview-tags"><b>Escuchar</b><b>Orientar</b><b>Decidir</b></span></div>
+          <div class="v50-preview-window v50-preview-two"><svg class="ui-icon"><use href="#i-scan"/></svg><span id="v50-preview-caption">Un paso a la vez</span></div>
+          <div class="v50-cube-experience" id="v50-cube-experience" aria-label="Explora las tres funciones de D’Lorgia Orienta">
+            <div class="v50-cube-wire" role="group" aria-label="Caras del cubo interactivo">
+              <button class="v50-cube-face v50-cube-front is-active" type="button" data-v50-cube="guide" aria-label="Orientador Personal"><svg class="ui-icon"><use href="#i-compass"/></svg><span>Orientar</span></button>
+              <button class="v50-cube-face v50-cube-right" type="button" data-v50-cube="advisor" aria-label="Asesor informativo"><svg class="ui-icon"><use href="#i-message"/></svg><span>Preguntar</span></button>
+              <button class="v50-cube-face v50-cube-top" type="button" data-v50-cube="evaluation" aria-label="Preparar evaluación"><svg class="ui-icon"><use href="#i-calendar"/></svg><span>Evaluar</span></button>
+            </div>
+            <p id="v50-cube-explain" class="v50-cube-explain" aria-live="polite">El Orientador reúne información a partir de tus preferencias; no realiza diagnósticos.</p>
+          </div>
+          <div class="v50-preview-deco" aria-hidden="true">✧</div>
+        </div>
+      </div>
+      <div class="v50-dialog-footer"><div class="v50-tour-dots" id="v50-tour-dots" aria-label="Progreso de la bienvenida"><span class="active"></span><span></span><span></span></div><div class="v50-tour-actions"><button id="v50-tour-skip" type="button" class="v50-soft-action">Ahora no</button><button id="v50-tour-prev" type="button" class="v50-soft-action" hidden>← Atrás</button><button id="v50-tour-next" type="button" class="v50-primary-action">Siguiente →</button></div></div>
+    </div>
+  </dialog>
+  <dialog id="v50-settings-dialog" class="v50-dialog v50-settings-dialog" aria-labelledby="v50-settings-title">
+    <div class="v50-settings-shell"><div class="v50-settings-head"><div><p class="eyebrow">TU EXPERIENCIA</p><h2 id="v50-settings-title">Configuración</h2></div><button class="v50-dialog-x" id="v50-settings-close" aria-label="Cerrar configuración" type="button">×</button></div>
+      <p class="v50-settings-intro">Ajusta la forma de usar D’Lorgia sin perder tu orientación.</p>
+      <button class="v50-setting-row" id="v50-settings-replay" type="button"><svg class="ui-icon"><use href="#i-sparkles"/></svg><span><b>Volver a ver la bienvenida</b><small>Repite el recorrido de tres pasos cuando quieras.</small></span><strong>↗</strong></button>
+      <button class="v50-setting-row" id="v50-settings-accessibility" type="button"><svg class="ui-icon"><use href="#i-eye"/></svg><span><b>Accesibilidad</b><small>Texto, contraste y reducción de movimiento.</small></span><strong>↗</strong></button>
+      <label class="v50-setting-row v50-setting-toggle"><svg class="ui-icon"><use href="#i-scan"/></svg><span><b>Marco de teléfono en escritorio</b><small>Activa la vista compacta cuando prefieras usarla.</small></span><input id="v50-phone-frame" type="checkbox" /></label>
+      <a class="v50-setting-row" href="/ayuda"><svg class="ui-icon"><use href="#i-info"/></svg><span><b>Centro de ayuda</b><small>Respuestas a dudas frecuentes.</small></span><strong>↗</strong></a>
+      <p class="v50-settings-footnote">D’Lorgia Orienta ofrece información general y no sustituye una evaluación profesional.</p>
+    </div>
+  </dialog>
+  <dialog id="v50-progress-dialog" class="v50-dialog v50-progress-dialog" aria-labelledby="v50-progress-title">
+    <div class="v50-progress-shell"><div class="v50-progress-head"><div><p class="eyebrow">TU RECORRIDO DIGITAL</p><h2 id="v50-progress-title">Así va tu camino.</h2><p>Este porcentaje representa tareas de la aplicación, no un avance médico.</p></div><button class="v50-dialog-x" id="v50-progress-close" type="button" aria-label="Cerrar mi progreso">×</button></div>
+      <div id="home-plan" class="plan-card"></div>
+      <div id="home-continuity" class="continuity-card hidden"></div>
+      <div class="v50-progress-buttons"><button class="v50-primary-action" id="v50-progress-continue" type="button">Continuar mi recorrido →</button><button class="v50-soft-action" id="v50-progress-later" type="button">Ver después</button></div>
+    </div>
+  </dialog>
   <script type="module" src="/assets/app-v400.js"></script>
 </body>
 </html>

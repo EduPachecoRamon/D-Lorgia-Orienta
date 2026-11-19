@@ -1,7 +1,7 @@
 import { officialTreatmentImage, handleOfficialImageError } from './dlorgia-imagery46.js';
 import {humanMessage} from './dlorgia-feedback.js';
 import {initAmbient} from './dlorgia-ambient.js';
-const DLORGIA_BUILD = '4.7.0-connected';
+const DLORGIA_BUILD = '5.0.0-focus';
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => [...document.querySelectorAll(sel)];
 
@@ -27,7 +27,7 @@ const USER_SCOPED_KEYS = new Set([
   'dlorgia:lastOrientation', 'dlorgia:history', 'dlorgia:profile', 'dlorgia:reminders:v3',
   'dlorgia:savedTreatments', 'dlorgia:advisorMemory:v1', 'dlorgia:preferences:v1',
   'dlorgia:onboardingComplete', 'dlorgia:lastEvaluation', 'dlorgia:personalGuide:v1',
-  'dlorgia:guideDraft:v1', 'dlorgia:chatDraft:v1', 'dlorgia:lastScreen:v1', 'dlorgia:welcomeSeen:v1'
+  'dlorgia:guideDraft:v1', 'dlorgia:chatDraft:v1', 'dlorgia:lastScreen:v1', 'dlorgia:welcomeSeen:v1', 'dlorgia:tourSeen:v50'
 ]);
 
 let activeIdentity = null;
@@ -533,12 +533,110 @@ async function verifyAccount(identifier, password) {
 }
 
 function enterExperience() {
-  const onboarded = store.get('dlorgia:onboardingComplete', false);
-  const next = onboarded ? 'home' : (store.get('dlorgia:welcomeSeen:v1', false) ? 'onboarding' : 'welcome');
-  if (next === 'onboarding') applyOnboarding();
-  navStack = [next];
-  show(next, false);
+  navStack = ['home'];
+  show('home', false);
+  maybeShowFirstTour();
 }
+
+
+// v5.0: bienvenida de una sola vez por cuenta, accesible y repetible desde Configuración.
+const tourScenes = [
+  { eyebrow:'BIENVENIDO A TU ESPACIO',title:'Hola, esto es D’Lorgia Orienta.',text:'Aquí puedes organizar lo que te interesa conocer, sin tener que elegir un tratamiento desde el primer minuto.',preview:'Tu punto de partida',caption:'Empieza por lo que te interesa' },
+  { eyebrow:'01 · CONOCE TUS OPCIONES',title:'Primero, descubre por dónde empezar.',text:'El Orientador te pregunta por tus preferencias y reúne opciones informativas para explorar. No intenta diagnosticarte ni sustituir a un profesional.',preview:'Orientación personal',caption:'Tu ruta, a tu manera' },
+  { eyebrow:'02 · TÚ DECIDES EL SIGUIENTE PASO',title:'Después, continúa con calma.',text:'Puedes revisar tratamientos, preguntar al Asesor o enviar una solicitud de evaluación. D’Lorgia confirmará la disponibilidad antes de considerar una cita acordada.',preview:'Tu siguiente paso',caption:'Tú tienes el control' }
+];
+const cubeDescriptions = {
+  guide:'El Orientador reúne información a partir de tus preferencias; no realiza diagnósticos.',
+  advisor:'El Asesor responde preguntas generales y ayuda a organizar lo que quieres consultar.',
+  evaluation:'La evaluación con el equipo profesional permite confirmar el siguiente paso y su disponibilidad.'
+};
+for(const face of $$('[data-v50-cube]')) {
+  const selectFace = () => {
+    const key = face.dataset.v50Cube;
+    $$('[data-v50-cube]').forEach(item => item.classList.toggle('is-active', item === face));
+    const output = $('#v50-cube-explain');
+    if (output) output.textContent = cubeDescriptions[key] || '';
+  };
+  face.addEventListener('mouseenter', selectFace);
+  face.addEventListener('focus', selectFace);
+  face.addEventListener('click', selectFace);
+}
+let tourIndex = 0;
+function openAppDialog(selector) {
+  const modal = $(selector);
+  if (!modal || modal.open) return false;
+  if (typeof modal.showModal === 'function') modal.showModal();
+  else modal.setAttribute('open', '');
+  return true;
+}
+function closeAppDialog(selector) {
+  const modal = $(selector);
+  if (!modal) return;
+  if (typeof modal.close === 'function' && modal.open) modal.close();
+  else modal.removeAttribute('open');
+}
+function updateTourScene() {
+  const scene = tourScenes[tourIndex];
+  const root = $('#v50-tour-scene');
+  if (!root) return;
+  root.dataset.step = String(tourIndex);
+  $('#v50-tour-eyebrow').textContent = scene.eyebrow;
+  $('#v50-tour-heading').textContent = scene.title;
+  $('#v50-tour-text').textContent = scene.text;
+  $('#v50-preview-title').textContent = scene.preview;
+  $('#v50-preview-caption').textContent = scene.caption;
+  $('#v50-tour-counter').textContent = `${String(tourIndex + 1).padStart(2,'0')} / 03`;
+  [...$('#v50-tour-dots').children].forEach((dot, index) => dot.classList.toggle('active', index === tourIndex));
+  $('#v50-tour-prev').hidden = tourIndex === 0;
+  $('#v50-tour-next').textContent = tourIndex === tourScenes.length - 1 ? 'Empezar mi orientación →' : 'Siguiente →';
+}
+function startTour(replay = false) {
+  if (!hasEntryAccess()) return;
+  closeAppDialog('#v50-settings-dialog');
+  tourIndex = 0;
+  updateTourScene();
+  openAppDialog('#v50-tour-dialog');
+}
+function maybeShowFirstTour() {
+  if (!hasEntryAccess() || store.get('dlorgia:tourSeen:v50', false)) return;
+  // Al principio de una sesión válida; nunca tapa el formulario de ingreso.
+  setTimeout(() => { if (hasEntryAccess() && !$('#v50-tour-dialog')?.open) startTour(); }, 160);
+}
+function finishTour(goToGuide = false) {
+  store.set('dlorgia:tourSeen:v50', true);
+  closeAppDialog('#v50-tour-dialog');
+  if (goToGuide) { guideStep = getPersonalGuide() ? 'result' : 0; show('guide'); }
+}
+function renderFramePreference() {
+  const enabled = Boolean(rawStore.get('dlorgia:frame:v50', false));
+  document.body.classList.toggle('v50-phone-frame', enabled);
+  const input = $('#v50-phone-frame');
+  if (input) input.checked = enabled;
+}
+function showProgressDialog() {
+  if (!getPersonalGuide()) return;
+  renderPlan();
+  openAppDialog('#v50-progress-dialog');
+}
+$('#v50-settings-open')?.addEventListener('click', () => openAppDialog('#v50-settings-dialog'));
+$('#v50-settings-close')?.addEventListener('click', () => closeAppDialog('#v50-settings-dialog'));
+$('#v50-settings-replay')?.addEventListener('click', () => startTour(true));
+$('#v50-profile-tour')?.addEventListener('click', () => startTour(true));
+$('#v50-settings-accessibility')?.addEventListener('click', () => { closeAppDialog('#v50-settings-dialog'); $('#a11y-trigger')?.click(); });
+$('#v50-phone-frame')?.addEventListener('change', (e) => { rawStore.set('dlorgia:frame:v50', e.target.checked); renderFramePreference(); });
+$('#v50-tour-next')?.addEventListener('click', () => { if (tourIndex < tourScenes.length - 1) { tourIndex++; updateTourScene(); } else finishTour(true); });
+$('#v50-tour-prev')?.addEventListener('click', () => { tourIndex = Math.max(0,tourIndex - 1); updateTourScene(); });
+$('#v50-tour-skip')?.addEventListener('click', () => finishTour());
+$('#v50-tour-close')?.addEventListener('click', () => finishTour());
+$('#v50-tour-dialog')?.addEventListener('close', () => store.set('dlorgia:tourSeen:v50', true));
+$('#v50-progress-close')?.addEventListener('click', () => closeAppDialog('#v50-progress-dialog'));
+$('#v50-progress-later')?.addEventListener('click', () => closeAppDialog('#v50-progress-dialog'));
+$('#v50-progress-continue')?.addEventListener('click', () => { closeAppDialog('#v50-progress-dialog'); show(currentOrientation ? 'summary' : 'guide'); });
+$('#v50-home-progress-open')?.addEventListener('click', showProgressDialog);
+for(const selector of ['#v50-tour-dialog','#v50-settings-dialog','#v50-progress-dialog']) {
+  $(selector)?.addEventListener('click', (event) => { if (event.target === event.currentTarget) closeAppDialog(selector); });
+}
+renderFramePreference();
 
 function setNavActive(id) {
   const tabId = ['journey-space','preferences-space'].includes(id) ? 'portal' : id;
@@ -669,6 +767,16 @@ function renderHome() {
     }
   }
 
+  const started = Boolean(guide);
+  const headline = $('#v50-home-headline');
+  if (headline) headline.textContent = started ? 'Ya tienes una orientación. ¿Qué sigue?' : '¿Qué te gustaría entender sobre tu cuidado?';
+  const intro = $('#v50-home-intro');
+  if (intro) intro.textContent = started
+    ? 'Tu perfil orientativo ya está preparado. Revisa sus opciones o elige una herramienta para continuar, sin prisas.'
+    : 'No necesitas saber qué tratamiento elegir. Cuéntanos tus preferencias y te ayudaremos a organizar preguntas y posibilidades para conversar con un profesional.';
+  const mainAction = $('#v50-home-primary-text');
+  if (mainAction) mainAction.textContent = started ? 'Revisar mi orientación' : 'Empezar mi orientación';
+  $('#v50-home-next')?.classList.toggle('hidden', !started);
   renderPlan();
   if (!currentOrientation) {
     box.classList.add('hidden');
@@ -838,6 +946,7 @@ async function submitPersonalGuide(event) {
     if (!selectedTreatment && result.matches?.[0]?.id) selectedTreatment = result.matches[0].id;
     renderGuide(); renderHome(); renderCatalog(); renderAdvisor(); renderPortal(); renderFollowUp();
     toast('Tu perfil del Orientador Personal quedó guardado.', 'success');
+    showProgressDialog();
   } catch (error) {
     const message = error.message || 'No pude construir el perfil.';
     toast(message);
@@ -1409,26 +1518,20 @@ function applyOnboarding() {
 function renderPlan() {
   const box = $('#home-plan');
   if (!box) return;
-  const onboardingDone = store.get('dlorgia:onboardingComplete', false);
-  const guideDone = Boolean(getPersonalGuide());
-  const evaluation = store.get('dlorgia:lastEvaluation');
-  const hasReminder = getReminders().some((x) => !x.done);
   const steps = [
-    { label: 'Personalizar espacio', done: onboardingDone, nav: 'preferences-space' },
-    { label: 'Crear perfil guía', done: guideDone, nav: 'guide' },
-    { label: 'Generar orientación', done: Boolean(currentOrientation), nav: 'calculator' },
-    { label: 'Agendar evaluación', done: Boolean(evaluation), nav: 'evaluation' },
-    { label: 'Activar seguimiento', done: hasReminder, nav: 'followup' }
+    { label:'Cuenta creada', done:hasEntryAccess(), nav:'preferences-space' },
+    { label:'Orientación personal', done:Boolean(getPersonalGuide()), nav:'guide' },
+    { label:'Evaluación solicitada', done:Boolean(store.get('dlorgia:lastEvaluation')?.date), nav:'evaluation' },
+    { label:'Recordatorio guardado', done:getReminders().length > 0, nav:'followup' }
   ];
-  const done = steps.filter((x) => x.done).length;
+  const done = steps.filter(step => step.done).length;
   const pct = Math.round((done / steps.length) * 100);
-  const next = steps.find((x) => !x.done);
-  box.classList.remove('hidden');
-  box.innerHTML = `<div class="plan-head"><span><small>PLAN ACTIVO</small><b>${done}/${steps.length} pasos listos</b></span><strong>${pct}%</strong></div>
-    <div class="plan-progress"><span style="width:${pct}%"></span></div>
-    <div class="plan-steps">${steps.map((x) => `<span class="${x.done ? 'done' : ''}">${x.done ? icon('check','ui-icon mini') : '<span class="plan-dot"></span>'} ${escapeHtml(x.label)}</span>`).join('')}</div>
-    ${next ? `<button class="secondary full" id="plan-next">Continuar con: ${escapeHtml(next.label)} →</button>` : `<div class="plan-complete">${icon('circle-check','ui-icon mini')} Tu base ya está organizada. Cuando quieras, vuelve al Orientador o al Asesor para continuar.</div>`}`;
-  if (next && $('#plan-next')) $('#plan-next').onclick = () => show(next.nav);
+  const next = steps.find(step => !step.done);
+  box.innerHTML = `<div class="plan-head"><span><small>ACCIONES EN LA APP · NO AVANCE CLÍNICO</small><b>${done} de ${steps.length} acciones</b></span><strong>${pct}%</strong></div>
+    <div class="plan-progress" role="progressbar" aria-label="Acciones digitales completadas" aria-valuemin="0" aria-valuemax="${steps.length}" aria-valuenow="${done}"><span style="width:${pct}%"></span></div>
+    <div class="plan-steps">${steps.map(step => `<span class="${step.done ? 'done' : ''}">${step.done ? icon('check','ui-icon mini') : '<span class="plan-dot"></span>'} ${escapeHtml(step.label)}</span>`).join('')}</div>
+    ${next ? `<button class="secondary full" id="plan-next">Continuar: ${escapeHtml(next.label)} →</button>` : `<p class="plan-complete">Tu recorrido digital está organizado. Puedes volver a consultar tus opciones cuando quieras.</p>`}`;
+  if (next && $('#plan-next')) $('#plan-next').onclick = () => { closeAppDialog('#v50-progress-dialog'); show(next.nav); };
 }
 
 let networkStateInitialized = false;
@@ -1474,7 +1577,7 @@ async function installPWA() {
 
 async function registerServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
-  try { const reg = await navigator.serviceWorker.register('/service-worker.js?v=480', { updateViaCache: 'none' }); await reg.update(); }
+  try { const reg = await navigator.serviceWorker.register('/service-worker.js?v=500', { updateViaCache: 'none' }); await reg.update(); }
   catch (error) { console.warn('Service worker no disponible', error); }
 }
 
@@ -1561,10 +1664,6 @@ async function init() {
   if (!hasEntryAccess()) {
     navStack = ['login'];
     show('login', false);
-  } else if (!store.get('dlorgia:onboardingComplete', false)) {
-    const firstView = store.get('dlorgia:welcomeSeen:v1', false) ? 'onboarding' : 'welcome';
-    navStack = [firstView];
-    show(firstView, false);
   } else {
     const last = store.get('dlorgia:lastScreen:v1', 'home');
     const resumable = new Set(['home','guide','catalog','assistant','followup','portal','calculator','evaluation']);
@@ -1573,7 +1672,9 @@ async function init() {
     show(next, false);
     if (next !== 'home') toast('Retomamos donde lo dejaste.', 'success');
   }
+  if (hasEntryAccess()) maybeShowFirstTour();
 }
+
 
 $$('[data-nav]').forEach((btn) => btn.addEventListener('click', () => show(btn.dataset.nav)));
 $$('[data-back]').forEach((btn) => btn.addEventListener('click', goBack));

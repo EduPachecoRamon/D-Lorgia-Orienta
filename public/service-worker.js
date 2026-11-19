@@ -1,11 +1,12 @@
-const CACHE = 'dlorgia-orienta-v490-institucional';
+const CACHE = 'dlorgia-orienta-v500-enfoque';
 const CORE = [
-  '/app', '/', '/portada.html', '/guia',
+  '/app', '/', '/guia',
   '/assets/portada-v49.css',
   '/assets/portada-v49.js',
   '/assets/guia-v49.css',
   '/assets/guia-v49.js',
   '/assets/acceso-v49.css',
+  '/assets/foco-v50.css',
   '/assets/fotos-v49.css',
   '/assets/institucional-v49.css',
   '/assets/acceso-v48.css',
